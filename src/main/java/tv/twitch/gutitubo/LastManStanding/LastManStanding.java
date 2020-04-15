@@ -8,12 +8,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class LastManStanding extends JavaPlugin {
 
 	Logger logger = Bukkit.getLogger();
+	private static String VERSION = "0.0.1";
+
+	// 最寄りのプレイヤーコンパス更新
+	// 弓で前ブリンク
+	// 発光クールダウン
 
 	@Override
 	public void onEnable() {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onEnable();
-		logger.info("[LMS] plugin loaded");
+		logger.info("[LMS] plugin loaded. - ver." + VERSION);
+		getConfig();
 	}
 
 	@Override
