@@ -5,10 +5,14 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+
 public class LastManStanding extends JavaPlugin {
 
 	Logger logger = Bukkit.getLogger();
 	private static String VERSION = "0.0.1";
+
+	public static LastManStanding main;
 
 	// 最寄りのプレイヤーコンパス更新
 	// 弓で前ブリンク
@@ -19,7 +23,8 @@ public class LastManStanding extends JavaPlugin {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onEnable();
 		logger.info("[LMS] plugin loaded. - ver." + VERSION);
-		getConfig();
+		main = this;
+		ConfigReader.init();
 	}
 
 	@Override

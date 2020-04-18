@@ -12,11 +12,21 @@ public class ConfigValue {
 	/**
 	 * ゲーム開始までの準備時間
 	 */
-	public static int readyTime;
+	public static int waitingTime;
 
 	/**
-	 * ゲーム開始直前の隠れる時間
+	 * ゲーム終了までの時間
 	 */
-	public static int hidingTime;
+	public static int gameTime;
+
+	/**
+	 * ゲーム開始時間
+	 */
+	public static int startTime;
+
+	/**
+	 * ゲーム開始最少人数
+	 */
+	public static int minPlayer;
 
 }
