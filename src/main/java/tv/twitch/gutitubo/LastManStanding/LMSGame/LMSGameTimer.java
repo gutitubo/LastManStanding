@@ -11,7 +11,6 @@ public class LMSGameTimer extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		// TODO 自動生成されたメソッド・スタブ
 
 	}
 

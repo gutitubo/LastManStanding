@@ -8,6 +8,8 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+
 public class LMSGame {
 
 	/* ------------- */
@@ -69,7 +71,7 @@ public class LMSGame {
 
 		// 3. タイマー開始
 		BukkitRunnable timer = new LMSGameTimer();
-		//timer.runTaskTimer(LastManStanding., 20, 20);
+		timer.runTaskTimer(LastManStanding.main, 20, 20);
 	}
 
 	/**
