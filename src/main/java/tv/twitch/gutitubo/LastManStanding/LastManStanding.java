@@ -10,7 +10,7 @@ import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
 public class LastManStanding extends JavaPlugin {
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "0.0.1";
+	private static String VERSION = "0.0.2";
 
 	public static LastManStanding main;
 
