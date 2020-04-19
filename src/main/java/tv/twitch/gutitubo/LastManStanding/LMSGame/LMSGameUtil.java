@@ -5,6 +5,8 @@ import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
+
 /**
  * ゲーム進行用のStaticメソッドを集めたクラス
  * @author gutitubo
@@ -57,7 +59,8 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerLoadout (Player p) {
 		Inventory inv = p.getInventory();
-		//TODO LMSItemの作成
+		inv.setItem(0, LMSItems.BOW.toItemStack());
+		inv.setItem(8, LMSItems.COMPASS.toItemStack());
 	}
 
 	/**
