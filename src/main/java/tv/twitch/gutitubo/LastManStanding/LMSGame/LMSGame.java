@@ -85,4 +85,10 @@ public class LMSGame {
 		LMSGameUtil.resetPlayerStatus(players);
 	}
 
+	/**
+	 * 参加者リストを取得
+	 */
+	public ArrayList<Player> getPlayers() {
+		return this.players;
+	}
 }
