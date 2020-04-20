@@ -10,7 +10,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
-
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 
 /**
@@ -136,9 +135,12 @@ public class LMSGameUtil {
 	}
 
 	/**
-	 *
+	 * プレイヤーリストにタイトルを送信
 	 */
-	public static void sendTitleAll (List<Player> players) {
-
+	public static void sendTitleToPlayerList (List<Player> players, String title, String subtitle,
+			int fadeIn, int stay, int fadeOut) {
+		for (Player p: players) {
+			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+		}
 	}
 }
