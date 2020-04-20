@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
 
 public class LMSGame {
 
@@ -43,6 +44,7 @@ public class LMSGame {
 	 */
 	private void loadConfig() {
 		//TODO configからDefault値を読み込む
+		ConfigReader.reload();
 	}
 
 	/**

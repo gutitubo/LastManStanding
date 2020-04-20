@@ -2,8 +2,14 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 
 /**
  * ゲーム進行用のStaticメソッドを集めたクラス
@@ -67,5 +73,69 @@ public class LMSGameUtil {
 		for (Player p: players) {
 			givePlayerLoadout(p);
 		}
+	}
+
+	/**
+	 * プレイヤーに矢を配るためのメソッド
+	 */
+	public static void givePlayerArrow (Player p) {
+		Inventory inv = p.getInventory();
+		if (inv.contains(Material.ARROW)) {
+			inv.addItem(new ItemStack(Material.ARROW));
+		}
+	}
+
+	/**
+	 * 全プレイヤーに矢を配るためのメソッド
+	 */
+	public static void givePlayerArrow (List<Player> players) {
+		for (Player p : players) {
+			givePlayerArrow(p);
+		}
+	}
+
+	/**
+	 * プレイヤーに初期の透明化を配るためのメソッド
+	 */
+	private static void givePlayerInvis (Player p) {
+		p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20*60*10, 0));
+	}
+
+	/**
+	 * 全プレイヤーに初期の透明化を配るためのメソッド
+	 */
+	public static void givePlayerInvis (List<Player> players) {
+		for (Player p : players) {
+			givePlayerInvis(p);
+			for (Player other: players) {
+				if (!p.equals(other)) p.hidePlayer(LastManStanding.main, other);
+			}
+		}
+	}
+
+	/**
+	 * プレイヤーの透明化を解除するためのメソッド
+	 */
+	private static void takePlayerInvis (Player p) {
+		p.removePotionEffect(PotionEffectType.INVISIBILITY);
+	}
+
+	/**
+	 * 全プレイヤーの透明化を解除するためのメソッド
+	 */
+	public static void takePlayerInvis (List<Player> players) {
+		for (Player p : players) {
+			takePlayerInvis(p);
+			for (Player other: players) {
+				if (!p.equals(other)) p.showPlayer(LastManStanding.main, other);
+			}
+		}
+	}
+
+	/**
+	 *
+	 */
+	public static void sendTitleAll (List<Player> players) {
+
 	}
 }
