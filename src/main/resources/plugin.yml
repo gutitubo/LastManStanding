@@ -1,6 +1,6 @@
 name: LastManStanding
 main: tv.twitch.gutitubo.LastManStanding.LastManStanding
-version: 0.0.2
+version: 0.0.3
 author: gutitubo
 api-version: 1.14
 commands:
