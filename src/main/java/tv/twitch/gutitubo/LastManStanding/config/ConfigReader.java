@@ -17,6 +17,7 @@ public class ConfigReader {
 	 */
 	public static void init() {
 		LastManStanding.main.saveDefaultConfig();
+		reload();
 	}
 
 	/**
