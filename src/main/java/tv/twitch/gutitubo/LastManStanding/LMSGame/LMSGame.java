@@ -70,10 +70,13 @@ public class LMSGame {
 
 		// 2. 参加プレイヤーに処理
 		LMSGameUtil.resetPlayerStatus(players);
+		LMSGameUtil.givePlayerInvis(players);
 
 		// 3. タイマー開始
 		BukkitRunnable timer = new LMSGameTimer();
 		timer.runTaskTimer(LastManStanding.main, 20, 20);
+
+		// 4. 参加者テレポート
 	}
 
 	/**

@@ -2,6 +2,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -140,6 +141,16 @@ public class LMSGameUtil {
 	public static void sendTitleToPlayerList (List<Player> players, String title, String subtitle,
 			int fadeIn, int stay, int fadeOut) {
 		for (Player p: players) {
+			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+		}
+	}
+
+	/**
+	 * 全員にタイトルを送信
+	 */
+	public static void sendTitleToAll(String title, String subtitle,
+			int fadeIn, int stay, int fadeOut) {
+		for (Player p: Bukkit.getOnlinePlayers()) {
 			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
 		}
 	}
