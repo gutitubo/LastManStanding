@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
 
 public class LastManStanding extends JavaPlugin {
@@ -16,6 +17,8 @@ public class LastManStanding extends JavaPlugin {
 	private static String VERSION = "0.0.2";
 
 	public static LastManStanding main;
+
+	private static LMSGame game;
 
 	// 最寄りのプレイヤーコンパス更新
 	// 弓で前ブリンク
@@ -53,6 +56,27 @@ public class LastManStanding extends JavaPlugin {
 			if (sender.isOp()) {
 				if (args[0] != null) {
 					cmd = args[0];
+					if (cmd.equalsIgnoreCase("start")) {
+						/* -- ゲーム開始分岐 -- */
+						if (getGame() == null) {
+							game = new LMSGame();
+							game.startTimer();
+						} else {
+							CommandUtil.cantStartAnnounce(sender);
+						}
+						/* -- ---- --- --- -- */
+					} else if (cmd.equalsIgnoreCase("reset")) {
+						/* -- ゲームリセット分岐 -- */
+						if (getGame() != null) {
+							game.reset();
+							game = null;
+						} else {
+							CommandUtil.cantResetAnnounce(sender);
+						}
+						/* -- ---- ---- ---- -- */
+					} else {
+						CommandUtil.sendCmdAnnounce(sender);
+					}
 				} else {
 					CommandUtil.sendCmdAnnounce(sender);
 				}
@@ -62,5 +86,9 @@ public class LastManStanding extends JavaPlugin {
 			}
 		}
 		return true;
+	}
+
+	public static LMSGame getGame() {
+		return game;
 	}
 }
