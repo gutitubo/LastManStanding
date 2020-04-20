@@ -24,7 +24,9 @@ public class LMSGameUtil {
 	 * 全プレイヤーに初期処理を行うメソッド
 	 */
 	public static void playerInitProc (List<Player> players) {
+		resetPlayerStatus(players);
 		givePlayerLoadout(players);
+		givePlayerInvis(players);
 		givePlayerStatus(players);
 	}
 

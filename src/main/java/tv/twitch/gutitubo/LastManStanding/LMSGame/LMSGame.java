@@ -26,6 +26,7 @@ public class LMSGame {
 	/*------------------ */
 	protected boolean canJoin = false; //ゲーム参加可能フラグ
 	protected ArrayList<Player> players; //参加者リスト
+	private LMSGameLogic logic; //ゲームロジック処理用オブジェクト
 
 	public LMSGame() {
 		init();
@@ -37,6 +38,7 @@ public class LMSGame {
 	private void init() {
 		loadConfig();
 		registPlayer();
+		logic = new LMSGameLogic(this);
 	}
 
 	/**
@@ -69,8 +71,7 @@ public class LMSGame {
 		}
 
 		// 2. 参加プレイヤーに処理
-		LMSGameUtil.resetPlayerStatus(players);
-		LMSGameUtil.givePlayerInvis(players);
+		LMSGameUtil.playerInitProc(players);
 
 		// 3. タイマー開始
 		BukkitRunnable timer = new LMSGameTimer();
@@ -93,5 +94,12 @@ public class LMSGame {
 	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
+	}
+
+	/**
+	 * ゲームロジックへアクセス
+	 */
+	public LMSGameLogic getLogic() {
+		return this.logic;
 	}
 }
