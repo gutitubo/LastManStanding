@@ -91,7 +91,7 @@ public class LMSGameLogic {
 	 */
 	public void winGame(Player winner) {
 		// 1. 勝者をアナウンス
-		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + winner.getName() + " WON!"
+		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
 
 		// 2. 結果をファイル出力
