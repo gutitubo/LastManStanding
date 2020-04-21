@@ -48,7 +48,9 @@ public class LMSGameLogic {
 				, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
 		// 5. Killerが最後の1人になった場合は終了
-
+		if (alive.size() == 1) {
+			winGame(killer);
+		}
 	}
 
 	/**
@@ -81,6 +83,23 @@ public class LMSGameLogic {
 
 		// 3. Aliveリストから削除
 		alive.remove(victim);
+	}
+
+	/**
+	 * 勝者を指定してゲームをたたむメソッド
+	 * @param winner 勝者
+	 */
+	public void winGame(Player winner) {
+		// 1. 勝者をアナウンス
+		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + winner.getName() + " WON!"
+				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
+
+		// 2. 結果をファイル出力
+
+
+		// 3. ゲームリセット, ロビー転送
+
+
 	}
 
 	/**
