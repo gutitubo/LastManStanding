@@ -29,6 +29,10 @@ public class LMSScore {
 		this.kill = kill;
 	}
 
+	public void addKill(int kill) {
+		setKill(getKill() + kill);
+	}
+
 	public int getScore() {
 		return score;
 	}
