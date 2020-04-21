@@ -3,6 +3,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -28,6 +29,25 @@ public class LMSGameUtil {
 		givePlayerLoadout(players);
 		givePlayerInvis(players);
 		givePlayerStatus(players);
+	}
+
+	/**
+	 * 全プレイヤーにリセット処理を行うメソッド
+	 */
+	public static void playerResetProc (List<Player> players) {
+		resetPlayerStatus(players);
+		for (Player p: players) {
+			/* 各プレイヤーへの処理 */
+
+			// 1. ロビー転送
+
+			// 2. ゲームモード変更
+			p.setGameMode(GameMode.ADVENTURE);
+
+			// 3. インベントリクリア
+			p.getInventory().clear();
+
+		}
 	}
 
 	/**

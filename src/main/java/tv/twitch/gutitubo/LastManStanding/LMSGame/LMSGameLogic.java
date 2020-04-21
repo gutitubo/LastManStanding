@@ -3,6 +3,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -98,7 +99,11 @@ public class LMSGameLogic {
 
 
 		// 3. ゲームリセット, ロビー転送
-
+		ArrayList<Player> all = new ArrayList<>();
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			all.add(p);
+		}
+		LMSGameUtil.playerResetProc(all);
 
 	}
 
