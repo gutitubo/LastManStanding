@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Score;
 
 /**
  * ゲームの勝敗等ロジック部分を記述
@@ -15,11 +14,15 @@ public class LMSGameLogic {
 
 	private LMSGame game; //このLogicが対応するgame
 	private ArrayList<Player> alive; //生存者のリスト
-	private HashMap<Player, Score> playerScore; //生存者とスコアのHashMap
+	private HashMap<Player, LMSScore> playerScore; //生存者とスコアのHashMap
 
 	public LMSGameLogic(LMSGame game) {
 		this.game = game;
 		alive = game.getPlayers(); //参加者を生存者に追加
+		playerScore = new HashMap<>();
+		for (Player p: alive) {
+			playerScore.put(p, new LMSScore(p));
+		}
 	}
 
 	/**
@@ -45,5 +48,12 @@ public class LMSGameLogic {
 	 */
 	public void displayResult() {
 
+	}
+
+	/**
+	 * プレイヤースコア管理Mapを取得するmethod
+	 */
+	public HashMap<Player, LMSScore> getPlayerScore() {
+		return playerScore;
 	}
 }
