@@ -56,4 +56,11 @@ public class LMSGameLogic {
 	public HashMap<Player, LMSScore> getPlayerScore() {
 		return playerScore;
 	}
+
+	/**
+	 * 生存者取得用メソッド
+	 */
+	public ArrayList<Player> getAlives() {
+		return alive;
+	}
 }
