@@ -2,6 +2,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -10,7 +11,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
-
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 
 /**
@@ -24,7 +24,9 @@ public class LMSGameUtil {
 	 * 全プレイヤーに初期処理を行うメソッド
 	 */
 	public static void playerInitProc (List<Player> players) {
+		resetPlayerStatus(players);
 		givePlayerLoadout(players);
+		givePlayerInvis(players);
 		givePlayerStatus(players);
 	}
 
@@ -136,9 +138,22 @@ public class LMSGameUtil {
 	}
 
 	/**
-	 *
+	 * プレイヤーリストにタイトルを送信
 	 */
-	public static void sendTitleAll (List<Player> players) {
+	public static void sendTitleToPlayerList (List<Player> players, String title, String subtitle,
+			int fadeIn, int stay, int fadeOut) {
+		for (Player p: players) {
+			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+		}
+	}
 
+	/**
+	 * 全員にタイトルを送信
+	 */
+	public static void sendTitleToAll(String title, String subtitle,
+			int fadeIn, int stay, int fadeOut) {
+		for (Player p: Bukkit.getOnlinePlayers()) {
+			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+		}
 	}
 }
