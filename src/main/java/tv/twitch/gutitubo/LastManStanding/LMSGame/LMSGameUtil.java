@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 
 /**
@@ -133,7 +132,7 @@ public class LMSGameUtil {
 		for (Player p : players) {
 			givePlayerInvis(p);
 			for (Player other: players) {
-				if (!p.equals(other)) p.hidePlayer(LastManStanding.main, other);
+				if (!p.equals(other)) p.hidePlayer(other);
 			}
 		}
 	}
@@ -152,7 +151,7 @@ public class LMSGameUtil {
 		for (Player p : players) {
 			takePlayerInvis(p);
 			for (Player other: players) {
-				if (!p.equals(other)) p.showPlayer(LastManStanding.main, other);
+				if (!p.equals(other)) p.showPlayer(other);
 			}
 		}
 	}
