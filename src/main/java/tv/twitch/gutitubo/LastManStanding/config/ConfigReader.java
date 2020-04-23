@@ -28,6 +28,7 @@ public class ConfigReader {
 		ConfigValue.gameTime = LastManStanding.main.getConfig().getInt("GameTime");
 		ConfigValue.startTime = LastManStanding.main.getConfig().getInt("StartTime");
 		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("MinPlayer");
+		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("WalkSpeed");
 	}
 
 }

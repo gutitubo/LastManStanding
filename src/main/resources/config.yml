@@ -1,4 +1,14 @@
+# ゲーム開始までの待機時間
 WaitingTime: 30
+
+# 総ゲーム時間
 GameTime: 600
+
+# ゲーム開始時間
 StartTime: 30
+
+# ゲーム開始可能最少人数 
 MinPlayer: 2
+
+# プレイヤー移動速度 デフォルト0.2
+WalkSpeed: 0.3

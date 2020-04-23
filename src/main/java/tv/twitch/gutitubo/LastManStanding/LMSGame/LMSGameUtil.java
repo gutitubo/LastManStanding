@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
 /**
  * ゲーム進行用のStaticメソッドを集めたクラス
@@ -19,6 +20,13 @@ import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
  *
  */
 public class LMSGameUtil {
+
+	private static final float defaultSpeed = 0.2F;
+	private static float walkSpeed = 0.3F;
+
+	public static void reloadValue() {
+		walkSpeed = ConfigValue.walkSpeed;
+	}
 
 	/**
 	 * 全プレイヤーに初期処理を行うメソッド
