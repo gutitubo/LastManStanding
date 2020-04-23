@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
 public class LMSGame {
 
@@ -47,6 +48,10 @@ public class LMSGame {
 	private void loadConfig() {
 		//TODO configからDefault値を読み込む
 		ConfigReader.reload();
+		waitingTime = ConfigValue.waitingTime;
+		gameTime = ConfigValue.gameTime;
+		startTime = ConfigValue.startTime;
+		minPlayer = ConfigValue.minPlayer;
 	}
 
 	/**
@@ -87,9 +92,9 @@ public class LMSGame {
 	 * ゲーム終了時処理のメソッド
 	 */
 	public void reset() {
+		LMSGameUtil.resetPlayerStatus(players);
 		players = null;
 		canJoin = false;
-		LMSGameUtil.resetPlayerStatus(players);
 	}
 
 	/**

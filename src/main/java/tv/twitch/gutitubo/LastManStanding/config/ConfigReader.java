@@ -16,7 +16,7 @@ public class ConfigReader {
 	 *	Configの値が登録されていない場合に新しく値を登録する
 	 */
 	public static void init() {
-		LastManStanding.main.saveDefaultConfig();
+	//	LastManStanding.main.saveDefaultConfig();
 		reload();
 	}
 
@@ -24,6 +24,10 @@ public class ConfigReader {
 	 * configから値を読み込んでConfigValueに格納する
 	 */
 	public static void reload() {
+//		LastManStanding.main.getConfig().set("WaitingTime", 30);
+//		LastManStanding.main.getConfig().set("GameTime", 600);
+//		LastManStanding.main.getConfig().set("StartTime", 30);
+//		LastManStanding.main.getConfig().set("MinPlayer", 2);
 		ConfigValue.waitingTime = LastManStanding.main.getConfig().getInt("WaitingTime");
 		ConfigValue.gameTime = LastManStanding.main.getConfig().getInt("GameTime");
 		ConfigValue.startTime = LastManStanding.main.getConfig().getInt("StartTime");
