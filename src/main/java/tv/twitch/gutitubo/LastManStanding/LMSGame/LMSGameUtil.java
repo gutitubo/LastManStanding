@@ -104,7 +104,7 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerArrow (Player p) {
 		Inventory inv = p.getInventory();
-		if (inv.contains(Material.ARROW)) {
+		if (!inv.contains(Material.ARROW)) {
 			inv.addItem(new ItemStack(Material.ARROW));
 		}
 	}

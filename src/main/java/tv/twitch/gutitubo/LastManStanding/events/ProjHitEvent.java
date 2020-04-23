@@ -1,5 +1,6 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -27,18 +28,22 @@ public class ProjHitEvent implements Listener {
 	@EventHandler
 	public void whenHitProj(ProjectileHitEvent e) {
 		game = LastManStanding.getGame();
+		Bukkit.broadcastMessage("whenHitProj called!");
 		if (e.getEntity() instanceof Projectile) {
 			Projectile projectile = (Projectile) e.getEntity();
 			if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() instanceof Player)) {
 				/* ==== shooter, hitEntityがPlayerの場合 ==== */
 				//撃った側: Arrow1獲得 Speed獲得 Kill獲得 Point獲得 Title表示
+				Bukkit.broadcastMessage("p -> p arrow");
 				//撃たれた側: 死亡エフェクト Title表示 観戦者モード
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
 				if (shooter.equals(victim)) {
 					samePlayerShotted(shooter);
+					Bukkit.broadcastMessage("same player shooted!");
 				} else {
 					/* あたった側の死亡エフェクト */
+					Bukkit.broadcastMessage("shooted! shooter:" + shooter + " victim:" + victim);
 					deadPlayerEffect(victim);
 					/* あたった側は死亡！ */
 					game.getLogic().killPlayer(shooter, victim);
@@ -46,6 +51,7 @@ public class ProjHitEvent implements Listener {
 				hittedProjectile(projectile);
 			} else if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() == null)) {
 				/* === shooterがPlayer, hitEntityがnullの場合 === */
+				Bukkit.broadcastMessage("player -> null");
 				missedProjectile(projectile);
 			}
 		}

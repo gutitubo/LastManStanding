@@ -5,11 +5,16 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
+import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
+import tv.twitch.gutitubo.LastManStanding.events.SignTeleportEvent;
+import tv.twitch.gutitubo.LastManStanding.events.SneakingJumpEvent;
 
 public class LastManStanding extends JavaPlugin {
 
@@ -31,6 +36,7 @@ public class LastManStanding extends JavaPlugin {
 		logger.info("[LMS] plugin loaded. - ver." + VERSION);
 		main = this;
 		ConfigReader.init();
+		eventRegist(Bukkit.getPluginManager());
 	}
 
 	@Override
@@ -86,6 +92,13 @@ public class LastManStanding extends JavaPlugin {
 			}
 		}
 		return true;
+	}
+
+	private void eventRegist(PluginManager pm) {
+		pm.registerEvents(new PlayerJoinAndQuitEvent(), this);
+		pm.registerEvents(new ProjHitEvent(), this);
+		pm.registerEvents(new SignTeleportEvent(), this);
+		pm.registerEvents(new SneakingJumpEvent(), this);
 	}
 
 	public static LMSGame getGame() {
