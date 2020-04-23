@@ -78,6 +78,9 @@ public class LMSGame {
 		timer.runTaskTimer(LastManStanding.main, 20, 20);
 
 		// 4. 参加者テレポート
+
+
+		// 5. ワールドボーダー初期処理
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -34,7 +36,6 @@ public class ProjHitEvent implements Listener {
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
 				if (shooter.equals(victim)) {
-					//TODO 撃った側と撃たれた側が同じ場合: 前Blink
 					samePlayerShotted(shooter);
 				} else {
 					/* あたった側の死亡エフェクト */
@@ -53,13 +54,16 @@ public class ProjHitEvent implements Listener {
 	private static void missedProjectile(Projectile projectile) {
 		//TODO 着弾地点にエフェクト, ProjectileTypeによっては削除
 		Location hitted = projectile.getLocation();
-		hitted.getWorld();
+		hitted.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, projectile.getLocation(), 1, 0, 0, 0);
+		hitted.getWorld().playSound(hitted, Sound.BLOCK_WOOD_BREAK, 0.5F, 1F);
 		projectile.remove();
 	}
 
 	private static void hittedProjectile(Projectile projectile) {
 		//TODO エンティティに着弾したときの絵ヘクト
 		Location hitted = projectile.getLocation();
+		hitted.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, projectile.getLocation(), 1, 0, 0, 0);
+		hitted.getWorld().playSound(hitted, Sound.BLOCK_ANVIL_BREAK, 0.5F, 1F);
 		projectile.remove();
 	}
 
@@ -69,9 +73,5 @@ public class ProjHitEvent implements Listener {
 
 	private static void deadPlayerEffect(Player p) {
 		//TODO 死亡エフェクト
-	}
-
-	private static void blinkPlayer(Player p) {
-		// TODO 前ブリンク
 	}
 }
