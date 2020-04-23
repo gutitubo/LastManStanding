@@ -24,10 +24,6 @@ public class ConfigReader {
 	 * configから値を読み込んでConfigValueに格納する
 	 */
 	public static void reload() {
-//		LastManStanding.main.getConfig().set("WaitingTime", 30);
-//		LastManStanding.main.getConfig().set("GameTime", 600);
-//		LastManStanding.main.getConfig().set("StartTime", 30);
-//		LastManStanding.main.getConfig().set("MinPlayer", 2);
 		ConfigValue.waitingTime = LastManStanding.main.getConfig().getInt("WaitingTime");
 		ConfigValue.gameTime = LastManStanding.main.getConfig().getInt("GameTime");
 		ConfigValue.startTime = LastManStanding.main.getConfig().getInt("StartTime");

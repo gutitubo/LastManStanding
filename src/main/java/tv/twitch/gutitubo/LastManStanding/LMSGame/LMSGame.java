@@ -70,7 +70,7 @@ public class LMSGame {
 	 */
 	public void startTimer() {
 		// 1. 開始可能か判定
-		if (players.size() >= minPlayer) {
+		if (players.size() < minPlayer) {
 			Bukkit.broadcastMessage(ChatColor.RED + "ゲーム開始には最低 " + minPlayer +"人 必要です。");
 			return;
 		}
