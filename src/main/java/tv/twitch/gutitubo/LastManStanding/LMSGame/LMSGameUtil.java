@@ -32,6 +32,7 @@ public class LMSGameUtil {
 	 * 全プレイヤーに初期処理を行うメソッド
 	 */
 	public static void playerInitProc (List<Player> players) {
+		reloadValue();
 		resetPlayerStatus(players);
 		givePlayerLoadout(players);
 		givePlayerInvis(players);
@@ -61,7 +62,7 @@ public class LMSGameUtil {
 	 * プレイヤーに初期ステータス処理を行うメソッド
 	 */
 	public static void givePlayerStatus (Player p) {
-		p.setWalkSpeed(0.25F);
+		p.setWalkSpeed(walkSpeed);
 	}
 
 	/**

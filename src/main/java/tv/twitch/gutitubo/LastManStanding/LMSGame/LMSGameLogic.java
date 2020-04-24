@@ -42,15 +42,20 @@ public class LMSGameLogic {
 		deadProcess(victim);
 
 		// 3. VictimをKillerのカメラに
-		victim.setSpectatorTarget(killer);
+		if (killer != null) victim.setSpectatorTarget(killer);
 
 		// 4. VictimにKillerと順位を表示
-		victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + alive.size()
-				, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
+		if (killer != null)
+			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + alive.size()
+			, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
 		// 5. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
-			winGame(killer);
+			if (killer != null) {
+				winGame(killer);
+			} else {
+				winGame(alive.get(0));
+			}
 		}
 	}
 
@@ -58,6 +63,9 @@ public class LMSGameLogic {
 	 * Killerに各種ポイントやクールダウン解消等の恩恵を与える
 	 */
 	public void killerPointProc(Player killer, Player victim) {
+		// Pre. killer不在の場合はだめ
+		if (killer == null) return;
+
 		// 1. 矢を配布
 		LMSGameUtil.givePlayerArrow(killer);
 
