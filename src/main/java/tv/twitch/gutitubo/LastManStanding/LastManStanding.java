@@ -74,8 +74,7 @@ public class LastManStanding extends JavaPlugin {
 					} else if (cmd.equalsIgnoreCase("reset")) {
 						/* -- ゲームリセット分岐 -- */
 						if (getGame() != null) {
-							game.reset();
-							game = null;
+							resetGame();
 						} else {
 							CommandUtil.cantResetAnnounce(sender);
 						}
@@ -103,5 +102,10 @@ public class LastManStanding extends JavaPlugin {
 
 	public static LMSGame getGame() {
 		return game;
+	}
+
+	public static void resetGame() {
+		game.reset();
+		game = null;
 	}
 }

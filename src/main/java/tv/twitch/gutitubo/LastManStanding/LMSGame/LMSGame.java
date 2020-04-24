@@ -92,9 +92,11 @@ public class LMSGame {
 	 * ゲーム終了時処理のメソッド
 	 */
 	public void reset() {
-		LMSGameUtil.resetPlayerStatus(players);
+		LMSGameUtil.playerResetProc(players);
 		players = null;
 		canJoin = false;
+
+		//TODO ロビーテレポート
 	}
 
 	/**

@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+
 /**
  * ゲームの勝敗等ロジック部分を記述
  * @author gutitubo
@@ -46,10 +48,13 @@ public class LMSGameLogic {
 
 		// 4. VictimにKillerと順位を表示
 		if (killer != null)
-			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + alive.size()
+			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + alive.size() + 1
 			, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
-		// 5. Killerが最後の1人になった場合は終了
+		// 5. KillLog表示
+		killLog(killer, victim);
+
+		// 6. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
 			if (killer != null) {
 				winGame(killer);
@@ -103,7 +108,7 @@ public class LMSGameLogic {
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
 
-		// 2. 結果をファイル出力
+		// 2. 結果をファイル出力 + ゲーム内計算
 
 
 		// 3. ゲームリセット, ロビー転送
@@ -111,8 +116,22 @@ public class LMSGameLogic {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			all.add(p);
 		}
-		LMSGameUtil.playerResetProc(all);
+		LastManStanding.resetGame();
+	}
 
+	public void killLog(Player killer, Player victim) {
+		String r = ChatColor.RESET.toString() + ChatColor.GRAY.toString();
+		String victimName = ChatColor.DARK_BLUE.toString() + victim.getName();
+		String rank = ChatColor.GOLD.toString() + "#" + (alive.size()+1);
+		String kill = ChatColor.RED.toString() + playerScore.get(victim).getKill()
+				+ ChatColor.GRAY.toString() + "kill";
+
+		if (killer == null) {
+			Bukkit.broadcastMessage(victimName + r + " が死亡した。 - " + rank + " " + kill);
+		} else {
+			String killerName = ChatColor.GOLD.toString() + killer.getName();
+			Bukkit.broadcastMessage(killerName + r + " が " + victimName + r + " を殺した。 - " + rank + " " + kill);
+		}
 	}
 
 	/**
