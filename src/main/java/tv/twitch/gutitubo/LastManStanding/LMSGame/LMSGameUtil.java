@@ -3,6 +3,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -10,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
 /**
  * ゲーム進行用のStaticメソッドを集めたクラス
@@ -19,6 +20,13 @@ import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
  *
  */
 public class LMSGameUtil {
+
+	private static final float defaultSpeed = 0.2F;
+	private static float walkSpeed = 0.3F;
+
+	public static void reloadValue() {
+		walkSpeed = ConfigValue.walkSpeed;
+	}
 
 	/**
 	 * 全プレイヤーに初期処理を行うメソッド
@@ -28,6 +36,25 @@ public class LMSGameUtil {
 		givePlayerLoadout(players);
 		givePlayerInvis(players);
 		givePlayerStatus(players);
+	}
+
+	/**
+	 * 全プレイヤーにリセット処理を行うメソッド
+	 */
+	public static void playerResetProc (List<Player> players) {
+		resetPlayerStatus(players);
+		for (Player p: players) {
+			/* 各プレイヤーへの処理 */
+
+			// 1. ロビー転送
+
+			// 2. ゲームモード変更
+			p.setGameMode(GameMode.ADVENTURE);
+
+			// 3. インベントリクリア
+			p.getInventory().clear();
+
+		}
 	}
 
 	/**
@@ -85,7 +112,7 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerArrow (Player p) {
 		Inventory inv = p.getInventory();
-		if (inv.contains(Material.ARROW)) {
+		if (!inv.contains(Material.ARROW)) {
 			inv.addItem(new ItemStack(Material.ARROW));
 		}
 	}
@@ -113,7 +140,7 @@ public class LMSGameUtil {
 		for (Player p : players) {
 			givePlayerInvis(p);
 			for (Player other: players) {
-				if (!p.equals(other)) p.hidePlayer(LastManStanding.main, other);
+				if (!p.equals(other)) p.hidePlayer(other);
 			}
 		}
 	}
@@ -132,7 +159,7 @@ public class LMSGameUtil {
 		for (Player p : players) {
 			takePlayerInvis(p);
 			for (Player other: players) {
-				if (!p.equals(other)) p.showPlayer(LastManStanding.main, other);
+				if (!p.equals(other)) p.showPlayer(other);
 			}
 		}
 	}

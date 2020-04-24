@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
 public class LMSGame {
 
@@ -47,6 +48,10 @@ public class LMSGame {
 	private void loadConfig() {
 		//TODO configからDefault値を読み込む
 		ConfigReader.reload();
+		waitingTime = ConfigValue.waitingTime;
+		gameTime = ConfigValue.gameTime;
+		startTime = ConfigValue.startTime;
+		minPlayer = ConfigValue.minPlayer;
 	}
 
 	/**
@@ -65,7 +70,7 @@ public class LMSGame {
 	 */
 	public void startTimer() {
 		// 1. 開始可能か判定
-		if (players.size() >= minPlayer) {
+		if (players.size() < minPlayer) {
 			Bukkit.broadcastMessage(ChatColor.RED + "ゲーム開始には最低 " + minPlayer +"人 必要です。");
 			return;
 		}
@@ -78,15 +83,18 @@ public class LMSGame {
 		timer.runTaskTimer(LastManStanding.main, 20, 20);
 
 		// 4. 参加者テレポート
+
+
+		// 5. ワールドボーダー初期処理
 	}
 
 	/**
 	 * ゲーム終了時処理のメソッド
 	 */
 	public void reset() {
+		LMSGameUtil.resetPlayerStatus(players);
 		players = null;
 		canJoin = false;
-		LMSGameUtil.resetPlayerStatus(players);
 	}
 
 	/**

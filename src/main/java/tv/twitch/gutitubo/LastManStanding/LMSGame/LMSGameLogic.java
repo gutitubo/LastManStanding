@@ -3,6 +3,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -91,14 +92,18 @@ public class LMSGameLogic {
 	 */
 	public void winGame(Player winner) {
 		// 1. 勝者をアナウンス
-		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + winner.getName() + " WON!"
+		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
 
 		// 2. 結果をファイル出力
 
 
 		// 3. ゲームリセット, ロビー転送
-
+		ArrayList<Player> all = new ArrayList<>();
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			all.add(p);
+		}
+		LMSGameUtil.playerResetProc(all);
 
 	}
 

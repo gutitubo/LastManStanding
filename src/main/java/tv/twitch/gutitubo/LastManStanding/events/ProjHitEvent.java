@@ -1,5 +1,9 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -24,35 +28,56 @@ public class ProjHitEvent implements Listener {
 	@EventHandler
 	public void whenHitProj(ProjectileHitEvent e) {
 		game = LastManStanding.getGame();
+		Bukkit.broadcastMessage("whenHitProj called!");
 		if (e.getEntity() instanceof Projectile) {
 			Projectile projectile = (Projectile) e.getEntity();
 			if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() instanceof Player)) {
 				/* ==== shooter, hitEntityがPlayerの場合 ==== */
 				//撃った側: Arrow1獲得 Speed獲得 Kill獲得 Point獲得 Title表示
+				Bukkit.broadcastMessage("p -> p arrow");
 				//撃たれた側: 死亡エフェクト Title表示 観戦者モード
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
 				if (shooter.equals(victim)) {
-					//TODO 撃った側と撃たれた側が同じ場合: 前Blink
-
+					samePlayerShotted(shooter);
+					Bukkit.broadcastMessage("same player shooted!");
 				} else {
 					/* あたった側の死亡エフェクト */
+					Bukkit.broadcastMessage("shooted! shooter:" + shooter + " victim:" + victim);
 					deadPlayerEffect(victim);
 					/* あたった側は死亡！ */
 					game.getLogic().killPlayer(shooter, victim);
 				}
+				hittedProjectile(projectile);
 			} else if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() == null)) {
 				/* === shooterがPlayer, hitEntityがnullの場合 === */
+				Bukkit.broadcastMessage("player -> null");
 				missedProjectile(projectile);
 			}
 		}
 	}
 
-	public static void missedProjectile(Projectile projectile) {
+	private static void missedProjectile(Projectile projectile) {
 		//TODO 着弾地点にエフェクト, ProjectileTypeによっては削除
+		Location hitted = projectile.getLocation();
+		hitted.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, projectile.getLocation(), 1, 0, 0, 0);
+		hitted.getWorld().playSound(hitted, Sound.BLOCK_WOOD_BREAK, 0.5F, 1F);
+		projectile.remove();
 	}
 
-	public static void deadPlayerEffect(Player player) {
+	private static void hittedProjectile(Projectile projectile) {
+		//TODO エンティティに着弾したときの絵ヘクト
+		Location hitted = projectile.getLocation();
+		hitted.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, projectile.getLocation(), 1, 0, 0, 0);
+		hitted.getWorld().playSound(hitted, Sound.BLOCK_ANVIL_BREAK, 0.5F, 1F);
+		projectile.remove();
+	}
+
+	private static void samePlayerShotted(Player p) {
+		// TODO 前ブリンク
+	}
+
+	private static void deadPlayerEffect(Player p) {
 		//TODO 死亡エフェクト
 	}
 }

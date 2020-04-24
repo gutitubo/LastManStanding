@@ -29,4 +29,9 @@ public class ConfigValue {
 	 */
 	public static int minPlayer;
 
+	/**
+	 * プレイヤーの足の速さ
+	 */
+	public static float walkSpeed;
+
 }
