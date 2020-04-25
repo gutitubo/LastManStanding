@@ -79,6 +79,9 @@ public class LastManStanding extends JavaPlugin {
 							CommandUtil.cantResetAnnounce(sender);
 						}
 						/* -- ---- ---- ---- -- */
+					} else if (cmd.equalsIgnoreCase("config")) {
+						ConfigReader.reload();
+						CommandUtil.sendConfigReloadAnnounce(sender);
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

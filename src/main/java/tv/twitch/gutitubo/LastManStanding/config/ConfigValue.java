@@ -34,4 +34,17 @@ public class ConfigValue {
 	 */
 	public static float walkSpeed;
 
+	/**
+	 * 最終範囲に選ばれる座標範囲
+	 */
+	public static double higher_x;
+	public static double higher_z;
+	public static double lower_x;
+	public static double lower_z;
+
+	/**
+	 * Borderの初期範囲
+	 */
+	public static double defaultSize;
+
 }

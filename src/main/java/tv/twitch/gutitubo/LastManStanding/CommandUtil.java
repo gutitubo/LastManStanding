@@ -25,4 +25,8 @@ public class CommandUtil {
 	public static void cantResetAnnounce(CommandSender cmd) {
 		cmd.sendMessage(ChatColor.DARK_RED + "ゲームは開始されていません。");
 	}
+
+	public static void sendConfigReloadAnnounce(CommandSender cmd) {
+		cmd.sendMessage(ChatColor.GOLD + "[LastManStanding] Configをリロードしました。");
+	}
 }

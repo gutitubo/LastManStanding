@@ -12,3 +12,13 @@ MinPlayer: 2
 
 # プレイヤー移動速度 デフォルト0.2
 WalkSpeed: 0.3
+
+# 範囲に選択される座標を設定
+Border:
+  higher:
+    x: 0
+    z: 0
+  lower:
+    x: 0
+    z: 0
+  DefaultSize: 500.0
