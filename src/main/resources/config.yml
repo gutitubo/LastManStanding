@@ -16,9 +16,9 @@ WalkSpeed: 0.3
 # 範囲に選択される座標を設定
 Border:
   higher:
-    x: 0
-    z: 0
+    x: 50
+    z: 50
   lower:
-    x: 0
-    z: 0
+    x: -50
+    z: -50
   DefaultSize: 500.0
