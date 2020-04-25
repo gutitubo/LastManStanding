@@ -43,6 +43,5 @@ public class LimitedPlayerActivity implements Listener {
 			// 2. ダメージをキャンセル
 			e.setCancelled(true);
 		}
-
 	}
 }
