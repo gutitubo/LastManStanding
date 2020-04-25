@@ -34,6 +34,12 @@ public class LMSBorder {
 
 		// 2. WorldBorderの初期範囲を設定
 		wb.setSize(defaultSize);
+
+		// 3. ダメージバッファを0に設定
+		wb.setDamageBuffer(0);
+
+		// 4. ダメージを1000に設定
+		wb.setDamageAmount(1000);
 	}
 
 	public static void start() {
@@ -41,14 +47,14 @@ public class LMSBorder {
 		wb.setSize(0.1, gameTime);
 	}
 
-	public static double randomX() {
+	private static double randomX() {
 		double range = higher_x - lower_x;
 		Random rnd = new Random();
 		double d_rnd = rnd.nextDouble() * range;
 		return lower_x + d_rnd;
 	}
 
-	public static double randomZ() {
+	private static double randomZ() {
 		double range = higher_z - lower_z;
 		Random rnd = new Random();
 		double d_rnd = rnd.nextDouble() * range;

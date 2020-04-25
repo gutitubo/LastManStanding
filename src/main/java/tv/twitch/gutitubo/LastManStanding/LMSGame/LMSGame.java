@@ -93,6 +93,7 @@ public class LMSGame {
 	 */
 	public void reset() {
 		LMSGameUtil.playerResetProc(players);
+		LMSBorder.off();
 		players = null;
 		canJoin = false;
 

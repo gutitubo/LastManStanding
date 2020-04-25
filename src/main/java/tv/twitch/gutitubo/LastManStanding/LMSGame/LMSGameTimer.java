@@ -29,6 +29,8 @@ public class LMSGameTimer extends BukkitRunnable {
 		} else if (count == waitingTime) {
 			LMSGameUtil.sendTitleToAll("", ChatColor.RED.toString()+"- START -", 0, 25, 10);
 			LMSGameUtil.takePlayerInvis(LastManStanding.getGame().getPlayers());
+			LMSBorder.create();
+			LMSBorder.start();
 
 		// 3. ゲーム開始後はボスバーの更新 + ボーダー縮小
 		} else {
