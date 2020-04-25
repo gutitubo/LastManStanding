@@ -1,6 +1,5 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -9,6 +8,8 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
@@ -28,30 +29,27 @@ public class ProjHitEvent implements Listener {
 	@EventHandler
 	public void whenHitProj(ProjectileHitEvent e) {
 		game = LastManStanding.getGame();
-		Bukkit.broadcastMessage("whenHitProj called!");
 		if (e.getEntity() instanceof Projectile) {
 			Projectile projectile = (Projectile) e.getEntity();
 			if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() instanceof Player)) {
 				/* ==== shooter, hitEntityがPlayerの場合 ==== */
 				//撃った側: Arrow1獲得 Speed獲得 Kill獲得 Point獲得 Title表示
-				Bukkit.broadcastMessage("p -> p arrow");
 				//撃たれた側: 死亡エフェクト Title表示 観戦者モード
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
 				if (shooter.equals(victim)) {
 					samePlayerShotted(shooter);
-					Bukkit.broadcastMessage("same player shooted!");
 				} else {
 					/* あたった側の死亡エフェクト */
-					Bukkit.broadcastMessage("shooted! shooter:" + shooter + " victim:" + victim);
 					deadPlayerEffect(victim);
 					/* あたった側は死亡！ */
 					game.getLogic().killPlayer(shooter, victim);
+					/* キラー側にバフとエフェクトを付与 */
+					killedBuff(shooter);
 				}
 				hittedProjectile(projectile);
 			} else if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() == null)) {
 				/* === shooterがPlayer, hitEntityがnullの場合 === */
-				Bukkit.broadcastMessage("player -> null");
 				missedProjectile(projectile);
 			}
 		}
@@ -60,7 +58,7 @@ public class ProjHitEvent implements Listener {
 	private static void missedProjectile(Projectile projectile) {
 		//TODO 着弾地点にエフェクト, ProjectileTypeによっては削除
 		Location hitted = projectile.getLocation();
-		hitted.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, projectile.getLocation(), 1, 0, 0, 0);
+		hitted.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, projectile.getLocation(), 1, 0, 0, 0);
 		hitted.getWorld().playSound(hitted, Sound.BLOCK_WOOD_BREAK, 0.5F, 1F);
 		projectile.remove();
 	}
@@ -68,9 +66,21 @@ public class ProjHitEvent implements Listener {
 	private static void hittedProjectile(Projectile projectile) {
 		//TODO エンティティに着弾したときの絵ヘクト
 		Location hitted = projectile.getLocation();
-		hitted.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, projectile.getLocation(), 1, 0, 0, 0);
-		hitted.getWorld().playSound(hitted, Sound.BLOCK_ANVIL_BREAK, 0.5F, 1F);
+		hitted.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, projectile.getLocation(), 1, 0, 0, 0);
+		hitted.getWorld().playSound(hitted, Sound.ENTITY_PLAYER_HURT, 0.5F, 1F);
 		projectile.remove();
+	}
+
+	/**
+	 * プレイヤーキル時のバフ
+	 */
+	private static void killedBuff(Player p) {
+		// 1. 速度上昇を付与
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1, false, false), true);
+
+		// 2. 音を出す
+		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 0.4F, 1.2F);
+		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_FIREBALL_EXPLODE, 0.5F, 0.8F);
 	}
 
 	private static void samePlayerShotted(Player p) {

@@ -16,7 +16,7 @@ public class ConfigReader {
 	 *	Configの値が登録されていない場合に新しく値を登録する
 	 */
 	public static void init() {
-	//	LastManStanding.main.saveDefaultConfig();
+		LastManStanding.main.saveDefaultConfig();
 		reload();
 	}
 
@@ -27,8 +27,16 @@ public class ConfigReader {
 		ConfigValue.waitingTime = LastManStanding.main.getConfig().getInt("WaitingTime");
 		ConfigValue.gameTime = LastManStanding.main.getConfig().getInt("GameTime");
 		ConfigValue.startTime = LastManStanding.main.getConfig().getInt("StartTime");
+
 		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("MinPlayer");
-		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("WalkSpeed");
+		ConfigValue.walkSpeed = (float) LastManStanding.main.getConfig().getDouble("WalkSpeed");
+
+		ConfigValue.higher_x = LastManStanding.main.getConfig().getDouble("Border.higher.x");
+		ConfigValue.higher_z = LastManStanding.main.getConfig().getDouble("Border.higher.z");
+		ConfigValue.lower_x = LastManStanding.main.getConfig().getDouble("Border.lower.x");
+		ConfigValue.lower_z = LastManStanding.main.getConfig().getDouble("Border.lower.z");
+
+		ConfigValue.defaultSize = LastManStanding.main.getConfig().getDouble("Border.DefaultSize");
 	}
 
 }

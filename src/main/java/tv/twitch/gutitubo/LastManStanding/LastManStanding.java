@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
 import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SignTeleportEvent;
@@ -74,12 +75,14 @@ public class LastManStanding extends JavaPlugin {
 					} else if (cmd.equalsIgnoreCase("reset")) {
 						/* -- ゲームリセット分岐 -- */
 						if (getGame() != null) {
-							game.reset();
-							game = null;
+							resetGame();
 						} else {
 							CommandUtil.cantResetAnnounce(sender);
 						}
 						/* -- ---- ---- ---- -- */
+					} else if (cmd.equalsIgnoreCase("config")) {
+						ConfigReader.reload();
+						CommandUtil.sendConfigReloadAnnounce(sender);
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}
@@ -99,9 +102,15 @@ public class LastManStanding extends JavaPlugin {
 		pm.registerEvents(new ProjHitEvent(), this);
 		pm.registerEvents(new SignTeleportEvent(), this);
 		pm.registerEvents(new SneakingJumpEvent(), this);
+		pm.registerEvents(new LimitedPlayerActivity(), this);
 	}
 
 	public static LMSGame getGame() {
 		return game;
+	}
+
+	public static void resetGame() {
+		game.reset();
+		game = null;
 	}
 }
