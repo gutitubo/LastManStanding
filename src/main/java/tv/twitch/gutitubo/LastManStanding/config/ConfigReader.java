@@ -29,7 +29,7 @@ public class ConfigReader {
 		ConfigValue.startTime = LastManStanding.main.getConfig().getInt("StartTime");
 
 		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("MinPlayer");
-		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("WalkSpeed");
+		ConfigValue.walkSpeed = (float) LastManStanding.main.getConfig().getDouble("WalkSpeed");
 
 		ConfigValue.higher_x = LastManStanding.main.getConfig().getDouble("Border.higher.x");
 		ConfigValue.higher_z = LastManStanding.main.getConfig().getDouble("Border.higher.z");
