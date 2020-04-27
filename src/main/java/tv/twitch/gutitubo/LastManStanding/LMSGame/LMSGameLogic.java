@@ -48,7 +48,7 @@ public class LMSGameLogic {
 
 		// 4. VictimにKillerと順位を表示
 		if (killer != null)
-			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + alive.size() + 1
+			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
 			, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
 		// 5. KillLog表示
