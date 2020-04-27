@@ -154,4 +154,11 @@ public class LMSGameLogic {
 	public ArrayList<Player> getAlives() {
 		return alive;
 	}
+
+	/**
+	 * Game取得メソッド
+	 */
+	public LMSGame getGame() {
+		return game;
+	}
 }
