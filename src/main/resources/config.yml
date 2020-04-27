@@ -23,6 +23,12 @@ Border:
     z: -50
   DefaultSize: 500.0
 
+# ロビーの座標を設定
+Lobby:
+  x: 0
+  y: 0
+  z: 0
+
 # スポーン地点を設定
 Spawn:
   Point1:
