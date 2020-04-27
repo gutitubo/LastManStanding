@@ -29,6 +29,7 @@ public class LMSGameTimer extends BukkitRunnable {
 		} else if (count == waitingTime) {
 			LMSGameUtil.sendTitleToAll("", ChatColor.RED.toString()+"- START -", 0, 25, 10);
 			LMSGameUtil.takePlayerInvis(LastManStanding.getGame().getPlayers());
+			game.setInGame(true);
 			LMSBorder.create();
 			LMSBorder.start();
 

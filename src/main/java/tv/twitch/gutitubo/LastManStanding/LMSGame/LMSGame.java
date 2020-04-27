@@ -25,7 +25,7 @@ public class LMSGame {
 	/* ----------------- */
 	/* ゲーム内部処理用変数 */
 	/*------------------ */
-	protected boolean canJoin = false; //ゲーム参加可能フラグ
+	protected boolean inGame = false; //ゲーム参加可能フラグ
 	protected ArrayList<Player> players; //参加者リスト
 	private LMSGameLogic logic; //ゲームロジック処理用オブジェクト
 
@@ -81,11 +81,6 @@ public class LMSGame {
 		// 3. タイマー開始
 		BukkitRunnable timer = new LMSGameTimer();
 		timer.runTaskTimer(LastManStanding.main, 20, 20);
-
-		// 4. 参加者テレポート
-
-
-		// 5. ワールドボーダー初期処理
 	}
 
 	/**
@@ -95,9 +90,7 @@ public class LMSGame {
 		LMSGameUtil.playerResetProc(players);
 		LMSBorder.off();
 		players = null;
-		canJoin = false;
-
-		//TODO ロビーテレポート
+		inGame = false;
 	}
 
 	/**
@@ -105,6 +98,20 @@ public class LMSGame {
 	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
+	}
+
+	/**
+	 * inGame状態の変更
+	 */
+	public void setInGame(boolean ingame) {
+		inGame = ingame;
+	}
+
+	/**
+	 * inGame状態の取得
+	 */
+	public boolean isInGame() {
+		return inGame;
 	}
 
 	/**
