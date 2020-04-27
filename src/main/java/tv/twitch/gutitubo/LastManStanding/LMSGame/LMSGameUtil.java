@@ -191,6 +191,15 @@ public class LMSGameUtil {
 	}
 
 	/**
+	 * 全員を発光させる
+	 */
+	public static void glowAll(List<Player> players) {
+		for (Player p : players) {
+			p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * 5, 0, false, false), true);
+		}
+	}
+
+	/**
 	 * ロビーにテレポートさせる
 	 */
 	public static void teleportToLobby(Player p) {
