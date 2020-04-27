@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -80,9 +81,38 @@ public class LastManStanding extends JavaPlugin {
 							CommandUtil.cantResetAnnounce(sender);
 						}
 						/* -- ---- ---- ---- -- */
-					} else if (cmd.equalsIgnoreCase("config")) {
+					} else if (cmd.equalsIgnoreCase("reload")) {
 						ConfigReader.reload();
 						CommandUtil.sendConfigReloadAnnounce(sender);
+					} else if (cmd.equalsIgnoreCase("spawnpoint")) {
+						/* -------------------- */
+						// Pre. senderがPlayerじゃないとだめです
+						if (!(sender instanceof Player)) return true;
+
+						// 1. args[1]がない場合 nullで返す
+						if (args[1] == null) {
+							sender.sendMessage("Usage: /lms spawnpoint <1~9>");
+							return true;
+						}
+
+						// 2. args[1]から数字を取得
+						int point = 0;
+						try {
+							point = Integer.parseInt(args[1]);
+						} catch (NumberFormatException e) {
+							Bukkit.getLogger().warning("[LMS] だめですエクセプション");
+						}
+
+						// 3. Pointが1~9じゃないとだめ
+						if (1 <= point && point <= 9) {
+							sender.sendMessage(ChatColor.RED + "SpawnPointは1~9で設定してください");
+							return true;
+						}
+
+						// 4. 座標をConfigに設定
+						CommandUtil.setSpawnPointToConfig(point, ((Player)sender).getLocation());
+
+						/* -------------------- */
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

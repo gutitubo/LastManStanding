@@ -1,5 +1,6 @@
 package tv.twitch.gutitubo.LastManStanding;
 
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
 import net.md_5.bungee.api.ChatColor;
@@ -29,4 +30,11 @@ public class CommandUtil {
 	public static void sendConfigReloadAnnounce(CommandSender cmd) {
 		cmd.sendMessage(ChatColor.GOLD + "[LastManStanding] Configをリロードしました。");
 	}
+
+	public static void setSpawnPointToConfig(int point, Location location) {
+		LastManStanding.main.getConfig().set("Spawn.Point" + point + ".x", location.getBlockX());
+		LastManStanding.main.getConfig().set("Spawn.Point" + point + ".y", location.getBlockY());
+		LastManStanding.main.getConfig().set("Spawn.Point" + point + ".z", location.getBlockZ());
+	}
+
 }
