@@ -40,6 +40,7 @@ public class LMSGameUtil {
 		givePlayerLoadout(players);
 		givePlayerInvis(players);
 		givePlayerStatus(players);
+		teleportToSpawn(players);
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class LMSGameUtil {
 	 * プレイヤーのステータスをデフォルトにリセットする
 	 */
 	public static void resetPlayerStatus (Player p) {
-		p.setWalkSpeed(0.2F);
+		p.setWalkSpeed(defaultSpeed);
 	}
 
 	/**
@@ -219,6 +220,19 @@ public class LMSGameUtil {
 	public static void teleportAllLobby() {
 		for (Player p: Bukkit.getOnlinePlayers()) {
 			teleportToLobby(p);
+		}
+	}
+
+	/**
+	 * 全員を各スポーン地点にテレポートさせる
+	 */
+	public static void teleportToSpawn(List<Player> players) {
+		int count = 0;
+		int point = 1;
+		for (Player p: players) {
+			point = count % 10;
+			teleportToSpawn(p, point);
+			count++;
 		}
 	}
 }
