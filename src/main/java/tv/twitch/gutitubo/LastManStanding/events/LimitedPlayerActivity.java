@@ -6,10 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 
 /**
  * プレイヤーの各種行動を制限するためのクラス
@@ -60,5 +62,16 @@ public class LimitedPlayerActivity implements Listener {
 	@EventHandler
 	public void whenPlayerFoodLevelChanged(FoodLevelChangeEvent e) {
 		e.setCancelled(true);
+	}
+
+	/**
+	 * inGame中じゃないと撃てないの
+	 */
+	@EventHandler
+	public void whenPlayerShooted(EntityShootBowEvent e) {
+		LMSGame game = LastManStanding.getGame();
+		if (game == null || !game.isInGame()) {
+			e.setCancelled(true);
+		}
 	}
 }
