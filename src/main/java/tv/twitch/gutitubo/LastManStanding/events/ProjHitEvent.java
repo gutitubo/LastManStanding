@@ -81,7 +81,6 @@ public class ProjHitEvent implements Listener {
 
 		// 2. 音を出す
 		p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT, 0.8F, 1F);
-		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 0.4F, 1.2F);
 		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_FIREBALL_EXPLODE, 0.5F, 0.8F);
 	}
 

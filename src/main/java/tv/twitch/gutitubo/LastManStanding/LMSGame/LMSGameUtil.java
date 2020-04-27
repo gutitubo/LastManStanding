@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -187,6 +188,15 @@ public class LMSGameUtil {
 			int fadeIn, int stay, int fadeOut) {
 		for (Player p: Bukkit.getOnlinePlayers()) {
 			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+		}
+	}
+
+	/**
+	 * 全員にSoundを送信
+	 */
+	public static void sendSoundToAll(Sound sound, Float volume, Float pitch) {
+		for (Player p: Bukkit.getOnlinePlayers()) {
+			p.playSound(p.getLocation(), sound, volume, pitch);
 		}
 	}
 
