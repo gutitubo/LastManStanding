@@ -29,6 +29,7 @@ public class LMSGameTimer extends BukkitRunnable {
 		} else if (count == waitingTime) {
 			LMSGameUtil.sendTitleToAll("", ChatColor.RED.toString()+"- START -", 0, 25, 10);
 			LMSGameUtil.takePlayerInvis(LastManStanding.getGame().getPlayers());
+			game.setInGame(true);
 			LMSBorder.create();
 			LMSBorder.start();
 
@@ -39,6 +40,12 @@ public class LMSGameTimer extends BukkitRunnable {
 
 		// 共通. 5秒ごとに矢を配布する
 		if (count%5 == 0) LMSGameUtil.givePlayerArrow(game.getLogic().getAlives());
+
+		// 共通. 1秒ごとにコンパスを更新する
+		LMSGameUtil.reloadCompass(game.getLogic().getAlives());
+
+		// 共通. 60秒ごとに5秒発光させる
+		if (count%60 == 0) LMSGameUtil.glowAll(game.getLogic().getAlives());
 
 		// 共通. カウントを1すすめる
 		count++;

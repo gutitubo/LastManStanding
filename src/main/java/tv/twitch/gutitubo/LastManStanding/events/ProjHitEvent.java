@@ -59,7 +59,8 @@ public class ProjHitEvent implements Listener {
 		//TODO 着弾地点にエフェクト, ProjectileTypeによっては削除
 		Location hitted = projectile.getLocation();
 		hitted.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, projectile.getLocation(), 1, 0, 0, 0);
-		hitted.getWorld().playSound(hitted, Sound.BLOCK_WOOD_BREAK, 0.5F, 1F);
+		hitted.getWorld().playSound(hitted, Sound.ENTITY_GENERIC_EXPLODE, 0.2F, 1F);
+		hitted.getWorld().playSound(hitted, Sound.ENTITY_ARROW_HIT, 0.5F, 1F);
 		projectile.remove();
 	}
 
@@ -79,6 +80,7 @@ public class ProjHitEvent implements Listener {
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1, false, false), true);
 
 		// 2. 音を出す
+		p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT, 0.8F, 1F);
 		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 0.4F, 1.2F);
 		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_FIREBALL_EXPLODE, 0.5F, 0.8F);
 	}
@@ -89,5 +91,9 @@ public class ProjHitEvent implements Listener {
 
 	private static void deadPlayerEffect(Player p) {
 		//TODO 死亡エフェクト
+		p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.4F, 1F);
+		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_HURT, 0.6F, 1F);
+
+		p.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, p.getLocation(), 1, 0, 0, 0);
 	}
 }

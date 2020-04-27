@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
@@ -37,6 +40,7 @@ public class LMSGameUtil {
 		givePlayerLoadout(players);
 		givePlayerInvis(players);
 		givePlayerStatus(players);
+		teleportToSpawn(players);
 	}
 
 	/**
@@ -48,6 +52,7 @@ public class LMSGameUtil {
 			/* 各プレイヤーへの処理 */
 
 			// 1. ロビー転送
+			teleportToLobby(p);
 
 			// 2. ゲームモード変更
 			p.setGameMode(GameMode.ADVENTURE);
@@ -78,7 +83,7 @@ public class LMSGameUtil {
 	 * プレイヤーのステータスをデフォルトにリセットする
 	 */
 	public static void resetPlayerStatus (Player p) {
-		p.setWalkSpeed(0.2F);
+		p.setWalkSpeed(defaultSpeed);
 	}
 
 	/**
@@ -182,6 +187,78 @@ public class LMSGameUtil {
 			int fadeIn, int stay, int fadeOut) {
 		for (Player p: Bukkit.getOnlinePlayers()) {
 			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+		}
+	}
+
+	/**
+	 * 全員を発光させる
+	 */
+	public static void glowAll(List<Player> players) {
+		for (Player p : players) {
+			p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * 5, 0, false, false), true);
+		}
+	}
+
+	/**
+	 * リスト内プレイヤーの各コンパスを最寄りプレイヤーにセットする
+	 */
+	public static void reloadCompass(List<Player> players) {
+		for (Player p : players) {
+			Player near = null;
+			for (Player q : players) {
+				double distance = p.getLocation().distance(q.getLocation());
+				if (near == null || distance < p.getLocation().distance(q.getLocation())) {
+					near = q;
+				}
+			}
+			p.setCompassTarget(near.getLocation());
+			p.setCooldown(Material.COMPASS, 20);
+		}
+	}
+
+	/**
+	 * ロビーにテレポートさせる
+	 */
+	public static void teleportToLobby(Player p) {
+		World w = Bukkit.getWorld("world");
+		double x = LastManStanding.main.getConfig().getInt("Lobby.x") + 0.5;
+		double y = LastManStanding.main.getConfig().getInt("Lobby.y") + 0.5;
+		double z = LastManStanding.main.getConfig().getInt("Lobby.z") + 0.5;
+		Location location = new Location(w, x, y, z);
+		p.teleport(location);
+	}
+
+	/**
+	 * スポーン地点にテレポートさせる　
+	 */
+	public static void teleportToSpawn(Player p, int point) {
+		World w = Bukkit.getWorld("world");
+		double x = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".x") + 0.5;
+		double y = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".y") + 0.5;
+		double z = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".z") + 0.5;
+		Location location = new Location(w, x, y, z);
+		p.teleport(location);
+	}
+
+	/**
+	 * 全員をロビーにテレポートさせる
+	 */
+	public static void teleportAllLobby() {
+		for (Player p: Bukkit.getOnlinePlayers()) {
+			teleportToLobby(p);
+		}
+	}
+
+	/**
+	 * 全員を各スポーン地点にテレポートさせる
+	 */
+	public static void teleportToSpawn(List<Player> players) {
+		int count = 0;
+		int point = 1;
+		for (Player p: players) {
+			point = count % 9;
+			teleportToSpawn(p, point + 1);
+			count++;
 		}
 	}
 }

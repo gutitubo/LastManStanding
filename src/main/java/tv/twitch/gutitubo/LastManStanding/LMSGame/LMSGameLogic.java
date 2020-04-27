@@ -48,7 +48,7 @@ public class LMSGameLogic {
 
 		// 4. VictimにKillerと順位を表示
 		if (killer != null)
-			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + alive.size() + 1
+			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
 			, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
 		// 5. KillLog表示
@@ -107,6 +107,10 @@ public class LMSGameLogic {
 		// 1. 勝者をアナウンス
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage(ChatColor.GOLD.toString() + ChatColor.BOLD.toString() +
+				winner.getName() + " がゲームに勝利しました!");
+		Bukkit.broadcastMessage("");
 
 		// 2. 結果をファイル出力 + ゲーム内計算
 
@@ -153,5 +157,12 @@ public class LMSGameLogic {
 	 */
 	public ArrayList<Player> getAlives() {
 		return alive;
+	}
+
+	/**
+	 * Game取得メソッド
+	 */
+	public LMSGame getGame() {
+		return game;
 	}
 }
