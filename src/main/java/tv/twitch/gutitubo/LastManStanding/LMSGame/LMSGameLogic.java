@@ -107,6 +107,10 @@ public class LMSGameLogic {
 		// 1. 勝者をアナウンス
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage(ChatColor.GOLD.toString() + ChatColor.BOLD.toString() +
+				winner.getName() + " がゲームに勝利しました!");
+		Bukkit.broadcastMessage("");
 
 		// 2. 結果をファイル出力 + ゲーム内計算
 
