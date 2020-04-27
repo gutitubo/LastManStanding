@@ -20,7 +20,7 @@ import tv.twitch.gutitubo.LastManStanding.events.SneakingJumpEvent;
 public class LastManStanding extends JavaPlugin {
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "0.0.6";
+	private static String VERSION = "0.0.7";
 
 	public static LastManStanding main;
 
