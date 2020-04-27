@@ -212,6 +212,7 @@ public class LMSGameUtil {
 				}
 			}
 			p.setCompassTarget(near.getLocation());
+			p.setCooldown(Material.COMPASS, 20);
 		}
 	}
 
