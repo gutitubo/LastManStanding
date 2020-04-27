@@ -84,14 +84,14 @@ public class LastManStanding extends JavaPlugin {
 					} else if (cmd.equalsIgnoreCase("reload")) {
 						ConfigReader.reload();
 						CommandUtil.sendConfigReloadAnnounce(sender);
-					} else if (cmd.equalsIgnoreCase("spawnpoint")) {
+					} else if (cmd.equalsIgnoreCase("setspawnpoint")) {
 						/* -------------------- */
 						// Pre. senderがPlayerじゃないとだめです
 						if (!(sender instanceof Player)) return true;
 
 						// 1. args[1]がない場合 nullで返す
 						if (args[1] == null) {
-							sender.sendMessage("Usage: /lms spawnpoint <1~9>");
+							sender.sendMessage("Usage: /lms setspawnpoint <1~9>");
 							return true;
 						}
 
@@ -113,6 +113,12 @@ public class LastManStanding extends JavaPlugin {
 						CommandUtil.setSpawnPointToConfig(point, ((Player)sender).getLocation());
 
 						/* -------------------- */
+					} else if (cmd.equalsIgnoreCase("setlobby")) {
+						// Pre. senderがPlayerじゃないとだめです
+						if (!(sender instanceof Player)) return true;
+
+						// 1. senderのロケーションをロビーとして登録
+						CommandUtil.setLobbyToConfig(((Player)sender).getLocation());
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

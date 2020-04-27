@@ -37,4 +37,9 @@ public class CommandUtil {
 		LastManStanding.main.getConfig().set("Spawn.Point" + point + ".z", location.getBlockZ());
 	}
 
+	public static void setLobbyToConfig(Location location) {
+		LastManStanding.main.getConfig().set("Lobby.x", location.getBlockX());
+		LastManStanding.main.getConfig().set("Lobby.y", location.getBlockY());
+		LastManStanding.main.getConfig().set("Lobby.z", location.getBlockZ());
+	}
 }
