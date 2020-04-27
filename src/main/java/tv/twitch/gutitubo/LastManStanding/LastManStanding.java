@@ -112,6 +112,9 @@ public class LastManStanding extends JavaPlugin {
 						// 4. 座標をConfigに設定
 						CommandUtil.setSpawnPointToConfig(point, ((Player)sender).getLocation());
 
+						// 5. 成功の旨をメッセージ表示
+						sender.sendMessage(ChatColor.YELLOW + "Spawn" + point + "を設定しました。");
+
 						/* -------------------- */
 					} else if (cmd.equalsIgnoreCase("setlobby")) {
 						// Pre. senderがPlayerじゃないとだめです
@@ -119,6 +122,9 @@ public class LastManStanding extends JavaPlugin {
 
 						// 1. senderのロケーションをロビーとして登録
 						CommandUtil.setLobbyToConfig(((Player)sender).getLocation());
+
+						// 2. 成功の旨をメッセージ表示
+						sender.sendMessage(ChatColor.YELLOW + "Lobby座標を設定しました。");
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

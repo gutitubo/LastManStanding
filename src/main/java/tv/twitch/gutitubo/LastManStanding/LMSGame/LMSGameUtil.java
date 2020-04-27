@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
@@ -183,5 +186,29 @@ public class LMSGameUtil {
 		for (Player p: Bukkit.getOnlinePlayers()) {
 			p.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
 		}
+	}
+
+	/**
+	 * ロビーにテレポートさせる
+	 */
+	public static void teleportToLobby(Player p) {
+		World w = Bukkit.getWorld("world");
+		double x = LastManStanding.main.getConfig().getInt("Lobby.x") + 0.5;
+		double y = LastManStanding.main.getConfig().getInt("Lobby.y") + 0.5;
+		double z = LastManStanding.main.getConfig().getInt("Lobby.z") + 0.5;
+		Location location = new Location(w, x, y, z);
+		p.teleport(location);
+	}
+
+	/**
+	 * スポーン地点にテレポートさせる　
+	 */
+	public static void teleportToSpawn(Player p, int point) {
+		World w = Bukkit.getWorld("world");
+		double x = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".x") + 0.5;
+		double y = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".y") + 0.5;
+		double z = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".z") + 0.5;
+		Location location = new Location(w, x, y, z);
+		p.teleport(location);
 	}
 }
