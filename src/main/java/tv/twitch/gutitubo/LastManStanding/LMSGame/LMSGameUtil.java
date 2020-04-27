@@ -51,6 +51,7 @@ public class LMSGameUtil {
 			/* 各プレイヤーへの処理 */
 
 			// 1. ロビー転送
+			teleportToLobby(p);
 
 			// 2. ゲームモード変更
 			p.setGameMode(GameMode.ADVENTURE);
@@ -210,5 +211,14 @@ public class LMSGameUtil {
 		double z = LastManStanding.main.getConfig().getInt("Spawn.Point" + point + ".z") + 0.5;
 		Location location = new Location(w, x, y, z);
 		p.teleport(location);
+	}
+
+	/**
+	 * 全員をロビーにテレポートさせる
+	 */
+	public static void teleportAllLobby() {
+		for (Player p: Bukkit.getOnlinePlayers()) {
+			teleportToLobby(p);
+		}
 	}
 }
