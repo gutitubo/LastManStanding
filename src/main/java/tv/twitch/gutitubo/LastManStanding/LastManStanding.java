@@ -104,7 +104,7 @@ public class LastManStanding extends JavaPlugin {
 						}
 
 						// 3. Pointが1~9じゃないとだめ
-						if (1 <= point && point <= 9) {
+						if (!(1 <= point && point <= 9)) {
 							sender.sendMessage(ChatColor.RED + "SpawnPointは1~9で設定してください");
 							return true;
 						}
@@ -114,6 +114,8 @@ public class LastManStanding extends JavaPlugin {
 
 						// 5. 成功の旨をメッセージ表示
 						sender.sendMessage(ChatColor.YELLOW + "Spawn" + point + "を設定しました。");
+
+						saveConfig();
 
 						/* -------------------- */
 					} else if (cmd.equalsIgnoreCase("setlobby")) {
@@ -125,6 +127,8 @@ public class LastManStanding extends JavaPlugin {
 
 						// 2. 成功の旨をメッセージ表示
 						sender.sendMessage(ChatColor.YELLOW + "Lobby座標を設定しました。");
+
+						saveConfig();
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

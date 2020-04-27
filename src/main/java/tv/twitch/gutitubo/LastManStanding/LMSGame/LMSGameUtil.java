@@ -230,8 +230,8 @@ public class LMSGameUtil {
 		int count = 0;
 		int point = 1;
 		for (Player p: players) {
-			point = count % 10;
-			teleportToSpawn(p, point);
+			point = count % 9;
+			teleportToSpawn(p, point + 1);
 			count++;
 		}
 	}
