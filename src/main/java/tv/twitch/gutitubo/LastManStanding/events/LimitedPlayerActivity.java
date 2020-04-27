@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -51,5 +52,13 @@ public class LimitedPlayerActivity implements Listener {
 			if (e.getDamage() < 950) return;
 			LastManStanding.getGame().getLogic().killPlayer(null, (Player) entity);
 		}
+	}
+
+	/**
+	 * プレイヤーの飢餓を防ぐ
+	 */
+	@EventHandler
+	public void whenPlayerFoodLevelChanged(FoodLevelChangeEvent e) {
+		e.setCancelled(true);
 	}
 }
