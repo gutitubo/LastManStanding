@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -77,6 +79,10 @@ public class LMSGame {
 
 		// 2. 参加プレイヤーに処理
 		LMSGameUtil.playerInitProc(players);
+		for (Player p: players) {
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20*30, 1, false, false), true);
+			p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20*30, 2, false, false), true);
+		}
 
 		// 3. タイマー開始
 		BukkitRunnable timer = new LMSGameTimer();
