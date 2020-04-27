@@ -200,6 +200,22 @@ public class LMSGameUtil {
 	}
 
 	/**
+	 * リスト内プレイヤーの各コンパスを最寄りプレイヤーにセットする
+	 */
+	public static void reloadCompass(List<Player> players) {
+		for (Player p : players) {
+			Player near = null;
+			for (Player q : players) {
+				double distance = p.getLocation().distance(q.getLocation());
+				if (near == null || distance < p.getLocation().distance(q.getLocation())) {
+					near = q;
+				}
+			}
+			p.setCompassTarget(near.getLocation());
+		}
+	}
+
+	/**
 	 * ロビーにテレポートさせる
 	 */
 	public static void teleportToLobby(Player p) {

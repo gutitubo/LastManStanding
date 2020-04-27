@@ -40,6 +40,9 @@ public class LMSGameTimer extends BukkitRunnable {
 		// 共通. 5秒ごとに矢を配布する
 		if (count%5 == 0) LMSGameUtil.givePlayerArrow(game.getLogic().getAlives());
 
+		// 共通. 1秒ごとにコンパスを更新する
+		LMSGameUtil.reloadCompass(game.getLogic().getAlives());
+
 		// 共通. 60秒ごとに5秒発光させる
 		if (count%60 == 0) LMSGameUtil.glowAll(game.getLogic().getAlives());
 
