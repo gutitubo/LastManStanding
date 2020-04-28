@@ -125,7 +125,7 @@ public class LMSGameLogic {
 
 	public void killLog(Player killer, Player victim) {
 		String r = ChatColor.RESET.toString() + ChatColor.GRAY.toString();
-		String victimName = ChatColor.DARK_BLUE.toString() + victim.getName();
+		String victimName = ChatColor.BLUE.toString() + victim.getName();
 		String rank = ChatColor.GOLD.toString() + "#" + (alive.size()+1);
 		String kill = ChatColor.RED.toString() + playerScore.get(victim).getKill()
 				+ ChatColor.GRAY.toString() + "kill";
