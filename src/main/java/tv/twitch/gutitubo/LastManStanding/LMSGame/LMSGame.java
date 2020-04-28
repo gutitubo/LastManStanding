@@ -93,7 +93,12 @@ public class LMSGame {
 	 * ゲーム終了時処理のメソッド
 	 */
 	public void reset() {
-		LMSGameUtil.playerResetProc(players);
+		ArrayList<Player> temp = new ArrayList<>();
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			temp.add(p);
+		}
+
+		LMSGameUtil.playerResetProc(temp);
 		LMSBorder.off();
 		inGame = false;
 	}
