@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -49,18 +50,17 @@ public class LMSGameLogic {
 		// 4. VictimにKillerと順位を表示
 		if (killer != null)
 			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
-			, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
+					, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
-		// 5. KillLog表示
+		// 5. Killerにサウンドを追加
+		killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
+
+		// 6. KillLog表示
 		killLog(killer, victim);
 
-		// 6. Killerが最後の1人になった場合は終了
+		// 7. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
-			if (killer != null) {
-				winGame(killer);
-			} else {
-				winGame(alive.get(0));
-			}
+			winGame(killer);
 		}
 	}
 
@@ -97,6 +97,16 @@ public class LMSGameLogic {
 
 		// 3. Aliveリストから削除
 		alive.remove(victim);
+
+		// 4. 死んだ場所に雷
+		victim.getWorld().strikeLightningEffect(victim.getLocation());
+
+		// 5. 全員に音を奏でる
+		LMSGameUtil.sendSoundToAll(Sound.ENTITY_ARROW_HIT_PLAYER, 1F, 1F);
+
+		// 6. タイトル表示
+		victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
+				, "", 10, 60, 10);
 	}
 
 	/**
@@ -125,7 +135,7 @@ public class LMSGameLogic {
 
 	public void killLog(Player killer, Player victim) {
 		String r = ChatColor.RESET.toString() + ChatColor.GRAY.toString();
-		String victimName = ChatColor.DARK_BLUE.toString() + victim.getName();
+		String victimName = ChatColor.BLUE.toString() + victim.getName();
 		String rank = ChatColor.GOLD.toString() + "#" + (alive.size()+1);
 		String kill = ChatColor.RED.toString() + playerScore.get(victim).getKill()
 				+ ChatColor.GRAY.toString() + "kill";
