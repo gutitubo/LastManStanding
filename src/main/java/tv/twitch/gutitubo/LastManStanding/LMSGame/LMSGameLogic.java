@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -97,6 +98,12 @@ public class LMSGameLogic {
 
 		// 3. Aliveリストから削除
 		alive.remove(victim);
+
+		// 4. 死んだ場所に雷
+		victim.getWorld().strikeLightningEffect(victim.getLocation());
+
+		// 5. 全員に音を奏でる
+		LMSGameUtil.sendSoundToAll(Sound.ENTITY_ARROW_HIT_PLAYER, 1F, 1F);
 	}
 
 	/**
