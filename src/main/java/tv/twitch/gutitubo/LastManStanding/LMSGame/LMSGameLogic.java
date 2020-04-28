@@ -53,6 +53,7 @@ public class LMSGameLogic {
 					, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
 		// 5. Killerにサウンドを追加
+		if (killer != null)
 		killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
 
 		// 6. KillLog表示
