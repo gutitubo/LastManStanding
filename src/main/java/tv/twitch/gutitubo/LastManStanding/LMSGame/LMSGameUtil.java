@@ -1,5 +1,6 @@
 package tv.twitch.gutitubo.LastManStanding.LMSGame;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -265,6 +266,7 @@ public class LMSGameUtil {
 	public static void teleportToSpawn(List<Player> players) {
 		int count = 0;
 		int point = 1;
+		Collections.shuffle(players);
 		for (Player p: players) {
 			point = count % 9;
 			teleportToSpawn(p, point + 1);
