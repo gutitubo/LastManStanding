@@ -1,0 +1,69 @@
+# ゲーム開始までの待機時間
+WaitingTime: 30
+
+# 総ゲーム時間
+GameTime: 600
+
+# ゲーム開始時間
+StartTime: 30
+
+# ゲーム開始可能最少人数 
+MinPlayer: 2
+
+# プレイヤー移動速度 デフォルト0.2
+WalkSpeed: 0.3
+
+# 範囲に選択される座標を設定
+Border:
+  higher:
+    x: 50
+    z: 50
+  lower:
+    x: -50
+    z: -50
+  DefaultSize: 500.0
+
+# ロビーの座標を設定
+Lobby:
+  x: 0
+  y: 0
+  z: 0
+
+# スポーン地点を設定
+Spawn:
+  Point1:
+    x: 0
+    y: 0
+    z: 0
+  Point2:
+    x: 0
+    y: 0
+    z: 0
+  Point3:
+    x: 0
+    y: 0
+    z: 0
+  Point4:
+    x: 0
+    y: 0
+    z: 0
+  Point5:
+    x: 0
+    y: 0
+    z: 0
+  Point6:
+    x: 0
+    y: 0
+    z: 0
+  Point7:
+    x: 0
+    y: 0
+    z: 0
+  Point8:
+    x: 0
+    y: 0
+    z: 0
+  Point9:
+    x: 0
+    y: 0
+    z: 0

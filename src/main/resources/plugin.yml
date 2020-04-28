@@ -1,3 +1,19 @@
 name: LastManStanding
 main: tv.twitch.gutitubo.LastManStanding.LastManStanding
-version: 0.0.1
+version: 1.1.1
+author: gutitubo
+api-version: 1.14
+commands:
+    lms:
+       description: LastManStanding no Command dayo
+       permission: LastManStanding.lms
+permissions:
+    LastManStanding.*:
+       description: LastManStanding no Command dayo
+       default: op
+    LastManStanding.lms:
+       description: LastManStanding no Command dayo
+       default: op
+    LastManStanding.mj:
+       description: LastManStanding no Command dayo
+       default: true
