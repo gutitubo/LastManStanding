@@ -104,6 +104,10 @@ public class LMSGameLogic {
 
 		// 5. 全員に音を奏でる
 		LMSGameUtil.sendSoundToAll(Sound.ENTITY_ARROW_HIT_PLAYER, 1F, 1F);
+
+		// 6. タイトル表示
+		victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
+				, "", 10, 60, 10);
 	}
 
 	/**
