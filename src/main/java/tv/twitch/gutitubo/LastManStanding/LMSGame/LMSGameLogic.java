@@ -50,7 +50,7 @@ public class LMSGameLogic {
 		// 4. VictimにKillerと順位を表示
 		if (killer != null)
 			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
-			, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
+					, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
 		// 5. Killerにサウンドを追加
 		killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
@@ -60,11 +60,7 @@ public class LMSGameLogic {
 
 		// 7. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
-			if (killer != null) {
-				winGame(killer);
-			} else {
-				winGame(alive.get(0));
-			}
+			winGame(killer);
 		}
 	}
 
