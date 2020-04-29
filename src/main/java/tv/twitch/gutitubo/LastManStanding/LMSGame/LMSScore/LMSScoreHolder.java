@@ -1,9 +1,13 @@
 package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * Scoreを保持しておくHashMapをどうにかするクラス
@@ -47,25 +51,126 @@ public class LMSScoreHolder {
 	 * Holderのスコアをソートして表示
 	 */
 	public static void display(int count, ScoreResultType type) {
-		ArrayList<String> players = new ArrayList<>();
-		HashMap<String, Integer> map = null;
 		switch (type) {
 		case ALL_POINT_RANK:
-			map = allPointHolder;
+			displayAllPointRank(count);
 			break;
 		case KILL_RANK:
-			map = killHolder;
+			displayKillRank(count);
 			break;
 		case POINT_RANK:
-			map = scoreHolder;
+			displayPointRank(count);
 			break;
 		case SURVIVE_RANK:
-			map = rankHolder;
+			displayRank(count);
 			break;
 		default:
 			return;
 		}
-		players.addAll(map.keySet());
+	}
+
+	/**
+	 * 全員の累計スコアを表示するクラス
+	 * @param count 表示する数
+	 */
+	private static void displayAllPointRank(int count) {
+		// 値を取り出す
+		ArrayList<String> players = new ArrayList<>();
+		players.addAll(allPointHolder.keySet());
+
+		// 降順にソートする
+		Collections.sort(players, (p1, p2) ->
+		allPointHolder.get(p1) - allPointHolder.get(p2)
+				);
+		Collections.reverse(players);
+
+		// 表示する
+		Bukkit.broadcastMessage("======================");
+		Bukkit.broadcastMessage("");
+		for (int i = 0; i < count; i++) {
+			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + i + " "
+					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
+					+ ChatColor.GRAY.toString() + " - "
+					+ ChatColor.RED.toString()
+					+ String.format("%3d", allPointHolder.get(players.get(i)))
+					+ ChatColor.GRAY + "POINT");
+		}
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage("======================");
+	}
+
+	private static void displayKillRank(int count) {
+		// 値を取り出す
+		ArrayList<String> players = new ArrayList<>();
+		players.addAll(killHolder.keySet());
+
+		// 降順にソートする
+		Collections.sort(players, (p1, p2) ->
+		killHolder.get(p1) - killHolder.get(p2)
+				);
+		Collections.reverse(players);
+
+		// 表示する
+		Bukkit.broadcastMessage("======================");
+		Bukkit.broadcastMessage("");
+		for (int i = 0; i < count; i++) {
+			Bukkit.broadcastMessage(ChatColor.DARK_RED + "#" + i + " "
+					+ ChatColor.DARK_RED.toString() + String.format("%-16s", players.get(i))
+					+ ChatColor.GRAY.toString() + " - "
+					+ ChatColor.DARK_RED.toString()
+					+ String.format("%2d", killHolder.get(players.get(i)))
+					+ ChatColor.GRAY + "KILL");
+		}
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage("======================");
+	}
+
+	private static void displayRank(int count) {
+		// 値を取り出す
+		ArrayList<String> players = new ArrayList<>();
+		players.addAll(rankHolder.keySet());
+
+		// 昇順にソートする
+		Collections.sort(players, (p1, p2) ->
+		rankHolder.get(p1) - rankHolder.get(p2));
+
+		// 表示する
+		Bukkit.broadcastMessage("======================");
+		Bukkit.broadcastMessage("");
+		for (int i = 0; i < count; i++) {
+			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + i + " "
+					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
+					+ ChatColor.GRAY.toString() + " - "
+					+ ChatColor.RED.toString()
+					+ String.format("%2d", killHolder.get(players.get(i)))
+					+ ChatColor.GRAY + "KILL");
+		}
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage("======================");
+	}
+
+	private static void displayPointRank(int count) {
+		// 値を取り出す
+		ArrayList<String> players = new ArrayList<>();
+		players.addAll(scoreHolder.keySet());
+
+		// 降順にソートする
+		Collections.sort(players, (p1, p2) ->
+		scoreHolder.get(p1) - scoreHolder.get(p2));
+
+		// 表示する
+		Bukkit.broadcastMessage("======================");
+		Bukkit.broadcastMessage("");
+		for (int i = 0; i < count; i++) {
+			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + i + " "
+					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
+					+ ChatColor.GRAY.toString() + " - "
+					+ ChatColor.RED.toString()
+					+ String.format("%3d", allPointHolder.get(players.get(i)))
+					+ ChatColor.GRAY + "POINT");
+		}
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage("======================");
 	}
 
 	/**
