@@ -117,6 +117,9 @@ public class LMSGameLogic {
 	 * @param winner 勝者
 	 */
 	public void winGame(Player winner) {
+		// Pre. ポイントを加算
+		LMSScoreUtil.giveRankPoint(winner, 1);
+
 		// 1. 勝者をアナウンス
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
