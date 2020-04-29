@@ -31,6 +31,9 @@ public class ConfigReader {
 		ConfigValue.minPlayer = LastManStanding.main.getConfig().getInt("MinPlayer");
 		ConfigValue.walkSpeed = (float) LastManStanding.main.getConfig().getDouble("WalkSpeed");
 
+		ConfigValue.killPoint = LastManStanding.main.getConfig().getInt("KillPoint");
+		ConfigValue.streamerKillPoint = LastManStanding.main.getConfig().getInt("StreamerKillPoint");
+
 		ConfigValue.higher_x = LastManStanding.main.getConfig().getDouble("Border.higher.x");
 		ConfigValue.higher_z = LastManStanding.main.getConfig().getDouble("Border.higher.z");
 		ConfigValue.lower_x = LastManStanding.main.getConfig().getDouble("Border.lower.x");

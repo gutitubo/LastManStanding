@@ -16,6 +16,14 @@ public class CommandUtil {
 		cmd.sendMessage(" == LastManStanding == ");
 		cmd.sendMessage("/lms start - ゲーム開始");
 		cmd.sendMessage("/lms reset - ゲーム強制終了");
+		cmd.sendMessage("/lms reload - Configリロード");
+		cmd.sendMessage("/lms setlobby - ロビー座標設定");
+		cmd.sendMessage("/lms setspawnpoint <1~9> - スポーン座標を設定");
+
+		cmd.sendMessage("/lms suvrank [count] - ランキング表示");
+		cmd.sendMessage("/lms killrank [count] - キルランク表示");
+		cmd.sendMessage("/lms pointrank [count] - 獲得ポイントランキング表示");
+		cmd.sendMessage("/lms rank [count] - 総合ポイントランキング");
 		cmd.sendMessage("");
 	}
 

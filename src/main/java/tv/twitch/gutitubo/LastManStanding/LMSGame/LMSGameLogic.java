@@ -10,6 +10,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 
 /**
  * ゲームの勝敗等ロジック部分を記述
@@ -43,6 +47,7 @@ public class LMSGameLogic {
 
 		// 2. Victimへの後処理
 		deadProcess(victim);
+		LMSScoreUtil.giveRankPoint(victim, alive.size() + 1);
 
 		// 3. VictimをKillerのカメラに
 		if (killer != null) victim.setSpectatorTarget(killer);
@@ -81,6 +86,7 @@ public class LMSGameLogic {
 		getPlayerScore().get(killer).addKill(1);
 
 		// 4. ポイントを計算
+		LMSScoreUtil.giveKillPoint(killer, victim);
 
 		// 5. バウンティを計算
 	}
@@ -90,6 +96,9 @@ public class LMSGameLogic {
 	 * @param victim 被害者
 	 */
 	public void deadProcess(Player victim) {
+		// Pre. スコア登録
+		LMSScoreHolder.registScore(playerScore.get(victim), alive.size());
+
 		// 1. 観戦モードに変更
 		victim.setGameMode(GameMode.SPECTATOR);
 
@@ -115,6 +124,12 @@ public class LMSGameLogic {
 	 * @param winner 勝者
 	 */
 	public void winGame(Player winner) {
+		// Pre. ポイントを加算
+		LMSScoreUtil.giveRankPoint(winner, 1);
+
+		// Pre. スコア登録
+		LMSScoreHolder.registScore(playerScore.get(winner), 1);
+
 		// 1. 勝者をアナウンス
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
@@ -124,7 +139,7 @@ public class LMSGameLogic {
 		Bukkit.broadcastMessage("");
 
 		// 2. 結果をファイル出力 + ゲーム内計算
-
+		LMSScoreHolder.display(10, ScoreResultType.SURVIVE_RANK);
 
 		// 3. ゲームリセット, ロビー転送
 		ArrayList<Player> all = new ArrayList<>();
@@ -147,13 +162,6 @@ public class LMSGameLogic {
 			String killerName = ChatColor.GOLD.toString() + killer.getName();
 			Bukkit.broadcastMessage(killerName + r + " が " + victimName + r + " を殺した。 - " + rank + " " + kill);
 		}
-	}
-
-	/**
-	 * 試合結果を表示するためのテキスト
-	 */
-	public void displayResult() {
-
 	}
 
 	/**

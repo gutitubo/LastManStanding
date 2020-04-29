@@ -1,5 +1,5 @@
 # ゲーム開始までの待機時間
-WaitingTime: 30
+WaitingTime: 20
 
 # 総ゲーム時間
 GameTime: 600
@@ -13,57 +13,79 @@ MinPlayer: 2
 # プレイヤー移動速度 デフォルト0.2
 WalkSpeed: 0.3
 
+# Kill時に獲得できるポイント
+KillPoint: 2
+
+# Streamer Kill時に獲得できるポイント
+StreamerKillPoint: 25
+
+# #Rankごとのポイント
+# Rank1: 100
+# Rank2: 50
+# Rank3: 30
+# Rank4: 15
+# Rank5: 10
+# Rank6: 9
+# Rank7: 8
+# Rank8: 7
+# Rank9: 6
+# Rank10: 5
+# Rank11to15: 4
+# Rank16to20: 3
+# Rank21to25: 2
+# RankLow: 1
+
 # 範囲に選択される座標を設定
 Border:
   higher:
-    x: 50
-    z: 50
+    x: 635
+    z: 1017
   lower:
-    x: -50
-    z: -50
-  DefaultSize: 500.0
+    x: 272
+    z: 449
+  DefaultSize: 1000.0
 
 # ロビーの座標を設定
 Lobby:
-  x: 0
-  y: 0
-  z: 0
+  x: 553
+  y: 200
+  z: 856
 
 # スポーン地点を設定
 Spawn:
   Point1:
-    x: 0
-    y: 0
-    z: 0
+    x: 496
+    y: 50
+    z: 809
   Point2:
-    x: 0
-    y: 0
-    z: 0
+    x: 321
+    y: 48
+    z: 767
   Point3:
-    x: 0
-    y: 0
-    z: 0
+    x: 364
+    y: 22
+    z: 569
   Point4:
-    x: 0
-    y: 0
-    z: 0
+    x: 475
+    y: 50
+    z: 491
   Point5:
-    x: 0
-    y: 0
-    z: 0
+    x: 577
+    y: 52
+    z: 547
   Point6:
-    x: 0
-    y: 0
-    z: 0
+    x: 520
+    y: 48
+    z: 653
   Point7:
-    x: 0
-    y: 0
-    z: 0
+    x: 597
+    y: 51
+    z: 796
   Point8:
-    x: 0
-    y: 0
-    z: 0
+    x: 479
+    y: 55
+    z: 888
   Point9:
-    x: 0
-    y: 0
-    z: 0
+    x: 332
+    y: 64
+    z: 950
