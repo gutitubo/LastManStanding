@@ -44,7 +44,10 @@ public class ProjHitEvent implements Listener {
 					return;
 				}
 
-				// 2. 誰かにあたったときの演出
+				// 2. 生きてる人にしか当たらないように
+				if (!game.getLogic().getAlives().contains(victim)) return;
+
+				// 3. 誰かにあたったときの演出
 				if (shooter.equals(victim)) {
 					samePlayerShotted(shooter);
 				} else {
