@@ -19,6 +19,7 @@ import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SignTeleportEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SneakingJumpEvent;
+import tv.twitch.gutitubo.LastManStanding.files.CSVCreator;
 
 public class LastManStanding extends JavaPlugin {
 
@@ -157,6 +158,9 @@ public class LastManStanding extends JavaPlugin {
 							count = Integer.parseInt(args[1]);
 						}
 						LMSScoreHolder.display(count, ScoreResultType.ALL_POINT_RANK);
+					} else if (cmd.equalsIgnoreCase("csv")) {
+						CSVCreator.createCsv();
+						sender.sendMessage("CSVファイルを出力しました。");
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

@@ -14,6 +14,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
+import tv.twitch.gutitubo.LastManStanding.files.CSVCreator;
 
 /**
  * ゲームの勝敗等ロジック部分を記述
@@ -136,6 +137,7 @@ public class LMSGameLogic {
 		Bukkit.broadcastMessage("");
 
 		// 2. 結果をファイル出力 + ゲーム内計算
+		CSVCreator.createCsv();
 		LMSScoreHolder.display(10, ScoreResultType.SURVIVE_RANK);
 
 		// 3. ゲームリセット, ロビー転送
