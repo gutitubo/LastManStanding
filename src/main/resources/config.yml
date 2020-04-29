@@ -13,6 +13,12 @@ MinPlayer: 2
 # プレイヤー移動速度 デフォルト0.2
 WalkSpeed: 0.3
 
+# Kill時に獲得できるポイント
+KillPoint: 2
+
+# Streamer Kill時に獲得できるポイント
+StreamerKillPoint: 25
+
 # 範囲に選択される座標を設定
 Border:
   higher:
