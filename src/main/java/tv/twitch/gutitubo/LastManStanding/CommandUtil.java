@@ -24,6 +24,7 @@ public class CommandUtil {
 		cmd.sendMessage("/lms killrank [count] - キルランク表示");
 		cmd.sendMessage("/lms pointrank [count] - 獲得ポイントランキング表示");
 		cmd.sendMessage("/lms rank [count] - 総合ポイントランキング");
+		cmd.sendMessage("/lms csv - フェイルをエクスポート");
 		cmd.sendMessage("");
 	}
 
