@@ -30,7 +30,9 @@ public class LastManStanding extends JavaPlugin {
 
 	private static LMSGame game;
 
-	// 最寄りのプレイヤーコンパス更新
+	/* BountyMode判別用boolean */
+	private boolean isBountyMode;
+
 	// 弓で前ブリンク
 	// 発光クールダウン
 
