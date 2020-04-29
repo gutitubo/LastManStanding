@@ -81,6 +81,7 @@ public class LMSGameLogic {
 		getPlayerScore().get(killer).addKill(1);
 
 		// 4. ポイントを計算
+		LMSScoreUtil.giveKillPoint(killer, victim);
 
 		// 5. バウンティを計算
 	}
