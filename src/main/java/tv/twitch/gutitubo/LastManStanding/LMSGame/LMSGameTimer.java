@@ -21,6 +21,8 @@ public class LMSGameTimer extends BukkitRunnable {
 
 	@Override
 	public void run() {
+		// Pre. ゲームが存在しないときにスケジューラをキャンセルする
+		if (LastManStanding.getGame() == null) this.cancel();
 
 		// 1. ゲーム開始前準備時間はタイマーが進むたびにカウントダウン
 		if (count < waitingTime) {
