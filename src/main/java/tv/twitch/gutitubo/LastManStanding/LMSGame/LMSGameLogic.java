@@ -124,9 +124,6 @@ public class LMSGameLogic {
 	 * @param winner 勝者
 	 */
 	public void winGame(Player winner) {
-		// Pre. ポイントを加算
-		LMSScoreUtil.giveRankPoint(winner, 1);
-
 		// Pre. スコア登録
 		LMSScoreHolder.registScore(playerScore.get(winner), 1);
 

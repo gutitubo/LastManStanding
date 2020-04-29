@@ -99,6 +99,7 @@ public class LimitedPlayerActivity implements Listener {
 	public void whenPlayerClickedArrow(InventoryClickEvent e) {
 		ItemStack item = e.getCurrentItem();
 		if (e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) return;
+		if (item == null) return;
 		if (item.getType() == Material.ARROW) {
 			e.setCancelled(true);
 		}
