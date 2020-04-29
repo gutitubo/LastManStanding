@@ -35,6 +35,16 @@ public class ConfigValue {
 	public static float walkSpeed;
 
 	/**
+	 * プレイヤーキル時のポイント
+	 */
+	public static int killPoint;
+
+	/**
+	 * ストリーマーキル時のポイント
+	 */
+	public static int streamerKillPoint;
+
+	/**
 	 * 最終範囲に選ばれる座標範囲
 	 */
 	public static double higher_x;
