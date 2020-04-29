@@ -32,6 +32,7 @@ public class LMSEnumToItemUtil {
 		itemMeta.setUnbreakable(true);
 		itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+		item.setItemMeta(itemMeta);
 		return item;
 	}
 
