@@ -1,6 +1,7 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,7 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.inventory.ItemStack;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
@@ -57,6 +61,19 @@ public class LimitedPlayerActivity implements Listener {
 	}
 
 	/**
+	 * 矢を拾えないように
+	 */
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void whenArrowPickedUp(PlayerPickupArrowEvent e) {
+		Player player = e.getPlayer();
+		GameMode gm = player.getGameMode();
+		if (!gm.equals(GameMode.CREATIVE)) {
+			e.setCancelled(true);
+			e.getArrow().remove();
+		}
+	}
+	/**
 	 * プレイヤーの飢餓を防ぐ
 	 */
 	@EventHandler
@@ -74,4 +91,17 @@ public class LimitedPlayerActivity implements Listener {
 			e.setCancelled(true);
 		}
 	}
+
+	/**
+	 * 矢を持てないように
+	 */
+	@EventHandler
+	public void whenPlayerClickedArrow(InventoryClickEvent e) {
+		ItemStack item = e.getCurrentItem();
+		if (e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) return;
+		if (item.getType() == Material.ARROW) {
+			e.setCancelled(true);
+		}
+	}
+
 }
