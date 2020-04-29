@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -59,6 +60,19 @@ public class LimitedPlayerActivity implements Listener {
 		}
 	}
 
+	/**
+	 * 矢を拾えないように
+	 */
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void whenArrowPickedUp(PlayerPickupArrowEvent e) {
+		Player player = e.getPlayer();
+		GameMode gm = player.getGameMode();
+		if (!gm.equals(GameMode.CREATIVE)) {
+			e.setCancelled(true);
+			e.getArrow().remove();
+		}
+	}
 	/**
 	 * プレイヤーの飢餓を防ぐ
 	 */
