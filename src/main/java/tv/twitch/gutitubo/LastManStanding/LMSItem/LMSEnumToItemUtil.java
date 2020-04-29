@@ -28,7 +28,7 @@ public class LMSEnumToItemUtil {
 	private static ItemStack LMSBow() {
 		ItemStack item = new ItemStack(Material.BOW);
 		ItemMeta itemMeta = item.getItemMeta();
-		itemMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+		itemMeta.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
 		itemMeta.setUnbreakable(true);
 		itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
