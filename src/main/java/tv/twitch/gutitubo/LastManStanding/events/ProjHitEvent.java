@@ -1,5 +1,6 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -37,6 +38,16 @@ public class ProjHitEvent implements Listener {
 				//撃たれた側: 死亡エフェクト Title表示 観戦者モード
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
+
+				// 1. クリエには当たらないように
+				if (victim.getGameMode().equals(GameMode.CREATIVE)) {
+					return;
+				}
+
+				// 2. 生きてる人にしか当たらないように
+				if (!game.getLogic().getAlives().contains(victim)) return;
+
+				// 3. 誰かにあたったときの演出
 				if (shooter.equals(victim)) {
 					samePlayerShotted(shooter);
 				} else {
