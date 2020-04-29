@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
 import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
 import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
@@ -46,6 +48,7 @@ public class LastManStanding extends JavaPlugin {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onDisable();
 		logger.info("[LMS] plugin unloaded.");
+		LMSScoreHolder.allClear();
 	}
 
 	@Override
@@ -67,6 +70,7 @@ public class LastManStanding extends JavaPlugin {
 					if (cmd.equalsIgnoreCase("start")) {
 						/* -- ゲーム開始分岐 -- */
 						if (getGame() == null) {
+							LMSScoreHolder.clear();
 							game = new LMSGame();
 							game.startTimer();
 						} else {
@@ -129,6 +133,30 @@ public class LastManStanding extends JavaPlugin {
 						sender.sendMessage(ChatColor.YELLOW + "Lobby座標を設定しました。");
 
 						saveConfig();
+					} else if (cmd.equalsIgnoreCase("suvrank")) {
+						int count = 10;
+						if (args[1] != null) {
+							count = Integer.parseInt(args[1]);
+						}
+						LMSScoreHolder.display(count, ScoreResultType.SURVIVE_RANK);
+					} else if (cmd.equalsIgnoreCase("killrank")) {
+						int count = 10;
+						if (args[1] != null) {
+							count = Integer.parseInt(args[1]);
+						}
+						LMSScoreHolder.display(count, ScoreResultType.KILL_RANK);
+					} else if (cmd.equalsIgnoreCase("pointrank")) {
+						int count = 10;
+						if (args[1] != null) {
+							count = Integer.parseInt(args[1]);
+						}
+						LMSScoreHolder.display(count, ScoreResultType.POINT_RANK);
+					} else if (cmd.equalsIgnoreCase("rank")) {
+						int count = 10;
+						if (args[1] != null) {
+							count = Integer.parseInt(args[1]);
+						}
+						LMSScoreHolder.display(count, ScoreResultType.ALL_POINT_RANK);
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}
