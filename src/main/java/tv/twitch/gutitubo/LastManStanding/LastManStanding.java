@@ -135,25 +135,25 @@ public class LastManStanding extends JavaPlugin {
 						saveConfig();
 					} else if (cmd.equalsIgnoreCase("suvrank")) {
 						int count = 10;
-						if (args[1] != null) {
+						if (args.length != 1 && args[1] != null) {
 							count = Integer.parseInt(args[1]);
 						}
 						LMSScoreHolder.display(count, ScoreResultType.SURVIVE_RANK);
 					} else if (cmd.equalsIgnoreCase("killrank")) {
 						int count = 10;
-						if (args[1] != null) {
+						if (args.length != 1 && args[1] != null) {
 							count = Integer.parseInt(args[1]);
 						}
 						LMSScoreHolder.display(count, ScoreResultType.KILL_RANK);
 					} else if (cmd.equalsIgnoreCase("pointrank")) {
 						int count = 10;
-						if (args[1] != null) {
+						if (args.length != 1 && args[1] != null) {
 							count = Integer.parseInt(args[1]);
 						}
 						LMSScoreHolder.display(count, ScoreResultType.POINT_RANK);
 					} else if (cmd.equalsIgnoreCase("rank")) {
 						int count = 10;
-						if (args[1] != null) {
+						if (args.length != 1 && args[1] != null) {
 							count = Integer.parseInt(args[1]);
 						}
 						LMSScoreHolder.display(count, ScoreResultType.ALL_POINT_RANK);

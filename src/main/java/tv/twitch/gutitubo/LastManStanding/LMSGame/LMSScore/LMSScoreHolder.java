@@ -11,6 +11,7 @@ import net.md_5.bungee.api.ChatColor;
 
 /**
  * Scoreを保持しておくHashMapをどうにかするクラス
+ * FIXME 冗長的過ぎてウケる
  * @author gutitubo
  *
  */
@@ -84,11 +85,16 @@ public class LMSScoreHolder {
 				);
 		Collections.reverse(players);
 
+		// Countがサイズを超えないようにする
+		if (count > players.size()) {
+			count = players.size();
+		}
+
 		// 表示する
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
-			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + i + " "
+			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + (i+1) + " "
 					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
@@ -110,11 +116,16 @@ public class LMSScoreHolder {
 				);
 		Collections.reverse(players);
 
+		// Countがサイズを超えないようにする
+		if (count > players.size()) {
+			count = players.size();
+		}
+
 		// 表示する
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
-			Bukkit.broadcastMessage(ChatColor.DARK_RED + "#" + i + " "
+			Bukkit.broadcastMessage(ChatColor.DARK_RED + "#" + (i+1) + " "
 					+ ChatColor.DARK_RED.toString() + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.DARK_RED.toString()
@@ -134,11 +145,16 @@ public class LMSScoreHolder {
 		Collections.sort(players, (p1, p2) ->
 		rankHolder.get(p1) - rankHolder.get(p2));
 
+		// Countがサイズを超えないようにする
+		if (count > players.size()) {
+			count = players.size();
+		}
+
 		// 表示する
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
-			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + i + " "
+			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + (i+1) + " "
 					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
@@ -158,11 +174,16 @@ public class LMSScoreHolder {
 		Collections.sort(players, (p1, p2) ->
 		scoreHolder.get(p1) - scoreHolder.get(p2));
 
+		// Countがサイズを超えないようにする
+		if (count > players.size()) {
+			count = players.size();
+		}
+
 		// 表示する
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
-			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + i + " "
+			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + (i+1) + " "
 					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
