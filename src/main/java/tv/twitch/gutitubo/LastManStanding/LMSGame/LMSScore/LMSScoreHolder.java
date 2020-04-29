@@ -20,7 +20,7 @@ public class LMSScoreHolder {
 
 	/**
 	 * Holderにスコアを登録する
-	 * TODO: 死亡時と優勝時に呼び出す。
+	 * 死亡時と優勝時に呼び出す。
 	 * @param score
 	 */
 	public static void registScore(LMSScore score, int rank) {

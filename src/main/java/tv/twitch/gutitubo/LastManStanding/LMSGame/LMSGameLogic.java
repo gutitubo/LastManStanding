@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
 
 /**
@@ -94,6 +95,9 @@ public class LMSGameLogic {
 	 * @param victim 被害者
 	 */
 	public void deadProcess(Player victim) {
+		// Pre. スコア登録
+		LMSScoreHolder.registScore(playerScore.get(victim), alive.size());
+
 		// 1. 観戦モードに変更
 		victim.setGameMode(GameMode.SPECTATOR);
 
@@ -121,6 +125,9 @@ public class LMSGameLogic {
 	public void winGame(Player winner) {
 		// Pre. ポイントを加算
 		LMSScoreUtil.giveRankPoint(winner, 1);
+
+		// Pre. スコア登録
+		LMSScoreHolder.registScore(playerScore.get(winner), 1);
 
 		// 1. 勝者をアナウンス
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
