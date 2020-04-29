@@ -43,6 +43,7 @@ public class LMSGameLogic {
 
 		// 2. Victimへの後処理
 		deadProcess(victim);
+		LMSScoreUtil.giveRankPoint(victim, alive.size() + 1);
 
 		// 3. VictimをKillerのカメラに
 		if (killer != null) victim.setSpectatorTarget(killer);
