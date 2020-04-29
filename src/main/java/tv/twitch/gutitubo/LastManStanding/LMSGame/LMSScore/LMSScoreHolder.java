@@ -1,5 +1,6 @@
 package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.entity.Player;
@@ -40,6 +41,31 @@ public class LMSScoreHolder {
 		} else {
 			allPointHolder.put(name, score.getScore());
 		}
+	}
+
+	/**
+	 * Holderのスコアをソートして表示
+	 */
+	public static void display(int count, ScoreResultType type) {
+		ArrayList<String> players = new ArrayList<>();
+		HashMap<String, Integer> map = null;
+		switch (type) {
+		case ALL_POINT_RANK:
+			map = allPointHolder;
+			break;
+		case KILL_RANK:
+			map = killHolder;
+			break;
+		case POINT_RANK:
+			map = scoreHolder;
+			break;
+		case SURVIVE_RANK:
+			map = rankHolder;
+			break;
+		default:
+			return;
+		}
+		players.addAll(map.keySet());
 	}
 
 	/**
