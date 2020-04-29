@@ -40,4 +40,8 @@ public class LMSScore {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public void addScore(int score) {
+		setScore(getScore() + score);
+	}
 }

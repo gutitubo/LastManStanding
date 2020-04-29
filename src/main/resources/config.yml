@@ -19,6 +19,22 @@ KillPoint: 2
 # Streamer Kill時に獲得できるポイント
 StreamerKillPoint: 25
 
+# #Rankごとのポイント
+# Rank1: 100
+# Rank2: 50
+# Rank3: 30
+# Rank4: 15
+# Rank5: 10
+# Rank6: 9
+# Rank7: 8
+# Rank8: 7
+# Rank9: 6
+# Rank10: 5
+# Rank11to15: 4
+# Rank16to20: 3
+# Rank21to25: 2
+# RankLow: 1
+
 # 範囲に選択される座標を設定
 Border:
   higher:

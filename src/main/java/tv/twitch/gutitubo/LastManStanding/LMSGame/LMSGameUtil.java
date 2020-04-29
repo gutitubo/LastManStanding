@@ -273,4 +273,21 @@ public class LMSGameUtil {
 			count++;
 		}
 	}
+
+	/**
+	 * 配信者かどうかをチェックする
+	 * @param p
+	 * @return
+	 */
+	public static boolean isStreamer(Player p) {
+		boolean isStreamer = false;
+		String name = p.getName();
+		//TODO ファイル管理する
+		if (name.contains("gutitubo")
+				|| name.contains("genpyon")
+				|| name.contains("aroeroeroeroeroe")
+				|| name.contains("tarakoTBTB"))
+			isStreamer = true;
+		return isStreamer;
+	}
 }
