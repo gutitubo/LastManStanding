@@ -164,13 +164,6 @@ public class LMSGameLogic {
 	}
 
 	/**
-	 * 試合結果を表示するためのテキスト
-	 */
-	public void displayResult() {
-
-	}
-
-	/**
 	 * プレイヤースコア管理Mapを取得するmethod
 	 */
 	public HashMap<Player, LMSScore> getPlayerScore() {
