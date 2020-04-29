@@ -34,6 +34,8 @@ public class LMSScoreHolder {
 		Player p = score.getPlayer();
 		String name = p.getName();
 
+		LMSScoreUtil.giveRankPoint(p, rank);
+
 		// 1. 各種ホルダーに値をput
 		killHolder.put(name, score.getKill());
 		scoreHolder.put(name, score.getScore());
@@ -173,6 +175,7 @@ public class LMSScoreHolder {
 		// 降順にソートする
 		Collections.sort(players, (p1, p2) ->
 		scoreHolder.get(p1) - scoreHolder.get(p2));
+		Collections.reverse(players);
 
 		// Countがサイズを超えないようにする
 		if (count > players.size()) {
@@ -187,7 +190,7 @@ public class LMSScoreHolder {
 					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
-					+ String.format("%3d", allPointHolder.get(players.get(i)))
+					+ String.format("%3d", scoreHolder.get(players.get(i)))
 					+ ChatColor.GRAY + "POINT");
 		}
 		Bukkit.broadcastMessage("");
