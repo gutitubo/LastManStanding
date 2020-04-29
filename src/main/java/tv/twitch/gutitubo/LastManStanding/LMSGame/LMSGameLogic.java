@@ -10,6 +10,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
 
 /**
  * ゲームの勝敗等ロジック部分を記述

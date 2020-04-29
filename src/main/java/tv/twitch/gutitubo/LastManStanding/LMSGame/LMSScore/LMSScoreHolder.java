@@ -1,4 +1,4 @@
-package tv.twitch.gutitubo.LastManStanding.LMSGame;
+package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore;
 
 /**
  * Scoreを保持しておくHashMapをどうにかするクラス

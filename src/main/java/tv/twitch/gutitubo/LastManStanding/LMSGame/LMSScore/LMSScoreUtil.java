@@ -1,8 +1,10 @@
-package tv.twitch.gutitubo.LastManStanding.LMSGame;
+package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore;
 
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGameUtil;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
 /**
