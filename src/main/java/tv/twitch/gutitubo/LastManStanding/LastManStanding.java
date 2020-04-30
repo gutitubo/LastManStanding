@@ -10,6 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.Team.Option;
+import org.bukkit.scoreboard.Team.OptionStatus;
 
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
@@ -36,6 +41,8 @@ public class LastManStanding extends JavaPlugin {
 
 	private static LMSGame game;
 
+	private static Team team;
+
 	// 弓で前ブリンク
 	// 発光クールダウン
 
@@ -47,6 +54,7 @@ public class LastManStanding extends JavaPlugin {
 		main = this;
 		ConfigReader.init();
 		eventRegist(Bukkit.getPluginManager());
+		registTeam();
 	}
 
 	@Override
@@ -218,6 +226,23 @@ public class LastManStanding extends JavaPlugin {
 		pm.registerEvents(new SignTeleportEvent(), this);
 		pm.registerEvents(new SneakingJumpEvent(), this);
 		pm.registerEvents(new LimitedPlayerActivity(), this);
+	}
+
+	private static void registTeam() {
+		ScoreboardManager manager = Bukkit.getScoreboardManager();
+		Scoreboard board = manager.getMainScoreboard();
+		team = board.getTeam("LMSPlayer");
+
+		if (team != null) {
+			team.unregister();
+		}
+
+		team = board.registerNewTeam("LSMPlayer");
+		team.setPrefix(ChatColor.GOLD.toString());
+		team.setSuffix(ChatColor.RESET.toString());
+		team.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
+		team.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
+		team.setAllowFriendlyFire(true);
 	}
 
 	public static LMSGame getGame() {
