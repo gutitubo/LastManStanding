@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -71,6 +72,7 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerStatus (Player p) {
 		p.setWalkSpeed(walkSpeed);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1);
 	}
 
 	/**
@@ -87,6 +89,7 @@ public class LMSGameUtil {
 	 */
 	public static void resetPlayerStatus (Player p) {
 		p.setWalkSpeed(defaultSpeed);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
 	}
 
 	/**
