@@ -237,9 +237,10 @@ public class LMSGameUtil {
 	 */
 	public static void reloadCompass(Player p, List<Player> players) {
 		Player near = null;
+		double dis = 999999;
 		for (Player q : players) {
-			double distance = p.getLocation().distance(q.getLocation());
-			if (near == null || distance < p.getLocation().distance(q.getLocation())) {
+			if (near == null || dis > p.getLocation().distance(q.getLocation())) {
+				dis = p.getLocation().distance(q.getLocation());
 				near = q;
 			}
 		}
