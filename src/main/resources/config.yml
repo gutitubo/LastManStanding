@@ -17,7 +17,7 @@ WalkSpeed: 0.3
 KillPoint: 5
 
 # Streamer Kill時に獲得できるポイント
-StreamerKillPoint: 25
+StreamerKillPoint: 30
 
 # #Rankごとのポイント
 # Rank1: 100
