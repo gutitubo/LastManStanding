@@ -72,7 +72,7 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerStatus (Player p) {
 		p.setWalkSpeed(walkSpeed);
-		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(1);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2);
 	}
 
 	/**
