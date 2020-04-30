@@ -87,7 +87,7 @@ public class ProjHitEvent implements Listener {
 	 */
 	private static void killedBuff(Player p) {
 		// 1. 速度上昇を付与
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1, false, false), true);
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 7, 2, false, false), true);
 
 		// 2. 音を出す
 		p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT, 0.8F, 1F);
@@ -99,6 +99,9 @@ public class ProjHitEvent implements Listener {
 		vector.setX(vector.getX() * 3.0);
 		vector.setZ(vector.getZ() * 3.0);
 		p.setVelocity(vector);
+		p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_HURT, 0.8F, 1.0F);
+		p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.4F, 1F);
+		p.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, p.getLocation(), 1, 0, 0, 0);
 	}
 
 	private static void deadPlayerEffect(Player p) {

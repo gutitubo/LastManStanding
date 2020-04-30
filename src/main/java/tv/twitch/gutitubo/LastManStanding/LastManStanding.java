@@ -245,6 +245,10 @@ public class LastManStanding extends JavaPlugin {
 		team.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
 		team.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
 		team.setAllowFriendlyFire(true);
+
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			LMSGameUtil.joinTeam(p);
+		}
 	}
 
 	public static LMSGame getGame() {
