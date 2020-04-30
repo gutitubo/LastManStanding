@@ -283,9 +283,8 @@ public class LMSGameUtil {
 	 * @param p
 	 * @return
 	 */
-	public static boolean isStreamer(Player p) {
+	public static boolean isStreamer(String name) {
 		boolean isStreamer = false;
-		String name = p.getName();
 		//TODO ファイル管理する
 		if (name.contains("gutitubo")
 				|| name.contains("genpyon")

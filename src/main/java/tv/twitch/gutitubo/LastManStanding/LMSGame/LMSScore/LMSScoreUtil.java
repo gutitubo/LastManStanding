@@ -29,7 +29,7 @@ public class LMSScoreUtil {
 
 		// 3. 渡すkillPointを設定
 		int value = ConfigValue.killPoint;
-		if (LMSGameUtil.isStreamer(killed)) value = ConfigValue.streamerKillPoint;
+		if (LMSGameUtil.isStreamer(killed.getName())) value = ConfigValue.streamerKillPoint;
 		score.addScore(value);
 	}
 
