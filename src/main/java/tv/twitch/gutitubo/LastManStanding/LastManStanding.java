@@ -14,7 +14,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGameUtil;
-import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
@@ -25,6 +24,7 @@ import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SignTeleportEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SneakingJumpEvent;
 import tv.twitch.gutitubo.LastManStanding.files.CSVCreator;
+import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 
 public class LastManStanding extends JavaPlugin {
 
@@ -173,7 +173,7 @@ public class LastManStanding extends JavaPlugin {
 						}
 
 						// Bountyを登録
-						LMSBountyHolder.registBounty(players);
+						LMSBountyManager.enableBounty(players);
 
 						// 全員にアナウンスする
 						LMSGameUtil.sendTitleToAll(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "BOUNTY MODE",
@@ -185,6 +185,12 @@ public class LastManStanding extends JavaPlugin {
 							count = Integer.parseInt(args[1]);
 						}
 						LMSBountyManager.displayBountyTop(count);
+					} else if (cmd.equalsIgnoreCase("update")) {
+						if (args.length != 3) return true;
+						String url = args[1];
+						String fileName = args[2];
+						FileUpdater.UpdateFile(url, fileName);
+						sender.sendMessage("ファイルを指定のURLからダウンロードしました。");
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

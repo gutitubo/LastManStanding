@@ -34,13 +34,17 @@ public class LMSBountyManager {
 	 */
 	public static void calcBounty(Player killer, Player victim) {
 		// Bountyモードが有効じゃないとだめ
+		Bukkit.broadcastMessage(isBountyMode + "");
 		if (!isBountyMode) return;
+		Bukkit.broadcastMessage("killer:"+killer);
+		Bukkit.broadcastMessage("victim:"+victim);
 		if (killer == null || victim == null) return;
 
 		// 名前を取得
 		String killerName = killer.getName();
 		String victimName = victim.getName();
-
+		Bukkit.broadcastMessage("killerName:"+killerName);
+		Bukkit.broadcastMessage("victimName:"+victimName);
 		// 各バウンティを定義
 		LMSBounty killerBounty = null;
 		LMSBounty victimBounty = null;
@@ -48,15 +52,16 @@ public class LMSBountyManager {
 		// 各バウンティを取得
 		for (Object obj : LMSBountyHolder.bountyHolder.stream().toArray()) {
 			LMSBounty bounty = (LMSBounty) obj;
-			if (bounty.getName().contains(killerName)) killerBounty = bounty;
-			if (bounty.getName().contains(victimName)) victimBounty = bounty;
+			if (bounty.getName().equals(killerName)) killerBounty = bounty;
+			if (bounty.getName().equals(victimName)) victimBounty = bounty;
 		}
-
+		Bukkit.broadcastMessage("killerBounty:"+killerBounty);
+		Bukkit.broadcastMessage("victimBounty:"+victimBounty);
 		// Bountyがないとだめ
 		if (killerBounty == null || victimBounty == null) return;
-
 		// Bountyを計算する
 		int value = killerBounty.robBounty(victimBounty);
+		Bukkit.broadcastMessage("value:"+value);
 
 		// 両者にバウンティのメッセージを送信
 		killer.sendMessage(ChatColor.GOLD + "$" + value + " を獲得！");
