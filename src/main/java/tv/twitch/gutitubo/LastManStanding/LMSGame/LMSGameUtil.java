@@ -240,13 +240,19 @@ public class LMSGameUtil {
 		double dis = 999999;
 		for (Player q : players) {
 			if (near == null || dis > p.getLocation().distance(q.getLocation())) {
-				dis = p.getLocation().distance(q.getLocation());
-				near = q;
+				if (p != q && !q.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+					dis = p.getLocation().distance(q.getLocation());
+					near = q;
+				}
 			}
 		}
-		p.setCompassTarget(near.getLocation());
-		int distance = (int) p.getLocation().distance(near.getLocation());
-		p.sendMessage(ChatColor.YELLOW.toString() + "[Target] " + near.getName() + ": " + distance + "m");
+		if (near != null) {
+			p.setCompassTarget(near.getLocation());
+			int distance = (int) p.getLocation().distance(near.getLocation());
+			p.sendMessage(ChatColor.YELLOW.toString() + "[Target] " + near.getName() + ": " + distance + "m");
+		} else {
+
+		}
 	}
 
 	/**
