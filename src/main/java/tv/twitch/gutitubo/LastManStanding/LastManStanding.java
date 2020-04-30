@@ -29,7 +29,7 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 public class LastManStanding extends JavaPlugin {
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "1.4.2";
+	private static String VERSION = "1.4.3";
 
 	public static LastManStanding main;
 
