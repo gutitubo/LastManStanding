@@ -67,7 +67,7 @@ public class LMSGameLogic {
 
 		// 7. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
-			winGame(killer);
+			winGame(alive.get(0));
 		}
 	}
 
