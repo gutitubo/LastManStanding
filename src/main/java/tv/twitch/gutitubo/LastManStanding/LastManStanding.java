@@ -240,7 +240,7 @@ public class LastManStanding extends JavaPlugin {
 			lobby.unregister();
 		}
 
-		team = board.registerNewTeam("LSMPlayer");
+		team = board.registerNewTeam("LMSPlayer");
 		team.setPrefix(ChatColor.GOLD.toString());
 		team.setSuffix(ChatColor.RESET.toString());
 		team.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
