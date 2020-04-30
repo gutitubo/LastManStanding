@@ -48,26 +48,29 @@ public class LMSGameLogic {
 		// 1. killer各種ポイントを振り分け,
 		killerPointProc(killer, victim);
 
-		// 2. Victimへの後処理
+		// 2. バウンティを計算
+		LMSBountyManager.calcBounty(killer, victim);
+
+		// 3. Victimへの後処理
 		deadProcess(victim);
 		LMSScoreUtil.giveRankPoint(victim, alive.size() + 1);
 
-		// 3. VictimをKillerのカメラに
+		// 4. VictimをKillerのカメラに
 		if (killer != null) swapSpecCamera(killer, victim);
 
-		// 4. VictimにKillerと順位を表示
+		// 5. VictimにKillerと順位を表示
 		if (killer != null)
 			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
 					, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
-		// 5. Killerにサウンドを追加
+		// 6. Killerにサウンドを追加
 		if (killer != null)
 		killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
 
-		// 6. KillLog表示
+		// 7. KillLog表示
 		killLog(killer, victim);
 
-		// 7. Killerが最後の1人になった場合は終了
+		// 8. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
 			winGame(alive.get(0));
 		}
@@ -90,9 +93,6 @@ public class LMSGameLogic {
 
 		// 4. ポイントを計算
 		LMSScoreUtil.giveKillPoint(killer, victim);
-
-		// 5. バウンティを計算
-		LMSBountyManager.calcBounty(killer, victim);
 	}
 
 	/**
