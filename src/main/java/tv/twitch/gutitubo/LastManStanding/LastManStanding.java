@@ -15,6 +15,7 @@ import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGameUtil;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSLastBattle.LMSLastBattle;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
@@ -191,6 +192,12 @@ public class LastManStanding extends JavaPlugin {
 						String fileName = args[2];
 						FileUpdater.UpdateFile(url, fileName);
 						sender.sendMessage("ファイルを指定のURLからダウンロードしました。");
+					} else if (cmd.equalsIgnoreCase("lastbattle")) {
+						if (getGame() == null) {
+							sender.sendMessage("ゲームは開始されていません");
+							return true;
+						}
+						LMSLastBattle.start();
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}

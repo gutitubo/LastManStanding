@@ -29,7 +29,7 @@ public class LastBattleTimer extends BukkitRunnable {
 			String title = "";
 			if (count < 5) title = ChatColor.DARK_RED.toString() + ChatColor.BOLD.toString() + "LAST BATTLE";
 			LMSGameUtil.sendTitleToAll(title, ChatColor.RED.toString()+(10 - count), 0, 25, 0);
-			LMSGameUtil.sendSoundToAll(Sound.BLOCK_NOTE_SNARE, 0.4F, 0.4F);
+			LMSGameUtil.sendSoundToAll(Sound.BLOCK_NOTE_BELL, 0.4F, 0.4F);
 
 			// 2. ゲーム開始と同時に透明化解除とアナウンス
 		} else if (count == 10) {

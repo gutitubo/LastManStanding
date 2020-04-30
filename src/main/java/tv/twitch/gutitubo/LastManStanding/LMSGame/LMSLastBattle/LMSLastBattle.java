@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -32,6 +33,7 @@ public class LMSLastBattle {
 		}
 		for (Player all : Bukkit.getOnlinePlayers()) {
 			all.teleport(lastBattleLocation);
+			all.playSound(all.getLocation(), Sound.ENTITY_LIGHTNING_IMPACT, 0.6F, 1F);
 		}
 
 		BukkitRunnable timer = new LastBattleTimer(players);
