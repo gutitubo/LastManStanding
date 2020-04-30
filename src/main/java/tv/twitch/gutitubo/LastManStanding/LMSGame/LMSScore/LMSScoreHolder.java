@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGameUtil;
 
 /**
  * Scoreを保持しておくHashMapをどうにかするクラス
@@ -96,8 +97,10 @@ public class LMSScoreHolder {
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
+			String color = ChatColor.RED.toString();
+			if (LMSGameUtil.isStreamer(players.get(i))) color = ChatColor.YELLOW.toString();
 			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + (i+1) + " "
-					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
+					+ color + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
 					+ String.format("%3d", allPointHolder.get(players.get(i)))
@@ -156,8 +159,10 @@ public class LMSScoreHolder {
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
+			String color = ChatColor.RED.toString();
+			if (LMSGameUtil.isStreamer(players.get(i))) color = ChatColor.YELLOW.toString();
 			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + (i+1) + " "
-					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
+					+ color + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
 					+ String.format("%2d", killHolder.get(players.get(i)))
@@ -186,8 +191,10 @@ public class LMSScoreHolder {
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
+			String color = ChatColor.RED.toString();
+			if (LMSGameUtil.isStreamer(players.get(i))) color = ChatColor.YELLOW.toString();
 			Bukkit.broadcastMessage(ChatColor.GOLD + "#" + (i+1) + " "
-					+ ChatColor.RED.toString() + String.format("%-16s", players.get(i))
+					+ color + String.format("%-16s", players.get(i))
 					+ ChatColor.GRAY.toString() + " - "
 					+ ChatColor.RED.toString()
 					+ String.format("%3d", scoreHolder.get(players.get(i)))

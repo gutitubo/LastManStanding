@@ -29,7 +29,7 @@ public class LMSScoreUtil {
 
 		// 3. 渡すkillPointを設定
 		int value = ConfigValue.killPoint;
-		if (LMSGameUtil.isStreamer(killed)) value = ConfigValue.streamerKillPoint;
+		if (LMSGameUtil.isStreamer(killed.getName())) value = ConfigValue.streamerKillPoint;
 		score.addScore(value);
 	}
 
@@ -59,18 +59,18 @@ public class LMSScoreUtil {
 		int value = 0;
 		if (rank == 1) value = 100;
 		else if (rank == 2) value = 50;
-		else if (rank == 3) value = 30;
-		else if (rank == 4) value = 15;
-		else if (rank == 5) value = 10;
-		else if (rank == 6) value = 9;
-		else if (rank == 7) value = 8;
-		else if (rank == 8) value = 7;
-		else if (rank == 9) value = 6;
-		else if (rank == 10) value = 5;
-		else if (rank >= 15) value = 4;
-		else if (rank >= 20) value = 3;
-		else if (rank >= 25) value = 2;
-		else value = 1;
+		else if (rank == 3) value = 45;
+		else if (rank == 4) value = 40;
+		else if (rank == 5) value = 35;
+		else if (rank == 6) value = 30;
+		else if (rank == 7) value = 25;
+		else if (rank == 8) value = 20;
+		else if (rank == 9) value = 15;
+		else if (rank == 10) value = 10;
+		else if (rank >= 15) value = 8;
+		else if (rank >= 20) value = 6;
+		else if (rank >= 25) value = 4;
+		else value = 2;
 		return value;
 	}
 

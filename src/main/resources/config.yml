@@ -14,26 +14,13 @@ MinPlayer: 2
 WalkSpeed: 0.3
 
 # Kill時に獲得できるポイント
-KillPoint: 2
+KillPoint: 5
 
 # Streamer Kill時に獲得できるポイント
-StreamerKillPoint: 25
+StreamerKillPoint: 30
 
-# #Rankごとのポイント
-# Rank1: 100
-# Rank2: 50
-# Rank3: 30
-# Rank4: 15
-# Rank5: 10
-# Rank6: 9
-# Rank7: 8
-# Rank8: 7
-# Rank9: 6
-# Rank10: 5
-# Rank11to15: 4
-# Rank16to20: 3
-# Rank21to25: 2
-# RankLow: 1
+# 自分を撃ったときの加速の強さ
+BlinkPower: 3.0
 
 # 範囲に選択される座標を設定
 Border:

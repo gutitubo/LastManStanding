@@ -10,6 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.Team.Option;
+import org.bukkit.scoreboard.Team.OptionStatus;
 
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
@@ -19,6 +24,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSLastBattle.LMSLastBattle;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.events.InteractItemEvent;
 import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
 import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
@@ -36,6 +42,8 @@ public class LastManStanding extends JavaPlugin {
 
 	private static LMSGame game;
 
+	public static Team team; // 戦闘用チーム
+
 	// 弓で前ブリンク
 	// 発光クールダウン
 
@@ -47,6 +55,7 @@ public class LastManStanding extends JavaPlugin {
 		main = this;
 		ConfigReader.init();
 		eventRegist(Bukkit.getPluginManager());
+		registTeam();
 	}
 
 	@Override
@@ -218,6 +227,24 @@ public class LastManStanding extends JavaPlugin {
 		pm.registerEvents(new SignTeleportEvent(), this);
 		pm.registerEvents(new SneakingJumpEvent(), this);
 		pm.registerEvents(new LimitedPlayerActivity(), this);
+		pm.registerEvents(new InteractItemEvent(), this);
+	}
+
+	private static void registTeam() {
+		ScoreboardManager manager = Bukkit.getScoreboardManager();
+		Scoreboard board = manager.getMainScoreboard();
+		team = board.getTeam("LMSPlayer");
+
+		if (team != null) {
+			team.unregister();
+		}
+
+		team = board.registerNewTeam("LMSPlayer");
+		team.setPrefix(ChatColor.GOLD.toString());
+		team.setSuffix(ChatColor.RESET.toString());
+		team.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
+		team.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		team.setAllowFriendlyFire(true);
 	}
 
 	public static LMSGame getGame() {

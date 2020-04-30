@@ -4,11 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -71,6 +73,7 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerStatus (Player p) {
 		p.setWalkSpeed(walkSpeed);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2);
 	}
 
 	/**
@@ -87,6 +90,7 @@ public class LMSGameUtil {
 	 */
 	public static void resetPlayerStatus (Player p) {
 		p.setWalkSpeed(defaultSpeed);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
 	}
 
 	/**
@@ -229,6 +233,22 @@ public class LMSGameUtil {
 	}
 
 	/**
+	 * プレイヤーのコンパスを最寄りのプレイヤーにするやつ
+	 */
+	public static void reloadCompass(Player p, List<Player> players) {
+		Player near = null;
+		for (Player q : players) {
+			double distance = p.getLocation().distance(q.getLocation());
+			if (near == null || distance < p.getLocation().distance(q.getLocation())) {
+				near = q;
+			}
+		}
+		p.setCompassTarget(near.getLocation());
+		int distance = (int) p.getLocation().distance(near.getLocation());
+		p.sendMessage(ChatColor.YELLOW.toString() + "[Target] " + near.getName() + ": " + distance + "m");
+	}
+
+	/**
 	 * ロビーにテレポートさせる
 	 */
 	public static void teleportToLobby(Player p) {
@@ -280,15 +300,38 @@ public class LMSGameUtil {
 	 * @param p
 	 * @return
 	 */
-	public static boolean isStreamer(Player p) {
+	public static boolean isStreamer(String name) {
 		boolean isStreamer = false;
-		String name = p.getName();
 		//TODO ファイル管理する
 		if (name.contains("gutitubo")
 				|| name.contains("genpyon")
 				|| name.contains("aroeroeroeroeroe")
-				|| name.contains("tarakoTBTB"))
+				|| name.contains("tarakoTBTB")
+				|| name.contains("kanegon1")
+				|| name.contains("consome01")
+				|| name.contains("Varvalian")
+				|| name.contains("ShoboSuke"))
 			isStreamer = true;
 		return isStreamer;
+	}
+
+	/**
+	 * チームに参加させる
+	 */
+	public static void joinTeam(Player p) {
+		String name = p.getName();
+		if (!LastManStanding.team.hasEntry(name)) {
+			LastManStanding.team.addEntry(name);
+		}
+	}
+
+	/**
+	 * チームから脱退させる
+	 */
+	public static void leaveTeam(Player p) {
+		String name = p.getName();
+		if (LastManStanding.team.hasEntry(name)) {
+			LastManStanding.team.removeEntry(name);
+		}
 	}
 }
