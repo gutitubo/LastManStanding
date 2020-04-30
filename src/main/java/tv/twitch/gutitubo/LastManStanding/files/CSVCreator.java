@@ -57,7 +57,7 @@ public class CSVCreator {
 					Integer rank = LMSScoreHolder.rankHolder.get(name);
 					Integer kill = LMSScoreHolder.killHolder.get(name);
 					Integer point = LMSScoreHolder.scoreHolder.get(name);
-					Integer totalPoint = LMSScoreHolder.rankHolder.get(name);
+					Integer totalPoint = LMSScoreHolder.allPointHolder.get(name);
 					if (rank == null) rank = Integer.valueOf(999);
 					if (kill == null) rank = Integer.valueOf(0);
 					if (point == null) rank = Integer.valueOf(0);
