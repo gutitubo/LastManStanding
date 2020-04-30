@@ -1,8 +1,10 @@
 package tv.twitch.gutitubo.LastManStanding;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,6 +13,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGameUtil;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyHolder;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
@@ -160,6 +165,26 @@ public class LastManStanding extends JavaPlugin {
 					} else if (cmd.equalsIgnoreCase("csv")) {
 						CSVCreator.createCsv();
 						sender.sendMessage("CSVファイルを出力しました。");
+					} else if (cmd.equalsIgnoreCase("bountyon")) {
+						// PlayerListを生成
+						ArrayList<Player> players = new ArrayList<>();
+						for (Player p: Bukkit.getOnlinePlayers()) {
+							if (!p.getGameMode().equals(GameMode.CREATIVE)) players.add(p);
+						}
+
+						// Bountyを登録
+						LMSBountyHolder.registBounty(players);
+
+						// 全員にアナウンスする
+						LMSGameUtil.sendTitleToAll(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "BOUNTY MODE",
+								ChatColor.GOLD + "$1000 が配布された", 15, 100, 15);
+						Bukkit.broadcastMessage(ChatColor.DARK_RED + "BountyModeが有効化されました。");
+					} else if (cmd.equalsIgnoreCase("bountyrank")) {
+						int count = 10;
+						if (args.length != 1 && args[1] != null) {
+							count = Integer.parseInt(args[1]);
+						}
+						LMSBountyManager.displayBountyTop(count);
 					} else {
 						CommandUtil.sendCmdAnnounce(sender);
 					}
