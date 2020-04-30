@@ -3,6 +3,7 @@ package tv.twitch.gutitubo.LastManStanding.LMSGame;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.WorldBorder;
 
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
@@ -34,6 +35,19 @@ public class LMSBorder {
 
 		// 2. WorldBorderの初期範囲を設定
 		wb.setSize(defaultSize);
+
+		// 3. ダメージバッファを0に設定
+		wb.setDamageBuffer(0);
+
+		// 4. ダメージを1000に設定
+		wb.setDamageAmount(1000);
+	}
+
+	public static void createLastBattle(Location location, double borderSize) {
+		// Worldの中心を設定
+		wb.setCenter(location.getX(), location.getZ());
+
+		wb.setSize(borderSize);
 
 		// 3. ダメージバッファを0に設定
 		wb.setDamageBuffer(0);
