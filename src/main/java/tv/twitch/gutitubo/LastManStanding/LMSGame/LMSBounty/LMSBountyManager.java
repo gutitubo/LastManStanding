@@ -35,11 +35,14 @@ public class LMSBountyManager {
 	public static void calcBounty(Player killer, Player victim) {
 		// Bountyモードが有効じゃないとだめ
 		if (!isBountyMode) return;
-		if (killer == null || victim == null) return;
+		if (victim == null) return;
 
 		// 名前を取得
-		String killerName = killer.getName();
+		String killerName = null;
+		if (killer != null)
+			killerName = killer.getName();
 		String victimName = victim.getName();
+
 		// 各バウンティを定義
 		LMSBounty killerBounty = null;
 		LMSBounty victimBounty = null;
@@ -47,16 +50,26 @@ public class LMSBountyManager {
 		// 各バウンティを取得
 		for (Object obj : LMSBountyHolder.bountyHolder.stream().toArray()) {
 			LMSBounty bounty = (LMSBounty) obj;
-			if (bounty.getName().equals(killerName)) killerBounty = bounty;
+			if (killer != null) {
+				if (bounty.getName().equals(killerName)) killerBounty = bounty;
+			}
 			if (bounty.getName().equals(victimName)) victimBounty = bounty;
 		}
-		// Bountyがないとだめ
-		if (killerBounty == null || victimBounty == null) return;
-		// Bountyを計算する
-		int value = killerBounty.robBounty(victimBounty);
 
-		// 両者にバウンティのメッセージを送信
-		killer.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.GOLD + "$" + value + " を獲得！");
+		// Bountyがないとだめ
+		if (victimBounty == null) return;
+
+		// KillerBountyがあるかどうかで対応を変える
+		int value = 0;
+		if (killerBounty != null) {
+			// Bountyを計算する
+			value = killerBounty.robBounty(victimBounty);
+			// 両者にバウンティのメッセージを送信
+			killer.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.GOLD + "$" + value + " を獲得！");
+		} else {
+			value = victimBounty.getBounty() / 2;
+			victimBounty.setBounty(value);
+		}
 		victim.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.RED + "$" + value + " を失った…");
 	}
 
@@ -98,10 +111,10 @@ public class LMSBountyManager {
 		Bukkit.broadcastMessage("");
 		for (int i = 0; i < count; i++) {
 			Bukkit.broadcastMessage(ChatColor.RED.toString() + String.format("%-16s", players.get(i).getName())
-					+ ChatColor.GRAY.toString() + " - "
-					+ ChatColor.GOLD.toString()
-					+ "$"
-					+ String.format("%5d", players.get(i).getBounty()));
+			+ ChatColor.GRAY.toString() + " - "
+			+ ChatColor.GOLD.toString()
+			+ "$"
+			+ String.format("%5d", players.get(i).getBounty()));
 		}
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage("======================");
