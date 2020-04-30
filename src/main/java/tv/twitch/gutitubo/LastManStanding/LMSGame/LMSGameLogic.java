@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -52,7 +53,7 @@ public class LMSGameLogic {
 		LMSScoreUtil.giveRankPoint(victim, alive.size() + 1);
 
 		// 3. VictimをKillerのカメラに
-		if (killer != null) victim.setSpectatorTarget(killer);
+		if (killer != null) swapSpecCamera(killer, victim);
 
 		// 4. VictimにKillerと順位を表示
 		if (killer != null)
@@ -163,6 +164,20 @@ public class LMSGameLogic {
 			String killerName = ChatColor.GOLD.toString() + killer.getName();
 			Bukkit.broadcastMessage(killerName + r + " が " + victimName + r + " を殺した。 - " + rank + " " + kill);
 		}
+	}
+
+	/**
+	 * キラー視点のカメラに移動する
+	 */
+	public void swapSpecCamera(Player killer, Player victim) {
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			Entity entity = p.getSpectatorTarget();
+			if (entity != null && entity instanceof Player) {
+				Player targ = (Player) entity;
+				if (targ.equals(victim)) p.setSpectatorTarget(killer);
+			}
+		}
+		victim.setSpectatorTarget(killer);
 	}
 
 	/**
