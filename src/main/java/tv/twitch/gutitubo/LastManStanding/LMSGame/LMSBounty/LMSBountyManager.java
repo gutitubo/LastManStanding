@@ -56,8 +56,8 @@ public class LMSBountyManager {
 		int value = killerBounty.robBounty(victimBounty);
 
 		// 両者にバウンティのメッセージを送信
-		killer.sendMessage(ChatColor.GOLD + "$" + value + " を獲得！");
-		victim.sendMessage(ChatColor.RED + "$" + value + " を失った…");
+		killer.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.GOLD + "$" + value + " を獲得！");
+		victim.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.RED + "$" + value + " を失った…");
 	}
 
 	/**
