@@ -24,7 +24,10 @@ public class CommandUtil {
 		cmd.sendMessage("/lms killrank [count] - キルランク表示");
 		cmd.sendMessage("/lms pointrank [count] - 獲得ポイントランキング表示");
 		cmd.sendMessage("/lms rank [count] - 総合ポイントランキング");
+		cmd.sendMessage("/lms bountyrank [count] - バウンティランキング");
+		cmd.sendMessage("/lms bountyon - バウンティ有効化(参加者が揃ってからコマンド使用)");
 		cmd.sendMessage("/lms csv - フェイルをエクスポート");
+		cmd.sendMessage("/lms update <FileName> <URL> - Pluginフォルダにファイルをインポート");
 		cmd.sendMessage("");
 	}
 

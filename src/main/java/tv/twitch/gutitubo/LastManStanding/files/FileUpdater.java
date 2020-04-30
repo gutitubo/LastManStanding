@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class FileUpdater {
 
-	public void UpdateFile(String urls,String filename){
+	public static void UpdateFile(String urls,String filename){
 
 		try {
 
