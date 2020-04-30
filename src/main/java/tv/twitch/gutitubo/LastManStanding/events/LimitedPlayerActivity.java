@@ -14,6 +14,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
@@ -110,6 +111,10 @@ public class LimitedPlayerActivity implements Listener {
 		}
 	}
 
+	/**
+	 * 落ちている矢を拾えなくする
+	 * @param e
+	 */
 	@EventHandler
 	public void whenPlayerPickupItem(EntityPickupItemEvent e) {
 		// イベントを発生させたエンティティを取得
@@ -130,4 +135,22 @@ public class LimitedPlayerActivity implements Listener {
 		}
 	}
 
+	/**
+	 * OffHandに矢を置けないようにするメソッド
+	 * @param e
+	 */
+	@EventHandler
+	public void whenPlayerSwappingItem(PlayerSwapHandItemsEvent e) {
+		// クリエイティブなら無効
+		Player p = e.getPlayer();
+		if (p.getGameMode() == GameMode.CREATIVE) return;
+
+		// Itemの種類が矢ならキャンセルする
+		ItemStack main = e.getMainHandItem();
+		ItemStack off = e.getOffHandItem();
+		if ((main != null && main.getType() == Material.ARROW)
+				&&(off != null && off.getType() == Material.ARROW)) {
+			e.setCancelled(true);
+		}
+	}
 }
