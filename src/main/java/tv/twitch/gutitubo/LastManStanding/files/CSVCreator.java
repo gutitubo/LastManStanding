@@ -62,7 +62,7 @@ public class CSVCreator {
 					Integer totalPoint = LMSScoreHolder.allPointHolder.get(name);
 					LMSBounty bountyObj = LMSBountyManager.getBounty(name);
 					Integer bounty = 0;
-					if (bountyObj != null) bountyObj.getBounty();
+					if (bountyObj != null) bounty = bountyObj.getBounty();
 
 					if (rank == null) rank = Integer.valueOf(999);
 					if (kill == null) kill = Integer.valueOf(0);
