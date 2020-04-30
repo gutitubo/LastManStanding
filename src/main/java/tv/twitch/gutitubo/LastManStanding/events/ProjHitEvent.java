@@ -34,8 +34,6 @@ public class ProjHitEvent implements Listener {
 			Projectile projectile = (Projectile) e.getEntity();
 			if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() instanceof Player)) {
 				/* ==== shooter, hitEntityがPlayerの場合 ==== */
-				//撃った側: Arrow1獲得 Speed獲得 Kill獲得 Point獲得 Title表示
-				//撃たれた側: 死亡エフェクト Title表示 観戦者モード
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
 
