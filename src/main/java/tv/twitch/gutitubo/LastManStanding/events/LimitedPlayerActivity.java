@@ -149,7 +149,7 @@ public class LimitedPlayerActivity implements Listener {
 		ItemStack main = e.getMainHandItem();
 		ItemStack off = e.getOffHandItem();
 		if ((main != null && main.getType() == Material.ARROW)
-				&&(off != null && off.getType() == Material.ARROW)) {
+				|| (off != null && off.getType() == Material.ARROW)) {
 			e.setCancelled(true);
 		}
 	}
