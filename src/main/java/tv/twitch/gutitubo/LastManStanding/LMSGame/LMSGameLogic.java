@@ -10,6 +10,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
@@ -90,6 +91,7 @@ public class LMSGameLogic {
 		LMSScoreUtil.giveKillPoint(killer, victim);
 
 		// 5. バウンティを計算
+		LMSBountyManager.calcBounty(killer, victim);
 	}
 
 	/**
