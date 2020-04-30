@@ -41,7 +41,8 @@ public class LastManStanding extends JavaPlugin {
 
 	private static LMSGame game;
 
-	private static Team team;
+	private static Team team; // 戦闘用チーム
+	private static Team lobby; // ロビー用チーム
 
 	// 弓で前ブリンク
 	// 発光クールダウン
@@ -232,9 +233,11 @@ public class LastManStanding extends JavaPlugin {
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard board = manager.getMainScoreboard();
 		team = board.getTeam("LMSPlayer");
+		lobby = board.getTeam("LobbyPlayer");
 
 		if (team != null) {
 			team.unregister();
+			lobby.unregister();
 		}
 
 		team = board.registerNewTeam("LSMPlayer");
@@ -243,6 +246,12 @@ public class LastManStanding extends JavaPlugin {
 		team.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
 		team.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
 		team.setAllowFriendlyFire(true);
+
+		lobby = board.registerNewTeam("LobbyPlayer");
+		lobby.setPrefix(ChatColor.GRAY.toString());
+		lobby.setSuffix(ChatColor.RESET.toString());
+		lobby.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
+		lobby.setAllowFriendlyFire(false);
 	}
 
 	public static LMSGame getGame() {
