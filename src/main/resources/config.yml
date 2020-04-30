@@ -14,7 +14,7 @@ MinPlayer: 2
 WalkSpeed: 0.3
 
 # Kill時に獲得できるポイント
-KillPoint: 2
+KillPoint: 5
 
 # Streamer Kill時に獲得できるポイント
 StreamerKillPoint: 25
