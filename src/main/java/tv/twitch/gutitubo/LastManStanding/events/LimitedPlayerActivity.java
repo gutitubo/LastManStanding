@@ -3,10 +3,12 @@ package tv.twitch.gutitubo.LastManStanding.events;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -105,6 +107,26 @@ public class LimitedPlayerActivity implements Listener {
 			}
 		} catch (NullPointerException exp) {
 
+		}
+	}
+
+	@EventHandler
+	public void whenPlayerPickupItem(EntityPickupItemEvent e) {
+		// イベントを発生させたエンティティを取得
+		LivingEntity entity = e.getEntity();
+		if (!(entity instanceof Player)) return;
+		Player p = (Player) entity;
+
+		// ゲームモード判定
+		if (p.getGameMode() == GameMode.CREATIVE) return;
+
+		// Item取得
+		ItemStack item = e.getItem().getItemStack();
+
+		// Itemの中身がArrowならしばく
+		if (item.getType() == Material.ARROW) {
+			e.setCancelled(true);
+			e.getItem().remove();
 		}
 	}
 
