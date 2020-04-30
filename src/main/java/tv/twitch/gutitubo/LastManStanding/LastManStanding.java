@@ -24,6 +24,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSLastBattle.LMSLastBattle;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.events.InteractItemEvent;
 import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
 import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
@@ -226,6 +227,7 @@ public class LastManStanding extends JavaPlugin {
 		pm.registerEvents(new SignTeleportEvent(), this);
 		pm.registerEvents(new SneakingJumpEvent(), this);
 		pm.registerEvents(new LimitedPlayerActivity(), this);
+		pm.registerEvents(new InteractItemEvent(), this);
 	}
 
 	private static void registTeam() {

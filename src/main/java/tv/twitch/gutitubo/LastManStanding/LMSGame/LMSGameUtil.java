@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -229,6 +230,22 @@ public class LMSGameUtil {
 			p.setCompassTarget(near.getLocation());
 			p.setCooldown(Material.COMPASS, 20);
 		}
+	}
+
+	/**
+	 * プレイヤーのコンパスを最寄りのプレイヤーにするやつ
+	 */
+	public static void reloadCompass(Player p, List<Player> players) {
+		Player near = null;
+		for (Player q : players) {
+			double distance = p.getLocation().distance(q.getLocation());
+			if (near == null || distance < p.getLocation().distance(q.getLocation())) {
+				near = q;
+			}
+		}
+		p.setCompassTarget(near.getLocation());
+		int distance = (int) p.getLocation().distance(near.getLocation());
+		p.sendMessage(ChatColor.YELLOW.toString() + "[Target] " + near.getName() + ": " + distance + "m");
 	}
 
 	/**
