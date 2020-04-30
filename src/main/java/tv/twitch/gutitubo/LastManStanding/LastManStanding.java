@@ -41,7 +41,7 @@ public class LastManStanding extends JavaPlugin {
 
 	private static LMSGame game;
 
-	private static Team team; // 戦闘用チーム
+	public static Team team; // 戦闘用チーム
 	private static Team lobby; // ロビー用チーム
 
 	// 弓で前ブリンク

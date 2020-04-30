@@ -295,4 +295,24 @@ public class LMSGameUtil {
 			isStreamer = true;
 		return isStreamer;
 	}
+
+	/**
+	 * チームに参加させる
+	 */
+	public static void joinTeam(Player p) {
+		String name = p.getName();
+		if (!LastManStanding.team.hasEntry(name)) {
+			LastManStanding.team.addEntry(name);
+		}
+	}
+
+	/**
+	 * チームから脱退させる
+	 */
+	public static void leaveTeam(Player p) {
+		String name = p.getName();
+		if (LastManStanding.team.hasEntry(name)) {
+			LastManStanding.team.removeEntry(name);
+		}
+	}
 }
