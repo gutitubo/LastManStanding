@@ -50,6 +50,7 @@ public class LMSGameUtil {
 	 */
 	public static void playerResetProc (List<Player> players) {
 		resetPlayerStatus(players);
+		takePlayerInvis(players);
 		for (Player p: players) {
 			/* 各プレイヤーへの処理 */
 
