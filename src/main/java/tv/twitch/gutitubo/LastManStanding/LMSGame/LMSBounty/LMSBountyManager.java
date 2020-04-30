@@ -48,8 +48,8 @@ public class LMSBountyManager {
 		// 各バウンティを取得
 		for (Object obj : LMSBountyHolder.bountyHolder.stream().toArray()) {
 			LMSBounty bounty = (LMSBounty) obj;
-			if (bounty.getName().contains(killerName)) killerBounty = bounty;
-			if (bounty.getName().contains(victimName)) victimBounty = bounty;
+			if (bounty.getName().equals(killerName)) killerBounty = bounty;
+			if (bounty.getName().equals(victimName)) victimBounty = bounty;
 		}
 
 		// Bountyがないとだめ
