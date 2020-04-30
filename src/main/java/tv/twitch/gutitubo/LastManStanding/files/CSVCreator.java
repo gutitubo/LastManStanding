@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBounty;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 
 /**
@@ -47,7 +49,7 @@ public class CSVCreator {
 			PrintWriter p = new PrintWriter(new BufferedWriter(f));
 
 			// ヘッダーを作成
-			p.print("Player,Rank,Kill,Point,TotalPoint");
+			p.print("Player,Rank,Kill,Point,TotalPoint,Bounty");
 			p.println();
 
 			// 全スコアの書き込み
@@ -58,16 +60,21 @@ public class CSVCreator {
 					Integer kill = LMSScoreHolder.killHolder.get(name);
 					Integer point = LMSScoreHolder.scoreHolder.get(name);
 					Integer totalPoint = LMSScoreHolder.allPointHolder.get(name);
+					LMSBounty bountyObj = LMSBountyManager.getBounty(name);
+					Integer bounty = 0;
+					if (bountyObj != null) bountyObj.getBounty();
+
 					if (rank == null) rank = Integer.valueOf(999);
-					if (kill == null) rank = Integer.valueOf(0);
-					if (point == null) rank = Integer.valueOf(0);
-					if (totalPoint == null) rank = Integer.valueOf(0);
+					if (kill == null) kill = Integer.valueOf(0);
+					if (point == null) point = Integer.valueOf(0);
+					if (totalPoint == null) totalPoint = Integer.valueOf(0);
 
 					p.print(name + ","
 							+ rank.toString() + ","
 							+ kill.toString() + ","
 							+ point.toString() + ","
-							+ totalPoint.toString());
+							+ totalPoint.toString() + ","
+							+ bounty.toString());
 					p.println();
 				}
 			}
