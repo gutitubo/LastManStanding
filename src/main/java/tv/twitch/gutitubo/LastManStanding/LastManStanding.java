@@ -244,7 +244,7 @@ public class LastManStanding extends JavaPlugin {
 		team.setPrefix(ChatColor.GOLD.toString());
 		team.setSuffix(ChatColor.RESET.toString());
 		team.setOption(Option.COLLISION_RULE, OptionStatus.NEVER);
-		team.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
+		team.setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
 		team.setAllowFriendlyFire(true);
 
 		lobby = board.registerNewTeam("LobbyPlayer");
