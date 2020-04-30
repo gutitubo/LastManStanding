@@ -45,6 +45,11 @@ public class ConfigValue {
 	public static int streamerKillPoint;
 
 	/**
+	 * Blinkのパワー
+	 */
+	public static double blinkPower;
+
+	/**
 	 * 最終範囲に選ばれる座標範囲
 	 */
 	public static double higher_x;
