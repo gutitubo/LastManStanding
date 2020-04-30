@@ -1,7 +1,10 @@
 package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
@@ -70,5 +73,40 @@ public class LMSBountyManager {
 			if (temp.getName().equalsIgnoreCase(name)) bounty = temp;
 		}
 		return bounty;
+	}
+
+	/**
+	 * BountyTopの表示
+	 */
+	public static void displayBountyTop(int count) {
+		// Bounty格納用 ArrayListの作成
+		ArrayList<LMSBounty> players = new ArrayList<>();
+		for (Object obj : LMSBountyHolder.bountyHolder.toArray()) {
+			players.add((LMSBounty) obj);
+		}
+
+		// 降順にソートする
+		Collections.sort(players, (p1, p2) ->
+		p1.getBounty() - p2.getBounty()
+				);
+		Collections.reverse(players);
+
+		// Countがサイズを超えないようにする
+		if (count > players.size()) {
+			count = players.size();
+		}
+
+		// 表示する
+		Bukkit.broadcastMessage("======================");
+		Bukkit.broadcastMessage("");
+		for (int i = 0; i < count; i++) {
+			Bukkit.broadcastMessage(ChatColor.RED.toString() + String.format("%-16s", players.get(i).getName())
+					+ ChatColor.GRAY.toString() + " - "
+					+ ChatColor.GOLD.toString()
+					+ "$"
+					+ String.format("%5d", players.get(i).getBounty()));
+		}
+		Bukkit.broadcastMessage("");
+		Bukkit.broadcastMessage("======================");
 	}
 }
