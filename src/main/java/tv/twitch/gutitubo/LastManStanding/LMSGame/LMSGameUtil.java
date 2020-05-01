@@ -18,6 +18,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBounty;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyHolder;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
@@ -249,7 +252,23 @@ public class LMSGameUtil {
 		if (near != null) {
 			p.setCompassTarget(near.getLocation());
 			int distance = (int) p.getLocation().distance(near.getLocation());
-			p.sendMessage(ChatColor.YELLOW.toString() + "[Target] " + near.getName() + ": " + distance + "m");
+			String bountystr = "";
+			if (LMSBountyManager.isBountyMode) {
+				String name = null;
+				LMSBounty bounty = null;
+				for (Object obj: LMSBountyHolder.bountyHolder.stream().toArray()) {
+					LMSBounty bountyobj = (LMSBounty) obj;
+					name = bountyobj.getName();
+					if (near.getName().equals(name)) {
+						bounty = bountyobj;
+					}
+				}
+				if (bounty != null) {
+					bountystr = ChatColor.GRAY + " - " + ChatColor.GOLD.toString() + "$" + bounty.getBounty();
+				}
+			}
+			p.sendMessage(ChatColor.GRAY.toString() + "[Target] " + near.getName() + ": " + distance + "m"
+					+ bountystr);
 		} else {
 
 		}
