@@ -97,7 +97,7 @@ public class ProjHitEvent implements Listener {
 	private static void samePlayerShotted(Player p) {
 		Vector vector = p.getLocation().getDirection();
 		vector.setX(vector.getX() * 3.0);
-		if (vector.getY() > 0) vector.setY(0.6);
+		if (vector.getY() > 0) vector.setY(0.4);
 		vector.setZ(vector.getZ() * 3.0);
 		p.setVelocity(vector);
 		p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_HURT, 0.8F, 1.0F);

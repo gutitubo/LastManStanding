@@ -67,9 +67,9 @@ public class LMSScoreUtil {
 		else if (rank == 8) value = 20;
 		else if (rank == 9) value = 15;
 		else if (rank == 10) value = 10;
-		else if (rank >= 15) value = 8;
-		else if (rank >= 20) value = 6;
-		else if (rank >= 25) value = 4;
+		else if (rank <= 15) value = 8;
+		else if (rank <= 20) value = 6;
+		else if (rank <= 25) value = 4;
 		else value = 2;
 		return value;
 	}
