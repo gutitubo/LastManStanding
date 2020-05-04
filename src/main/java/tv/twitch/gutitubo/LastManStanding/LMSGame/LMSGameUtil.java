@@ -4,11 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +18,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBounty;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyHolder;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSItem.LMSItems;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
@@ -50,6 +55,7 @@ public class LMSGameUtil {
 	 */
 	public static void playerResetProc (List<Player> players) {
 		resetPlayerStatus(players);
+		takePlayerInvis(players);
 		for (Player p: players) {
 			/* 各プレイヤーへの処理 */
 
@@ -70,6 +76,7 @@ public class LMSGameUtil {
 	 */
 	public static void givePlayerStatus (Player p) {
 		p.setWalkSpeed(walkSpeed);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2);
 	}
 
 	/**
@@ -86,6 +93,7 @@ public class LMSGameUtil {
 	 */
 	public static void resetPlayerStatus (Player p) {
 		p.setWalkSpeed(defaultSpeed);
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
 	}
 
 	/**
@@ -228,6 +236,45 @@ public class LMSGameUtil {
 	}
 
 	/**
+	 * プレイヤーのコンパスを最寄りのプレイヤーにするやつ
+	 */
+	public static void reloadCompass(Player p, List<Player> players) {
+		Player near = null;
+		double dis = 999999;
+		for (Player q : players) {
+			if (near == null || dis > p.getLocation().distance(q.getLocation())) {
+				if (p != q && !q.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+					dis = p.getLocation().distance(q.getLocation());
+					near = q;
+				}
+			}
+		}
+		if (near != null) {
+			p.setCompassTarget(near.getLocation());
+			int distance = (int) p.getLocation().distance(near.getLocation());
+			String bountystr = "";
+			if (LMSBountyManager.isBountyMode) {
+				String name = null;
+				LMSBounty bounty = null;
+				for (Object obj: LMSBountyHolder.bountyHolder.stream().toArray()) {
+					LMSBounty bountyobj = (LMSBounty) obj;
+					name = bountyobj.getName();
+					if (near.getName().equals(name)) {
+						bounty = bountyobj;
+					}
+				}
+				if (bounty != null) {
+					bountystr = ChatColor.GRAY + " - " + ChatColor.GOLD.toString() + "$" + bounty.getBounty();
+				}
+			}
+			p.sendMessage(ChatColor.GRAY.toString() + "[Target] " + near.getName() + ": " + distance + "m"
+					+ bountystr);
+		} else {
+
+		}
+	}
+
+	/**
 	 * ロビーにテレポートさせる
 	 */
 	public static void teleportToLobby(Player p) {
@@ -271,6 +318,46 @@ public class LMSGameUtil {
 			point = count % 9;
 			teleportToSpawn(p, point + 1);
 			count++;
+		}
+	}
+
+	/**
+	 * 配信者かどうかをチェックする
+	 * @param p
+	 * @return
+	 */
+	public static boolean isStreamer(String name) {
+		boolean isStreamer = false;
+		//TODO ファイル管理する
+		if (name.contains("gutitubo")
+				|| name.contains("genpyon")
+				|| name.contains("aroeroeroeroeroe")
+				|| name.contains("tarakoTBTB")
+				|| name.contains("kanegon1")
+				|| name.contains("consome01")
+				|| name.contains("Varvalian")
+				|| name.contains("ShoboSuke"))
+			isStreamer = true;
+		return isStreamer;
+	}
+
+	/**
+	 * チームに参加させる
+	 */
+	public static void joinTeam(Player p) {
+		String name = p.getName();
+		if (!LastManStanding.team.hasEntry(name)) {
+			LastManStanding.team.addEntry(name);
+		}
+	}
+
+	/**
+	 * チームから脱退させる
+	 */
+	public static void leaveTeam(Player p) {
+		String name = p.getName();
+		if (LastManStanding.team.hasEntry(name)) {
+			LastManStanding.team.removeEntry(name);
 		}
 	}
 }

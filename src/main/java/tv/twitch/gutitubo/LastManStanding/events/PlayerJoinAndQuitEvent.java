@@ -23,8 +23,12 @@ public class PlayerJoinAndQuitEvent implements Listener {
 	public void whenPlayerJoined(PlayerJoinEvent e) {
 		/* ゲーム開始後に参加した場合の処理 */
 		Player p = e.getPlayer();
+		p.setGameMode(GameMode.ADVENTURE);
+		p.getInventory().clear();
 		LMSGame game = LastManStanding.getGame();
+		LMSGameUtil.resetPlayerStatus(p);
 		LMSGameUtil.teleportToLobby(p);
+		LMSGameUtil.joinTeam(p);
 		if (game != null) {
 			p.setGameMode(GameMode.SPECTATOR);
 			p.sendMessage(ChatColor.YELLOW + "すでにゲームが開始されているため観戦者として参加します。");
@@ -36,6 +40,7 @@ public class PlayerJoinAndQuitEvent implements Listener {
 		/* ゲーム開始後に退出した場合の処理 */
 		Player p = e.getPlayer();
 		LMSGame game = LastManStanding.getGame();
+		LMSGameUtil.leaveTeam(p);
 		if (game != null) {
 			if (game.getLogic().getAlives().contains(p)) {
 				game.getLogic().killPlayer(null, p);

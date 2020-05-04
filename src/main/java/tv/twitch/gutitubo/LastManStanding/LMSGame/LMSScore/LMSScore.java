@@ -1,4 +1,4 @@
-package tv.twitch.gutitubo.LastManStanding.LMSGame;
+package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore;
 
 import org.bukkit.entity.Player;
 
@@ -39,5 +39,9 @@ public class LMSScore {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public void addScore(int score) {
+		setScore(getScore() + score);
 	}
 }

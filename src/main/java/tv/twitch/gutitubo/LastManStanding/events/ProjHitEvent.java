@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
@@ -34,8 +35,6 @@ public class ProjHitEvent implements Listener {
 			Projectile projectile = (Projectile) e.getEntity();
 			if ((projectile.getShooter() instanceof Player) && (e.getHitEntity() instanceof Player)) {
 				/* ==== shooter, hitEntityがPlayerの場合 ==== */
-				//撃った側: Arrow1獲得 Speed獲得 Kill獲得 Point獲得 Title表示
-				//撃たれた側: 死亡エフェクト Title表示 観戦者モード
 				Player shooter = (Player) projectile.getShooter();
 				Player victim = (Player) e.getHitEntity();
 
@@ -88,7 +87,7 @@ public class ProjHitEvent implements Listener {
 	 */
 	private static void killedBuff(Player p) {
 		// 1. 速度上昇を付与
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1, false, false), true);
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 7, 2, false, false), true);
 
 		// 2. 音を出す
 		p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT, 0.8F, 1F);
@@ -96,11 +95,17 @@ public class ProjHitEvent implements Listener {
 	}
 
 	private static void samePlayerShotted(Player p) {
-		// TODO 前ブリンク
+		Vector vector = p.getLocation().getDirection();
+		vector.setX(vector.getX() * 3.0);
+		if (vector.getY() > 0) vector.setY(0.4);
+		vector.setZ(vector.getZ() * 3.0);
+		p.setVelocity(vector);
+		p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_HURT, 0.8F, 1.0F);
+		p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.4F, 1F);
+		p.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, p.getLocation(), 1, 0, 0, 0);
 	}
 
 	private static void deadPlayerEffect(Player p) {
-		//TODO 死亡エフェクト
 		p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.4F, 1F);
 		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_HURT, 0.6F, 1F);
 

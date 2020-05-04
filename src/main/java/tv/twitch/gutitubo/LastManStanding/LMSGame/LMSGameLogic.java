@@ -7,9 +7,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
+import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
+import tv.twitch.gutitubo.LastManStanding.files.CSVCreator;
 
 /**
  * ゲームの勝敗等ロジック部分を記述
@@ -41,27 +48,31 @@ public class LMSGameLogic {
 		// 1. killer各種ポイントを振り分け,
 		killerPointProc(killer, victim);
 
-		// 2. Victimへの後処理
+		// 2. バウンティを計算
+		LMSBountyManager.calcBounty(killer, victim);
+
+		// 3. Victimへの後処理
 		deadProcess(victim);
+		LMSScoreUtil.giveRankPoint(victim, alive.size() + 1);
 
-		// 3. VictimをKillerのカメラに
-		if (killer != null) victim.setSpectatorTarget(killer);
+		// 4. VictimをKillerのカメラに
+		if (killer != null) swapSpecCamera(killer, victim);
 
-		// 4. VictimにKillerと順位を表示
+		// 5. VictimにKillerと順位を表示
 		if (killer != null)
 			victim.sendTitle(ChatColor.DARK_RED + ChatColor.BOLD .toString()+ "#" + (alive.size() + 1)
 					, ChatColor.RED + killer.getName() + " に倒された。", 10, 60, 10);
 
-		// 5. Killerにサウンドを追加
+		// 6. Killerにサウンドを追加
 		if (killer != null)
 		killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
 
-		// 6. KillLog表示
+		// 7. KillLog表示
 		killLog(killer, victim);
 
-		// 7. Killerが最後の1人になった場合は終了
+		// 8. Killerが最後の1人になった場合は終了
 		if (alive.size() == 1) {
-			winGame(killer);
+			winGame(alive.get(0));
 		}
 	}
 
@@ -81,8 +92,7 @@ public class LMSGameLogic {
 		getPlayerScore().get(killer).addKill(1);
 
 		// 4. ポイントを計算
-
-		// 5. バウンティを計算
+		LMSScoreUtil.giveKillPoint(killer, victim);
 	}
 
 	/**
@@ -90,6 +100,9 @@ public class LMSGameLogic {
 	 * @param victim 被害者
 	 */
 	public void deadProcess(Player victim) {
+		// Pre. スコア登録
+		LMSScoreHolder.registScore(playerScore.get(victim), alive.size());
+
 		// 1. 観戦モードに変更
 		victim.setGameMode(GameMode.SPECTATOR);
 
@@ -115,6 +128,9 @@ public class LMSGameLogic {
 	 * @param winner 勝者
 	 */
 	public void winGame(Player winner) {
+		// Pre. スコア登録
+		LMSScoreHolder.registScore(playerScore.get(winner), 1);
+
 		// 1. 勝者をアナウンス
 		LMSGameUtil.sendTitleToAll(ChatColor.GOLD.toString() + ChatColor.BOLD + winner.getName() + " WON!"
 				,ChatColor.DARK_RED.toString() + getPlayerScore().get(winner).getKill() + " kill", 10, 100, 10);
@@ -124,7 +140,8 @@ public class LMSGameLogic {
 		Bukkit.broadcastMessage("");
 
 		// 2. 結果をファイル出力 + ゲーム内計算
-
+		CSVCreator.createCsv();
+		LMSScoreHolder.display(10, ScoreResultType.SURVIVE_RANK);
 
 		// 3. ゲームリセット, ロビー転送
 		ArrayList<Player> all = new ArrayList<>();
@@ -150,10 +167,17 @@ public class LMSGameLogic {
 	}
 
 	/**
-	 * 試合結果を表示するためのテキスト
+	 * キラー視点のカメラに移動する
 	 */
-	public void displayResult() {
-
+	public void swapSpecCamera(Player killer, Player victim) {
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			Entity entity = p.getSpectatorTarget();
+			if (entity != null && entity instanceof Player) {
+				Player targ = (Player) entity;
+				if (targ.equals(victim)) p.setSpectatorTarget(killer);
+			}
+		}
+		victim.setSpectatorTarget(killer);
 	}
 
 	/**
