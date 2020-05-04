@@ -44,9 +44,6 @@ public class LastManStanding extends JavaPlugin {
 
 	public static Team team; // 戦闘用チーム
 
-	// 弓で前ブリンク
-	// 発光クールダウン
-
 	@Override
 	public void onEnable() {
 		// TODO 自動生成されたメソッド・スタブ
