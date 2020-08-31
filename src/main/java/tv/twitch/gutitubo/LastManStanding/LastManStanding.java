@@ -39,6 +39,7 @@ public class LastManStanding extends JavaPlugin {
 	 *  Ver 1.6.0 Update
 	 *
 	 *  お祝いモード追加
+	 *   - Configにて切り替え可能
 	 *   - 弓がめでたい感じに
 	 *   - 死体からランダムな花火が打ち上がる
 	 *   - 死体から打ち上がる花火はキル数で変わる
