@@ -36,16 +36,13 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 public class LastManStanding extends JavaPlugin {
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "1.5.4";
+	private static String VERSION = "1.5.5";
 
 	public static LastManStanding main;
 
 	private static LMSGame game;
 
 	public static Team team; // 戦闘用チーム
-
-	// 弓で前ブリンク
-	// 発光クールダウン
 
 	@Override
 	public void onEnable() {
