@@ -35,6 +35,17 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 
 public class LastManStanding extends JavaPlugin {
 
+	/*
+	 *  Ver 1.6.0 Update
+	 *
+	 *  お祝いモード追加
+	 *   - 弓がめでたい感じに
+	 *   - 死体からランダムな花火が打ち上がる
+	 *   - 死体から打ち上がる花火はキル数で変わる
+	 *   - キルメッセージがお祝い仕様に
+	 *
+	 */
+
 	Logger logger = Bukkit.getLogger();
 	private static String VERSION = "1.5.5";
 
