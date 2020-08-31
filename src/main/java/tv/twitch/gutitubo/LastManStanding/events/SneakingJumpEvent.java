@@ -61,4 +61,11 @@ public class SneakingJumpEvent implements Listener {
 			}
 		}
 	}
+
+	/**
+	 * プレイヤーにジャンプパッド用のエフェクトを与える
+	 */
+	private static void giveJumpPadEffect(Player p) {
+
+	}
 }
