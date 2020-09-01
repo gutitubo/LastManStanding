@@ -18,7 +18,8 @@ public class OiwaiEventTimer extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		if (arrow == null) this.cancel();
+		if (arrow == null || !arrow.isValid() || arrow.isOnGround()) this.cancel();
+		if (arrow.getLocation() == null) this.cancel();
 
 		Location loc = arrow.getLocation();
 		if (count % 2 == 0) {

@@ -17,6 +17,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 import tv.twitch.gutitubo.LastManStanding.files.CSVCreator;
 
 /**
@@ -162,10 +163,19 @@ public class LMSGameLogic {
 		String kill = ChatColor.RED.toString() + playerScore.get(victim).getKill()
 				+ ChatColor.GRAY.toString() + "kill";
 
+		String sibou = " が死亡した。 - ";
+		String korosita = " を殺した。 - ";
+
+		/* お祝いモードログ */
+		if (ConfigValue.isOiwai) sibou = " が祝われた。 - ";
+		if (ConfigValue.isOiwai) korosita = " をお祝いした。 - ";
+		if (ConfigValue.isOiwai) victimName = ChatColor.WHITE.toString() + victim.getName();
+
 		if (killer == null) {
 			Bukkit.broadcastMessage(victimName + r + " が死亡した。 - " + rank + " " + kill);
 		} else {
 			String killerName = ChatColor.GOLD.toString() + killer.getName();
+			if (ConfigValue.isOiwai) killerName = ChatColor.RED.toString() + killer.getName();
 			Bukkit.broadcastMessage(killerName + r + " が " + victimName + r + " を殺した。 - " + rank + " " + kill);
 		}
 	}

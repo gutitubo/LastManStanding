@@ -18,11 +18,12 @@ public class FireworkUtil {
 	public static void spawnArrowFirework(Location loc, Color color) {
 		// 1. Spawn Firework
 		Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+		firework.setGravity(false);
 
 		// 2. Edit Firework meta
 		FireworkMeta meta = firework.getFireworkMeta();
 		meta.setPower(0);
-		meta.addEffect(FireworkEffect.builder().withColor(color).with(Type.STAR).build());
+		meta.addEffect(FireworkEffect.builder().withColor(color).with(Type.BURST).build());
 
 		// 3. Set Firework meta
 		firework.setFireworkMeta(meta);
