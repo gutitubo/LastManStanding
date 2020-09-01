@@ -10,6 +10,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import tv.twitch.gutitubo.LastManStanding.FireworkUtil;
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
@@ -45,6 +46,9 @@ public class LMSGameLogic {
 	 * @param victim 被害者
 	 */
 	public void killPlayer(Player killer, Player victim) {
+		// EX. お祝いモードの花火
+		FireworkUtil.spawnDeadFirework(victim.getLocation(), getPlayerScore().get(victim).getKill());
+
 		// 1. killer各種ポイントを振り分け,
 		killerPointProc(killer, victim);
 
