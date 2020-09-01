@@ -26,6 +26,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
 import tv.twitch.gutitubo.LastManStanding.events.InteractItemEvent;
 import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
+import tv.twitch.gutitubo.LastManStanding.events.OiwaiEvent;
 import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SignTeleportEvent;
@@ -44,7 +45,6 @@ public class LastManStanding extends JavaPlugin {
 	 *   - 死体からランダムな花火が打ち上がる
 	 *   - 死体から打ち上がる花火はキル数で変わる
 	 *   - キルメッセージがお祝い仕様に
-	 *
 	 */
 
 	Logger logger = Bukkit.getLogger();
@@ -237,6 +237,7 @@ public class LastManStanding extends JavaPlugin {
 		pm.registerEvents(new SneakingJumpEvent(), this);
 		pm.registerEvents(new LimitedPlayerActivity(), this);
 		pm.registerEvents(new InteractItemEvent(), this);
+		pm.registerEvents(new OiwaiEvent(), this);
 	}
 
 	private static void registTeam() {

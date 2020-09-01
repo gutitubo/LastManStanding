@@ -45,6 +45,11 @@ public class ConfigValue {
 	public static int streamerKillPoint;
 
 	/**
+	 * お祝いモードの有効化設定
+	 */
+	public static boolean isOiwai;
+
+	/**
 	 * Blinkのパワー
 	 */
 	public static double blinkPower;

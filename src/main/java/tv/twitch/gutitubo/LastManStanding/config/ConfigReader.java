@@ -34,6 +34,8 @@ public class ConfigReader {
 		ConfigValue.killPoint = LastManStanding.main.getConfig().getInt("KillPoint");
 		ConfigValue.streamerKillPoint = LastManStanding.main.getConfig().getInt("StreamerKillPoint");
 
+		ConfigValue.isOiwai = LastManStanding.main.getConfig().getBoolean("Oiwai");
+
 		ConfigValue.blinkPower = LastManStanding.main.getConfig().getDouble("BlinkPower");
 
 		ConfigValue.higher_x = LastManStanding.main.getConfig().getDouble("Border.higher.x");
