@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -24,6 +25,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSLastBattle.LMSLastBattle;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 import tv.twitch.gutitubo.LastManStanding.events.InteractItemEvent;
 import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
 import tv.twitch.gutitubo.LastManStanding.events.OiwaiEvent;
@@ -66,6 +68,12 @@ public class LastManStanding extends JavaPlugin {
 		main = this;
 		ConfigReader.init();
 		eventRegist(Bukkit.getPluginManager());
+
+		if (ConfigValue.isOiwai) {
+			BukkitRunnable oiwaiTimer = new OiwaiTimer();
+			oiwaiTimer.runTaskTimer(this, 0, 20);
+		}
+
 		registTeam();
 	}
 
