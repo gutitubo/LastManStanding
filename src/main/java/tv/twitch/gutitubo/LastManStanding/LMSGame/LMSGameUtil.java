@@ -287,6 +287,18 @@ public class LMSGameUtil {
 	}
 
 	/**
+	 * ロビー座標を取得
+	 */
+	public static Location getLobby() {
+		World w = Bukkit.getWorld("world");
+		double x = LastManStanding.main.getConfig().getInt("Lobby.x") + 0.5;
+		double y = LastManStanding.main.getConfig().getInt("Lobby.y") + 0.5;
+		double z = LastManStanding.main.getConfig().getInt("Lobby.z") + 0.5;
+		Location location = new Location(w, x, y, z);
+		return location;
+	}
+
+	/**
 	 * スポーン地点にテレポートさせる　
 	 */
 	public static void teleportToSpawn(Player p, int point) {
