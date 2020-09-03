@@ -10,12 +10,15 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import tv.twitch.gutitubo.LastManStanding.FireworkUtil;
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty.LMSBountyManager;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScore;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreHolder;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.LMSScoreUtil;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
+import tv.twitch.gutitubo.LastManStanding.achievement.Achievements;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 import tv.twitch.gutitubo.LastManStanding.files.CSVCreator;
 
 /**
@@ -45,6 +48,9 @@ public class LMSGameLogic {
 	 * @param victim 被害者
 	 */
 	public void killPlayer(Player killer, Player victim) {
+		// EX. お祝いモードの花火
+		FireworkUtil.spawnDeadFirework(victim.getLocation(), getPlayerScore().get(victim).getKill());
+
 		// 1. killer各種ポイントを振り分け,
 		killerPointProc(killer, victim);
 
@@ -65,7 +71,7 @@ public class LMSGameLogic {
 
 		// 6. Killerにサウンドを追加
 		if (killer != null)
-		killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
+			killer.playSound(killer.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1F, 1F);
 
 		// 7. KillLog表示
 		killLog(killer, victim);
@@ -154,15 +160,27 @@ public class LMSGameLogic {
 	public void killLog(Player killer, Player victim) {
 		String r = ChatColor.RESET.toString() + ChatColor.GRAY.toString();
 		String victimName = ChatColor.BLUE.toString() + victim.getName();
+		String victimAchi = Achievements.getAchievement(victim.getName());
 		String rank = ChatColor.GOLD.toString() + "#" + (alive.size()+1);
 		String kill = ChatColor.RED.toString() + playerScore.get(victim).getKill()
 				+ ChatColor.GRAY.toString() + "kill";
 
+		String sibou = " が死亡した。 - ";
+		String korosita = " を殺した。 - ";
+
+		/* お祝いモードログ */
+		if (ConfigValue.isOiwai) sibou = " が祝われた。 - ";
+		if (ConfigValue.isOiwai) korosita = " をお祝いした。 - ";
+		if (ConfigValue.isOiwai) victimName = ChatColor.WHITE.toString() + victim.getName();
+
 		if (killer == null) {
-			Bukkit.broadcastMessage(victimName + r + " が死亡した。 - " + rank + " " + kill);
+			Bukkit.broadcastMessage(victimAchi + victimName + r + sibou + rank + " " + kill);
 		} else {
 			String killerName = ChatColor.GOLD.toString() + killer.getName();
-			Bukkit.broadcastMessage(killerName + r + " が " + victimName + r + " を殺した。 - " + rank + " " + kill);
+			String killerAchi = Achievements.getAchievement(killer.getName());
+			if (ConfigValue.isOiwai) killerName = ChatColor.RED.toString() + killer.getName();
+			Bukkit.broadcastMessage(killerAchi + killerName + r + " が " +
+					victimAchi + victimName + r + korosita + rank + " " + kill);
 		}
 	}
 
