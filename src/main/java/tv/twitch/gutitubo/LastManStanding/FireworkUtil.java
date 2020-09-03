@@ -1,5 +1,9 @@
 package tv.twitch.gutitubo.LastManStanding;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
@@ -58,6 +62,71 @@ public class FireworkUtil {
 	private static int getPower(int kill) {
 		int power = 2 + kill;
 		return power;
+	}
+
+	/**
+	 * Locationを中心としたランダムな場所に花火を出す
+	 * @param l
+	 */
+	public static void spawnRandomFireworks(Location l) {
+		Random rnd = new Random();
+		int x = rnd.nextInt(40)-20;
+		int z = rnd.nextInt(40)-20;
+		Location spawn = new Location(l.getWorld(), l.getX() + x, l.getY(), l.getZ() + z);
+		Firework fire = (Firework)spawn.getWorld().spawnEntity(spawn, EntityType.FIREWORK);
+		randomEffect(fire);
+	}
+
+	/**
+	 * お祝いモード用のスポーン地点花火
+	 * @param fire
+	 */
+	public static void spawnRandomFireworks(Location l, int n) {
+		Random rnd = new Random();
+		int x = rnd.nextInt(20)+n;
+		int z = rnd.nextInt(20)+n;
+		if (getRandomBool()) x*=-1;
+		if (getRandomBool()) z*=-1;
+
+		Location spawn = new Location(l.getWorld(), l.getX() + x, l.getY() - 40, l.getZ() + z);
+		Firework fire = (Firework)spawn.getWorld().spawnEntity(spawn, EntityType.FIREWORK);
+		randomEffect(fire);
+	}
+
+
+	private static void randomEffect(Firework fire) {
+		FireworkMeta meta = fire.getFireworkMeta();
+		meta.setPower(new Random().nextInt(4) + 3);
+		FireworkEffect eff = FireworkEffect.builder().withColor(getRandomColor()).with(getFireType()).flicker(getRandomBool()).trail(getRandomBool()).build();
+		meta.addEffect(eff);
+		fire.setFireworkMeta(meta);
+	}
+
+	private static boolean getRandomBool() {
+		Random rnd = new Random();
+		return rnd.nextBoolean();
+	}
+
+	private static FireworkEffect.Type getFireType() {
+		ArrayList<FireworkEffect.Type> types = new ArrayList<>();
+		types.add(Type.BALL);
+		types.add(Type.BALL_LARGE);
+		types.add(Type.BALL);
+		types.add(Type.BALL_LARGE);
+		types.add(Type.BALL);
+		types.add(Type.BALL_LARGE);
+		types.add(Type.CREEPER);
+		types.add(Type.STAR);
+		Collections.shuffle(types);
+		return types.get(0);
+	}
+
+	private static Color getRandomColor() {
+		int blue = new Random().nextInt(255);
+		int green = new Random().nextInt(255);
+		int red = new Random().nextInt(255);
+
+		return Color.fromBGR(blue, green, red);
 	}
 
 }
