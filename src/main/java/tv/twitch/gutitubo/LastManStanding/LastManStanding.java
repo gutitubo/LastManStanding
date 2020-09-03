@@ -26,6 +26,7 @@ import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSScore.ScoreResultType;
 import tv.twitch.gutitubo.LastManStanding.config.ConfigReader;
 import tv.twitch.gutitubo.LastManStanding.events.InteractItemEvent;
 import tv.twitch.gutitubo.LastManStanding.events.LimitedPlayerActivity;
+import tv.twitch.gutitubo.LastManStanding.events.OiwaiEvent;
 import tv.twitch.gutitubo.LastManStanding.events.PlayerJoinAndQuitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.ProjHitEvent;
 import tv.twitch.gutitubo.LastManStanding.events.SignTeleportEvent;
@@ -35,8 +36,21 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 
 public class LastManStanding extends JavaPlugin {
 
+	/*
+	 *  Ver 1.6.0 Update
+	 *
+	 *  お祝いモード追加
+	 *   - Configにて切り替え可能
+	 *   - 弓がめでたい感じに
+	 *   - 死体からランダムな花火が打ち上がる
+	 *   - 死体から打ち上がる花火はキル数で変わる
+	 *   - キルメッセージがお祝い仕様に
+	 *   - 称号作る
+	 *   - 祝砲の花火の挙動変更
+	 */
+
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "1.5.5";
+	private static String VERSION = "1.6.0";
 
 	public static LastManStanding main;
 
@@ -225,6 +239,7 @@ public class LastManStanding extends JavaPlugin {
 		pm.registerEvents(new SneakingJumpEvent(), this);
 		pm.registerEvents(new LimitedPlayerActivity(), this);
 		pm.registerEvents(new InteractItemEvent(), this);
+		pm.registerEvents(new OiwaiEvent(), this);
 	}
 
 	private static void registTeam() {

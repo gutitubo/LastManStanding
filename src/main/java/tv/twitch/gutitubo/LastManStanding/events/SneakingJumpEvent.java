@@ -3,6 +3,7 @@ package tv.twitch.gutitubo.LastManStanding.events;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -38,6 +39,7 @@ public class SneakingJumpEvent implements Listener {
 			Sign sign =(Sign) b.getState();
 			if (sign == null) return;
 			giveVelocityFromSign(p, sign);
+			p.getWorld().playSound(loc, Sound.ENTITY_PARROT_FLY, 1F, 1F);
 		}
 	}
 
