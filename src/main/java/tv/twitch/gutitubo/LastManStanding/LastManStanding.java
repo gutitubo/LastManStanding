@@ -45,6 +45,8 @@ public class LastManStanding extends JavaPlugin {
 	 *   - 死体からランダムな花火が打ち上がる
 	 *   - 死体から打ち上がる花火はキル数で変わる
 	 *   - キルメッセージがお祝い仕様に
+	 *   - 称号作る
+	 *   - 祝砲の花火の挙動変更
 	 */
 
 	Logger logger = Bukkit.getLogger();

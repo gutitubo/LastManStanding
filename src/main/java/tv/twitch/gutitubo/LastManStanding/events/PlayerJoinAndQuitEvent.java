@@ -11,6 +11,7 @@ import net.md_5.bungee.api.ChatColor;
 import tv.twitch.gutitubo.LastManStanding.LastManStanding;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGame;
 import tv.twitch.gutitubo.LastManStanding.LMSGame.LMSGameUtil;
+import tv.twitch.gutitubo.LastManStanding.achievement.Achievements;
 
 /**
  * ゲームへの参加と離脱を制御
@@ -33,6 +34,10 @@ public class PlayerJoinAndQuitEvent implements Listener {
 			p.setGameMode(GameMode.SPECTATOR);
 			p.sendMessage(ChatColor.YELLOW + "すでにゲームが開始されているため観戦者として参加します。");
 		}
+
+		String name = e.getPlayer().getName();
+		e.setJoinMessage(Achievements.getAchievement(name) + ChatColor.YELLOW.toString() +
+				name +  " joined the game.");
 	}
 
 	@EventHandler
