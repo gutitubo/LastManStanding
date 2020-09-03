@@ -50,7 +50,7 @@ public class LastManStanding extends JavaPlugin {
 	 */
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "1.6.0";
+	private static String VERSION = "1.6.1";
 
 	public static LastManStanding main;
 
