@@ -39,16 +39,12 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 public class LastManStanding extends JavaPlugin {
 
 	/*
-	 *  Ver 1.6.0 Update
+	 *  Ver 1.6.2 Update
 	 *
-	 *  お祝いモード追加
-	 *   - Configにて切り替え可能
-	 *   - 弓がめでたい感じに
-	 *   - 死体からランダムな花火が打ち上がる
-	 *   - 死体から打ち上がる花火はキル数で変わる
-	 *   - キルメッセージがお祝い仕様に
-	 *   - 称号作る
-	 *   - 祝砲の花火の挙動変更
+	 *  登録者奪い合いモード追加
+	 *   - Bountyモードから文字が違うモード
+	 *   - [降臨]のタグをつける
+	 *
 	 */
 
 	Logger logger = Bukkit.getLogger();
