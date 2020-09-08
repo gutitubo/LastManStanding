@@ -39,7 +39,10 @@ Lobby:
   z: 856
   
 # お祝いモードの切り替え
-Oiwai: true
+Oiwai: false
+
+# 登録者奪い合いモードの切り替え
+Ubaiai: true
 
 # スポーン地点を設定
 Spawn:
