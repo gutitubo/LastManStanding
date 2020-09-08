@@ -50,6 +50,11 @@ public class ConfigValue {
 	public static boolean isOiwai;
 
 	/**
+	 * 登録者奪い合いモードの有効化設定
+	 */
+	public static boolean isUbaiai;
+
+	/**
 	 * Blinkのパワー
 	 */
 	public static double blinkPower;
