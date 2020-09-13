@@ -200,10 +200,21 @@ public class LastManStanding extends JavaPlugin {
 						// Bountyを登録
 						LMSBountyManager.enableBounty(players);
 
+						// アナウンス用のメセージを作る
+						int bounty = ConfigValue.bountyAmount;
+						String title_main = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "BOUNTY MODE";
+						String title_sub = ChatColor.GOLD + "$" + bounty + " が配布された";
+						String msg = ChatColor.DARK_RED + "BountyModeが有効化されました。";
+
+						if (ConfigValue.isUbaiai) {
+							title_main = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "登録者奪い合いモード";
+							title_sub = ChatColor.GOLD + "あなたの登録者は" + bounty + " 人です。";
+							msg = ChatColor.DARK_RED + "登録者奪い合いモードが有効化されました。";
+						}
+
 						// 全員にアナウンスする
-						LMSGameUtil.sendTitleToAll(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "BOUNTY MODE",
-								ChatColor.GOLD + "$1000 が配布された", 15, 100, 15);
-						Bukkit.broadcastMessage(ChatColor.DARK_RED + "BountyModeが有効化されました。");
+						LMSGameUtil.sendTitleToAll(title_main, title_sub, 15, 100, 15);
+						Bukkit.broadcastMessage(msg);
 					} else if (cmd.equalsIgnoreCase("bountyrank")) {
 						int count = 10;
 						if (args.length != 1 && args[1] != null) {

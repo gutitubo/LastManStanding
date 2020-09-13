@@ -45,6 +45,11 @@ public class ConfigValue {
 	public static int streamerKillPoint;
 
 	/**
+	 * バウンティモードの初期配布額
+	 */
+	public static int bountyAmount;
+
+	/**
 	 * お祝いモードの有効化設定
 	 */
 	public static boolean isOiwai;

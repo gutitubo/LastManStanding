@@ -33,6 +33,7 @@ public class ConfigReader {
 
 		ConfigValue.killPoint = LastManStanding.main.getConfig().getInt("KillPoint");
 		ConfigValue.streamerKillPoint = LastManStanding.main.getConfig().getInt("StreamerKillPoint");
+		ConfigValue.bountyAmount = LastManStanding.main.getConfig().getInt("BountyAmount");
 
 		ConfigValue.isOiwai = LastManStanding.main.getConfig().getBoolean("Oiwai");
 		ConfigValue.isUbaiai = LastManStanding.main.getConfig().getBoolean("Ubaiai");

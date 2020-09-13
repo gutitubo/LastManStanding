@@ -22,6 +22,9 @@ StreamerKillPoint: 30
 # 自分を撃ったときの加速の強さ
 BlinkPower: 3.0
 
+# BountyMode の初期配布額
+BountyAmount: 100000
+
 # 範囲に選択される座標を設定
 Border:
   higher:
