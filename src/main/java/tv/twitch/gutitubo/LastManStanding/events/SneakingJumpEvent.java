@@ -2,7 +2,6 @@ package tv.twitch.gutitubo.LastManStanding.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -11,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.util.Vector;
+
+import tv.twitch.gutitubo.LastManStanding.CommonUtil;
 
 /**
  * スニークした際に看板があればぶっ飛んじまうイベント
@@ -35,7 +36,7 @@ public class SneakingJumpEvent implements Listener {
 		if (b == null) return;
 
 		// 3. ブロックが看板だった場合 状態を取得して処理
-		if (b.getType().equals(Material.SIGN_POST)) {
+		if (CommonUtil.isSign(b)) {
 			Sign sign =(Sign) b.getState();
 			if (sign == null) return;
 			giveVelocityFromSign(p, sign);

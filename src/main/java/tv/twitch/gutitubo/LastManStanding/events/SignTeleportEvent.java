@@ -13,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import tv.twitch.gutitubo.LastManStanding.CommonUtil;
+
 /**
  * 設置を踏んだときにテレポートするイベント
  * @author gutitubo, genpyon
@@ -50,13 +52,13 @@ public class SignTeleportEvent implements Listener {
 				new Location(p.getWorld(), p.getLocation().getX(), p.getLocation().getY() - 0.5, p.getLocation().getZ()));
 
 		// 2. 取得したブロッ九がエンドストーンじゃないとヤダ
-		if (b == null || !b.getType().equals(Material.ENDER_STONE)) return;
+		if (b == null || !b.getType().equals(Material.END_STONE)) return;
 
 		// 3. プレイヤーが踏んでるその下のブロックが看板じゃないとヤダ
 		Location loc = new Location(p.getWorld(),
 				p.getLocation().getX(), p.getLocation().getY() - 1.5F, p.getLocation().getZ());
 		b = p.getWorld().getBlockAt(loc);
-		if (b == null || !b.getType().equals(Material.SIGN_POST)) return;
+		if (b == null || !CommonUtil.isSign(b)) return;
 
 		// 4. SIGNの情報を取得してテレポートさせる
 		Sign sign = (Sign) b.getState();
@@ -94,6 +96,6 @@ public class SignTeleportEvent implements Listener {
 		// 5. 作成したLocationにテレポート + エフェクト
 		player.teleport(teleport);
 		player.setBedSpawnLocation(teleport, true);
-		player.playSound(teleport, Sound.ENTITY_ENDERMEN_TELEPORT, 0.2F, 1F);
+		player.playSound(teleport, Sound.ENTITY_ENDERMAN_TELEPORT, 0.2F, 1F);
 	}
 }

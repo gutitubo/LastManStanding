@@ -87,11 +87,11 @@ public class ProjHitEvent implements Listener {
 	 */
 	private static void killedBuff(Player p) {
 		// 1. 速度上昇を付与
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 7, 2, false, false), true);
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 7, 2, false, false));
 
 		// 2. 音を出す
 		p.playSound(p.getLocation(), Sound.ENTITY_ARROW_HIT, 0.8F, 1F);
-		p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_FIREBALL_EXPLODE, 0.5F, 0.8F);
+		p.playSound(p.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 0.5F, 0.8F);
 	}
 
 	private static void samePlayerShotted(Player p) {

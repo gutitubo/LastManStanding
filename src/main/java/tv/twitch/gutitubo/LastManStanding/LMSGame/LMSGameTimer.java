@@ -29,13 +29,13 @@ public class LMSGameTimer extends BukkitRunnable {
 			String title = "";
 			if (count < 5) title = ChatColor.RED.toString() + ChatColor.BOLD.toString() + "LAST MAN STANDING";
 			LMSGameUtil.sendTitleToAll(title, ChatColor.RED.toString()+(waitingTime - count), 0, 25, 0);
-			LMSGameUtil.sendSoundToAll(Sound.BLOCK_NOTE_SNARE, 0.4F, 0.4F);
+			LMSGameUtil.sendSoundToAll(Sound.BLOCK_NOTE_BLOCK_SNARE, 0.4F, 0.4F);
 
 		// 2. ゲーム開始と同時に透明化解除とアナウンス
 		} else if (count == waitingTime) {
 			LMSGameUtil.sendTitleToAll("", ChatColor.RED.toString()+"- START -", 0, 25, 10);
 			LMSGameUtil.takePlayerInvis(LastManStanding.getGame().getPlayers());
-			LMSGameUtil.sendSoundToAll(Sound.ENTITY_ENDERDRAGON_GROWL, 0.7F, 1F);
+			LMSGameUtil.sendSoundToAll(Sound.ENTITY_ENDER_DRAGON_GROWL, 0.7F, 1F);
 			game.setInGame(true);
 			LMSBorder.create();
 			LMSBorder.start();

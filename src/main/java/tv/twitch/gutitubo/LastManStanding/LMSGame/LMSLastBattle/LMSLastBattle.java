@@ -33,7 +33,7 @@ public class LMSLastBattle {
 		}
 		for (Player all : Bukkit.getOnlinePlayers()) {
 			all.teleport(lastBattleLocation);
-			all.playSound(all.getLocation(), Sound.ENTITY_LIGHTNING_IMPACT, 0.6F, 1F);
+			all.playSound(all.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 0.6F, 1F);
 		}
 
 		BukkitRunnable timer = new LastBattleTimer(players);
