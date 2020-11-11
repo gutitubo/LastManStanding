@@ -39,20 +39,16 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 public class LastManStanding extends JavaPlugin {
 
 	/*
-	 *  Ver 1.6.0 Update
+	 *  Ver 1.6.2 Update
 	 *
-	 *  お祝いモード追加
-	 *   - Configにて切り替え可能
-	 *   - 弓がめでたい感じに
-	 *   - 死体からランダムな花火が打ち上がる
-	 *   - 死体から打ち上がる花火はキル数で変わる
-	 *   - キルメッセージがお祝い仕様に
-	 *   - 称号作る
-	 *   - 祝砲の花火の挙動変更
+	 *  登録者奪い合いモード追加
+	 *   - Bountyモードから文字が違うモード
+	 *   - [降臨]のタグをつける
+	 *
 	 */
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "1.6.1";
+	private static String VERSION = "1.6.2";
 
 	public static LastManStanding main;
 
@@ -204,10 +200,21 @@ public class LastManStanding extends JavaPlugin {
 						// Bountyを登録
 						LMSBountyManager.enableBounty(players);
 
+						// アナウンス用のメセージを作る
+						int bounty = ConfigValue.bountyAmount;
+						String title_main = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "BOUNTY MODE";
+						String title_sub = ChatColor.GOLD + "$" + bounty + " が配布された";
+						String msg = ChatColor.DARK_RED + "BountyModeが有効化されました。";
+
+						if (ConfigValue.isUbaiai) {
+							title_main = ChatColor.DARK_RED + ChatColor.BOLD.toString() + "登録者奪い合いモード";
+							title_sub = ChatColor.GOLD + "あなたの登録者は" + bounty + " 人です。";
+							msg = ChatColor.DARK_RED + "登録者奪い合いモードが有効化されました。";
+						}
+
 						// 全員にアナウンスする
-						LMSGameUtil.sendTitleToAll(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "BOUNTY MODE",
-								ChatColor.GOLD + "$1000 が配布された", 15, 100, 15);
-						Bukkit.broadcastMessage(ChatColor.DARK_RED + "BountyModeが有効化されました。");
+						LMSGameUtil.sendTitleToAll(title_main, title_sub, 15, 100, 15);
+						Bukkit.broadcastMessage(msg);
 					} else if (cmd.equalsIgnoreCase("bountyrank")) {
 						int count = 10;
 						if (args.length != 1 && args[1] != null) {

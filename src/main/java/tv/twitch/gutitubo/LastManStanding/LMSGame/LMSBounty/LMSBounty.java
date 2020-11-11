@@ -1,5 +1,7 @@
 package tv.twitch.gutitubo.LastManStanding.LMSGame.LMSBounty;
 
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
+
 /**
  * プレイヤーに配られるBountyを定義したクラス
  * Bountyモードの開始はコマンドにて制御する
@@ -13,7 +15,7 @@ public class LMSBounty {
 
 	public LMSBounty(String name) {
 		this.name = name;
-		bounty = 1000;
+		bounty = ConfigValue.bountyAmount;
 	}
 
 	public String getName() {

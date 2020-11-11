@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
+import tv.twitch.gutitubo.LastManStanding.config.ConfigValue;
 
 public class LMSBountyManager {
 
@@ -59,18 +60,32 @@ public class LMSBountyManager {
 		// Bountyがないとだめ
 		if (victimBounty == null) return;
 
+		// Messageのフォーマットを作成
+		String prefix = ChatColor.DARK_RED + "[Bounty] ";
+		String pre_msg = ChatColor.GOLD + "$";
+		String msg_get = " を獲得！";
+		String msg_lost = " を失った…";
+		// 奪い合いモードのときはメッセージを変更
+		if (ConfigValue.isUbaiai) {
+			prefix = ChatColor.DARK_RED + "[登録者] ";
+			pre_msg = ChatColor.GOLD.toString();
+			msg_get = " 人獲得！";
+			msg_lost = " 人失った…";
+		}
+
+
 		// KillerBountyがあるかどうかで対応を変える
 		int value = 0;
 		if (killerBounty != null) {
 			// Bountyを計算する
 			value = killerBounty.robBounty(victimBounty);
 			// 両者にバウンティのメッセージを送信
-			killer.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.GOLD + "$" + value + " を獲得！");
+			killer.sendMessage(prefix + pre_msg + value + msg_get);
 		} else {
 			value = victimBounty.getBounty() / 2;
 			victimBounty.setBounty(value);
 		}
-		victim.sendMessage(ChatColor.DARK_RED + "[Bounty] " + ChatColor.RED + "$" + value + " を失った…");
+		victim.sendMessage(prefix + ChatColor.RED + pre_msg + value + msg_lost);
 	}
 
 	/**
@@ -106,6 +121,9 @@ public class LMSBountyManager {
 			count = players.size();
 		}
 
+		String tani = "$";
+		if (ConfigValue.isUbaiai) tani = "登録者 ";
+
 		// 表示する
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
@@ -113,7 +131,7 @@ public class LMSBountyManager {
 			Bukkit.broadcastMessage(ChatColor.RED.toString() + String.format("%-16s", players.get(i).getName())
 			+ ChatColor.GRAY.toString() + " - "
 			+ ChatColor.GOLD.toString()
-			+ "$"
+			+ tani
 			+ String.format("%5d", players.get(i).getBounty()));
 		}
 		Bukkit.broadcastMessage("");
