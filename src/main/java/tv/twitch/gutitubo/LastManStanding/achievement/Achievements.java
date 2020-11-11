@@ -18,7 +18,7 @@ public class Achievements {
 		}
 
 		/* 超LMS ぐちつぼ降臨2020杯優勝 */
-		if (name.equalsIgnoreCase("Toxic_Kindred")) {
+		if (name.equalsIgnoreCase("kolu_pen") || name.equalsIgnoreCase("consome01")) {
 			achievement = ChatColor.GOLD.toString() + "[降臨]" + ChatColor.RESET.toString();
 		}
 

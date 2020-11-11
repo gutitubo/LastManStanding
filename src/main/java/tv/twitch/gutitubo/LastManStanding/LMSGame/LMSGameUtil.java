@@ -252,6 +252,7 @@ public class LMSGameUtil {
 		if (near != null) {
 			p.setCompassTarget(near.getLocation());
 			int distance = (int) p.getLocation().distance(near.getLocation());
+			String nearname = near.getName();
 			String bountystr = "";
 			if (LMSBountyManager.isBountyMode) {
 				String name = null;
@@ -265,9 +266,14 @@ public class LMSGameUtil {
 				}
 				if (bounty != null) {
 					bountystr = ChatColor.GRAY + " - " + ChatColor.GOLD.toString() + "$" + bounty.getBounty();
+					if (ConfigValue.isUbaiai) {
+						bountystr = ChatColor.GRAY + " - " + ChatColor.GOLD.toString()
+						+ "登録者 " + bounty.getBounty() + "人";
+						nearname = nearname + " channel";
+					}
 				}
 			}
-			p.sendMessage(ChatColor.GRAY.toString() + "[Target] " + near.getName() + ": " + distance + "m"
+			p.sendMessage(ChatColor.GRAY.toString() + "[Target] " + nearname + ": " + distance + "m"
 					+ bountystr);
 		} else {
 
