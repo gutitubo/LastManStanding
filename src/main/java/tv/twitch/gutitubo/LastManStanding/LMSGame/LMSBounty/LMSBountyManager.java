@@ -121,6 +121,9 @@ public class LMSBountyManager {
 			count = players.size();
 		}
 
+		String tani = "$";
+		if (ConfigValue.isUbaiai) tani = "登録者 ";
+
 		// 表示する
 		Bukkit.broadcastMessage("======================");
 		Bukkit.broadcastMessage("");
@@ -128,7 +131,7 @@ public class LMSBountyManager {
 			Bukkit.broadcastMessage(ChatColor.RED.toString() + String.format("%-16s", players.get(i).getName())
 			+ ChatColor.GRAY.toString() + " - "
 			+ ChatColor.GOLD.toString()
-			+ "$"
+			+ tani
 			+ String.format("%5d", players.get(i).getBounty()));
 		}
 		Bukkit.broadcastMessage("");
