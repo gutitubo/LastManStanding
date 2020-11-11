@@ -39,16 +39,15 @@ import tv.twitch.gutitubo.LastManStanding.files.FileUpdater;
 public class LastManStanding extends JavaPlugin {
 
 	/*
-	 *  Ver 1.6.2 Update
+	 *  Ver 1.7
 	 *
-	 *  登録者奪い合いモード追加
-	 *   - Bountyモードから文字が違うモード
-	 *   - [降臨]のタグをつける
+	 *  バージョンアップデート 1.16.x対応 (1.16.3?)
+	 *  [有名人] タグをつける
 	 *
 	 */
 
 	Logger logger = Bukkit.getLogger();
-	private static String VERSION = "1.6.2";
+	private static String VERSION = "1.7";
 
 	public static LastManStanding main;
 
