@@ -22,6 +22,12 @@ public class Achievements {
 			achievement = ChatColor.GOLD.toString() + "[降臨]" + ChatColor.RESET.toString();
 		}
 
+		/* 10万人おめでとう優勝 */
+		if (name.equalsIgnoreCase("myumaru") || name.equalsIgnoreCase("Heeeeeck")
+				|| name.equalsIgnoreCase("xwattar_TD")) {
+			achievement = ChatColor.GOLD.toString() + "[有名人]" + ChatColor.RESET.toString();
+		}
+
 		return achievement;
 	}
 

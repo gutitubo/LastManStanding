@@ -21,7 +21,7 @@ public class LMSLastBattle {
 	private static double borderSize = 11;
 
 	public static void start() {
-		lastBattleLocation = new Location(Bukkit.getWorld("world"), 452.5, 120, 630.5);
+		lastBattleLocation = new Location(Bukkit.getWorld("world"), -98.5, 165.5, -199.5);
 		// 既存のボーダーをオフに
 		LMSBorder.off();
 		ArrayList<Player> players = LastManStanding.getGame().getLogic().getAlives();

@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.md_5.bungee.api.ChatColor;
@@ -38,6 +40,12 @@ public class PlayerJoinAndQuitEvent implements Listener {
 		String name = e.getPlayer().getName();
 		e.setJoinMessage(Achievements.getAchievement(name) + ChatColor.YELLOW.toString() +
 				name +  " joined the game.");
+	}
+
+	@EventHandler
+	public void whenOpLoggedInFull (PlayerLoginEvent e) {
+		Player p = e.getPlayer();
+		if (p.isOp()) e.setResult(Result.ALLOWED);
 	}
 
 	@EventHandler
