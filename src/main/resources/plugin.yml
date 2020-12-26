@@ -7,6 +7,9 @@ commands:
     lms:
        description: LastManStanding no Command dayo
        permission: LastManStanding.lms
+    spec:
+       description: LastManStanding no Command dayo
+       permission: LastManStanding.lms
 permissions:
     LastManStanding.*:
        description: LastManStanding no Command dayo

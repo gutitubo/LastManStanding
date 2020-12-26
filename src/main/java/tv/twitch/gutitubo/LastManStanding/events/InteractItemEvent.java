@@ -1,7 +1,9 @@
 package tv.twitch.gutitubo.LastManStanding.events;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -49,11 +51,31 @@ public class InteractItemEvent implements Listener {
 			loc.add(vector.multiply(i));
 			cursor = getNearByPlayer(p, loc, game.getLogic().getAlives());
 			if (cursor != null) {
-				p.sendTitle("", ChatColor.RED.toString() + cursor.getName(), 10, 40, 10);
+				String kill = "";
+				if (LastManStanding.getGame() != null) {
+					kill = ChatColor.DARK_GRAY + " - " + ChatColor.DARK_RED.toString()
+							+ LastManStanding.getGame().getLogic().getPlayerScore().get(cursor).getKill()
+							+ ChatColor.GRAY.toString() + "Kill";
+				}
+				String title = ChatColor.RED.toString() + cursor.getName() + kill;
+				p.sendTitle("", title, 10, 40, 10);
+				for (Player spec: getSpecList(p)) {
+					spec.sendTitle("", title, 10, 40, 10);
+				}
 				return;
 			}
 			loc.subtract(vector);
 		}
+	}
+
+	private static List<Player> getSpecList(Player player) {
+		ArrayList<Player> list = new ArrayList<>();
+		for (Player all : Bukkit.getOnlinePlayers()) {
+			if (all.getGameMode().equals(GameMode.SPECTATOR) && all.getSpectatorTarget().equals(player)) {
+				list.add(all);
+			}
+		}
+		return list;
 	}
 
 	private static Player getNearByPlayer(Player me, Location loc, List<Player> players) {

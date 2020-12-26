@@ -45,7 +45,7 @@ Lobby:
 Oiwai: false
 
 # 登録者奪い合いモードの切り替え
-Ubaiai: true
+Ubaiai: false
 
 # スポーン地点を設定
 Spawn:

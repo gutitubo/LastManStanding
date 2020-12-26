@@ -351,10 +351,9 @@ public class LMSGameUtil {
 				|| name.contains("genpyon")
 				|| name.contains("aroeroeroeroeroe")
 				|| name.contains("tarakoTBTB")
-				|| name.contains("kanegon1")
+				|| name.contains("gonkanedayo")
 				|| name.contains("consome01")
-				|| name.contains("Varvalian")
-				|| name.contains("ShoboSuke"))
+				|| name.contains("Varvalian"))
 			isStreamer = true;
 		return isStreamer;
 	}

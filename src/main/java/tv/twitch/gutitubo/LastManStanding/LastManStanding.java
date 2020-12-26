@@ -242,6 +242,14 @@ public class LastManStanding extends JavaPlugin {
 				/* - CommandはOPのみに許可する - */
 				sender.sendMessage(ChatColor.DARK_RED + "この操作は許可されていません。");
 			}
+		} else if (command.getName().equalsIgnoreCase("spec")) {
+			if (args[0] != null && sender.isOp() && sender instanceof Player) {
+				Player targ = Bukkit.getPlayer(args[0]);
+				if (targ == null) return true;
+				Player spector = (Player) sender;
+				spector.setGameMode(GameMode.SPECTATOR);
+				spector.setSpectatorTarget(targ);
+			}
 		}
 		return true;
 	}
